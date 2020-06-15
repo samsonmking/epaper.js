@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/js/index.js",
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean"
   },
@@ -16,6 +16,9 @@
   "gypfile": true,
   "dependencies": {
     "bindings": "^1.5.0",
-    "node-addon-api": "^3.0.0"
+    "express": "^4.17.1",
+    "node-addon-api": "^3.0.0",
+    "png.js": "^0.2.1",
+    "puppeteer-core": "^4.0.0"
   }
 }
