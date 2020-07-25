@@ -4,6 +4,8 @@ const epaper = require('bindings')('epaper.node');
 const puppeteer = require('puppeteer-core');
 const convertPNGto1BitBuffer = require('./image.js');
 const readline = require('readline');
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
 
 const height = 300;
 const width = 400;
@@ -17,25 +19,26 @@ async function renderBrowser() {
         height,
         deviceScaleFactor: 1
     });
-    page.on('console', msg => console.log('PAGE LOG:', msg.text));
-    await page.goto('http://localhost:3000/index.html');
-    await page.waitForFunction(() => window.ebookDisplayed === true);
-    await display(page);
+    page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
-    pageCount = 0;
-    process.stdin.addListener('keypress', async (key, data) => {
-        if(data.name === 'left') {
-            page.keyboard.press('ArrowLeft');
-            await page.waitForFunction(pc => window.pageCount === pc, {}, --pageCount);
-            await display(page);
-        }
-        if(data.name === 'right') {
-            page.keyboard.press('ArrowRight');
-            await page.waitForFunction(pc => window.pageCount === pc, {}, ++pageCount);
-            await display(page);
-        }
+    wss.on('connection', (ws) => {
+        ws.on('message', async (message) => {
+            if(message === 'render') {
+                await display(page);
+            }
+        });
+
+        process.stdin.addListener('keypress', (key, data) => {
+            if(data.name === 'left') {
+                ws.send('left');
+            }
+            if(data.name === 'right') {
+                ws.send('right');
+            }
+        });
     });
 
+    await page.goto('http://localhost:3000/index.html');
 }
 
 function setUpDisplay() {
@@ -57,11 +60,12 @@ readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 process.stdin.addListener('keypress', (key, data) => {
     if(data.ctrl && data.name === 'c') {
+        epaper.sleep();
         process.exit();
     }
 });
 
 app.use(express.static('static'));
 app.listen(3000, () => {
-    renderBrowser()
+    renderBrowser();
 });

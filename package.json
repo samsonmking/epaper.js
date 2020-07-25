@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "node-addon-api": "^3.0.0",
     "png.js": "^0.2.1",
-    "puppeteer-core": "^4.0.0"
+    "puppeteer-core": "^4.0.0",
+    "ws": "^7.3.1"
   }
 }
