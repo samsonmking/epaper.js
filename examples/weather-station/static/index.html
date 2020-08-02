@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Weather Station</title>
       <link rel="stylesheet" href="css/weather-icons.min.css">
+      <script src="api-key.js"></script>
       <style>
         html, body {
             height: 100%;
@@ -132,7 +133,6 @@
             const ws = new WebSocket("ws://raspberrypi:8080");
 
             async function getWeather(zip) {
-                const apiKey='7da140e21afc3ff1c033e19b90288cb5';
                 const responce = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&units=imperial&appid=${apiKey}`)
                 return await responce.json();
             }
