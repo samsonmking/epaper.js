@@ -1,7 +1,7 @@
 {
     "targets": [
         {
-            "target_name": "epaper",
+            "target_name": "waveshare4in2",
             "cflags!": [ "-fno-exceptions" ],
             "cflags_cc!": [ "-fno-exceptions" ],
             "sources": [ 
