@@ -15,7 +15,7 @@ function convertPNGto1BitBuffer(pngBytes) {
                     const [r, g, b, alpha] = png.getPixel(x, y);
                     // https://www.w3.org/TR/AERT/#color-contrast
                     const luma = (r * 0.299) + (g * 0.587) + (b * 0.114);
-                    if (luma < 60) {
+                    if (luma < 50) {
                         out_index = Math.floor((x + y * width) / 8)
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(x % 8));
                     }

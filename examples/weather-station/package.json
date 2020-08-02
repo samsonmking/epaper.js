@@ -1,10 +1,10 @@
 {
-  "name": "epaperjs-example-ereader",
+  "name": "epaperjs-example-weather-station",
   "version": "1.0.0",
   "description": "",
-  "main": "ereader.js",
+  "main": "weather.js",
   "scripts": {
-    "start": "node ereader.js"
+    "start": "node weather.js"
   },
   "author": "",
   "license": "ISC",

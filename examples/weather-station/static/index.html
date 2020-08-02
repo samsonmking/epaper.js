@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Weather Station</title>
+      <link rel="stylesheet" href="css/weather-icons.min.css">
+      <style>
+        html, body {
+            height: 100%;
+            min-height: 100%;
+            width: 100%;
+            min-width: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            color: black;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .container {
+            height: 100%;
+            min-height: 100%;
+            width: 100%;
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "icon temp"
+                "icon description"
+                "date date";
+        }
+
+        #temp-icon {
+            font-size: 8rem;
+        }
+
+        #temp-now {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        .icon {
+            grid-area: icon;
+            align-self: center;
+            justify-self: center;
+            margin-right: 0.5rem;
+        }
+
+        .temp {
+            align-self: end;
+            grid-area: temp;
+            text-align: left;
+            margin-left: 0.5rem;
+            display: flex;
+            flex-direction: row;
+        }
+
+        #temp-range {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        #description {
+            grid-area: description;
+            align-self: start;
+            text-align: left;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        .date {
+            grid-area: date;
+            font-family: sans-serif;
+            font-size: 3rem;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            border-top: 2px solid black;
+        }
+        
+        #date-numbers {
+            font-size: 2.5rem;
+        }
+
+        #date-day {
+            text-transform: uppercase;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="icon">
+                <i id="temp-icon" class="wi wi-owm-800"></i>
+            </div>
+            <div class="temp">
+                <div id="temp-now"></div>
+                <div id="temp-range">
+                    <div id="temp-max"></div>
+                    <div id="temp-min"></div>
+                </div>
+            </div>
+            <div id="description"></div>
+            <div class="date">
+                <div id="date-day"></div>
+                <div id="date-numbers"></div>
+            </div>
+        </div>
+        <script>
+            const getIconElement = () => document.getElementById("temp-icon");
+            const getTempNowElement = () => document.getElementById("temp-now");
+            const getTempHighElement = () => document.getElementById("temp-max");
+            const getTempLowElement = () => document.getElementById("temp-min");
+            const getDescriptionElement = () => document.getElementById("description");
+            const getDateDayElement = () => document.getElementById("date-day");
+            const getDateNumbersElement = () => document.getElementById("date-numbers");
+
+            const ws = new WebSocket("ws://raspberrypi:8080");
+
+            async function getWeather(zip) {
+                const apiKey='7da140e21afc3ff1c033e19b90288cb5';
+                const responce = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&units=imperial&appid=${apiKey}`)
+                return await responce.json();
+            }
+
+            async function update() {
+                const weatherData = await getWeather("02130");
+                const epoch = weatherData.dt;
+                const isNight = () => epoch >= weatherData.sys.sunset;
+
+                const iconClassName = `wi-owm-${isNight() ? 'night' : 'day'}-${weatherData.weather[0].id}`
+                getIconElement().className=`wi ${iconClassName}`;
+                getTempNowElement().innerHTML = Math.round(weatherData.main.temp);
+                getTempHighElement().innerHTML = Math.round(weatherData.main.temp_max);
+                getTempLowElement().innerHTML = Math.round(weatherData.main.temp_min);
+                getDescriptionElement().innerHTML = weatherData.weather[0].description;
+
+                const date = new Date();
+                const days = [
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ];
+                getDateDayElement().innerHTML = days[date.getDay()];
+                getDateNumbersElement().innerHTML=`${date.getMonth() + 1}/${date.getDate()}`;
+            }
+
+             ws.addEventListener("open", () => {
+                 const updateRecursive = async () => {
+                     await update();
+                     ws.send("render");
+                     setTimeout(updateRecursive, 600000);
+                 };
+
+                 document.fonts.ready.then(updateRecursive);
+             });
+        </script>
+    </body>
+</html>
