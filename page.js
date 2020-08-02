@@ -5,6 +5,7 @@ class Page {
     constructor(browserPage, screen) {
         this.browserPage = browserPage;
         this.screen = screen;
+        this.sleeping = false;
     }
 
     async display() {
@@ -14,7 +15,19 @@ class Page {
             encoding: 'binary'
         });
         const displayBuffer = await convertPNGto1BitBuffer(pageImage);
+
+        if (this.sleeping) {
+            this.screen.driver.init();
+            this.sleeping = false;
+        } else if(this.handle) {
+            clearTimeout(this.handle);
+        }
+            
         this.screen.driver.display(displayBuffer);
+        this.handle = setTimeout(() => {
+            this.screen.driver.sleep();
+            this.sleeping = true;
+        }, 60000);
     }
 
     async goto(url) {
