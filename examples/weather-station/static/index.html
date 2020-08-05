@@ -44,7 +44,7 @@
         }
 
         #temp-now {
-            font-size: 4rem;
+            font-size: 3.7rem;
             font-weight: bold;
         }
 
@@ -85,7 +85,7 @@
         .date {
             grid-area: date;
             font-family: sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -94,10 +94,6 @@
             border-top: 2px solid black;
         }
         
-        #date-numbers {
-            font-size: 2.5rem;
-        }
-
         #date-day {
             text-transform: uppercase;
         }
@@ -163,10 +159,12 @@
                 getDateNumbersElement().innerHTML=`${date.getMonth() + 1}/${date.getDate()}`;
             }
 
+            const afterPaint = (cb) => requestAnimationFrame(() => requestAnimationFrame(cb));
+
              ws.addEventListener("open", () => {
                  const updateRecursive = async () => {
                      await update();
-                     ws.send("render");
+                     afterPaint(() => ws.send("render"));
                      setTimeout(updateRecursive, 600000);
                  };
 
