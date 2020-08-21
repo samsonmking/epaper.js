@@ -129,6 +129,9 @@
             const ws = new WebSocket("ws://raspberrypi:8080");
 
             async function getWeather(zip) {
+                if(!apiKey) {
+                    console.error(`OpenWeather API Key not defined. Please create api-key.js and export 'apiKey' variable`);
+                }
                 const responce = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&units=imperial&appid=${apiKey}`)
                 return await responce.json();
             }

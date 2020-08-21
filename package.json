@@ -1,15 +1,18 @@
 {
   "name": "epaperjs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple e-Paper display on a Raspberry Pi using Javascript and HTML",
   "main": "index.js",
   "scripts": {
-    "start": "node src/js/index.js",
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+      "name": "Samson King",
+      "email": "samson@samsonmking.com",
+      "url": "https://github.com/samsonmking/epaper.js"
+  },
+  "license": "MIT",
   "devDependencies": {
     "node-gyp": "^7.0.0"
   },

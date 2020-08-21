@@ -1,27 +1,25 @@
 const express = require('express');
-const getPage = require('./page.js');
 const devices = require('./devices.js');
 const readline = require('readline');
 const WebSocket = require('ws');
+const renderBrowser = require('./render.js');
 
-const app = express();
-const wss = new WebSocket.Server({ port: 8080 });
+const defaultConfig = {
+    webPort: 3000,
+    websocketPort: 8080,
+    staticDirectory: 'static',
+    url: `http://localhost:3000/index.html`
+};
 
-function setUpDisplay(driver) {
-    driver.dev_init();
-    driver.init();
-}
+const defaultRenderCallback = (page, ws) => {
+    page.onConsoleLog(msg => console.log(msg));
 
-async function renderBrowser(screen, epaperApp) {
-    setUpDisplay(screen.driver);
-    const page = await getPage(screen);
-
-    wss.on('connection', (ws) => {
-        epaperApp(page, ws);
+    ws.on('message', async (message) => {
+        if (message === 'render') {
+            await page.display();
+        }
     });
-
-    await page.goto('http://localhost:3000/index.html');
-}
+};
 
 function setupKeyInput(driver) {
     readline.emitKeypressEvents(process.stdin);
@@ -34,12 +32,20 @@ function setupKeyInput(driver) {
     });
 }
 
-function init(screen, epaperApp, config) {
+function init(screen = devices.waveshare4in2,
+    renderCallback = defaultRenderCallback,
+    config = {}) {
+    const configWithDefaults = {...defaultConfig, ...config};
+
+    const app = express();
+    const wss = new WebSocket.Server({port: configWithDefaults.websocketPort});
+
     setupKeyInput(screen.driver);
-    app.use(express.static(config.staticDirectory));
-    app.listen(3000, () => {
-        renderBrowser(screen, epaperApp);
+
+    app.use(express.static(configWithDefaults.staticDirectory));
+    app.listen(configWithDefaults.webPort, () => {
+        renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
     });
 }
 
-module.exports = { init, devices };
+module.exports = {init, devices};

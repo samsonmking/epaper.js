@@ -5,9 +5,9 @@
             "cflags!": [ "-fno-exceptions" ],
             "cflags_cc!": [ "-fno-exceptions" ],
             "sources": [ 
-                "./src/c/EPD_4in2_node.cc",
-                "./src/c/DEV_Config.c",
-                "./src/c/EPD_4in2.c"
+                "./c/EPD_4in2_node.cc",
+                "./c/DEV_Config.c",
+                "./c/EPD_4in2.c"
             ],
             "defines": [
                 "RPI",

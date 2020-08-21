@@ -6,8 +6,12 @@
   "scripts": {
     "start": "node weather.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+      "name": "Samson King",
+      "email": "samson@samsonmking.com",
+      "url": "https://github.com/samsonmking/epaper.js"
+  },
+  "license": "MIT",
   "dependencies": {
     "epaperjs": "file:../.."
   }
