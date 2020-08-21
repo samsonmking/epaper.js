@@ -20,6 +20,8 @@ const render = (page, ws) => {
 
 }
 
-init(devices.waveshare4in2, render, {
+const config = {
     staticDirectory: 'static'
-});
+};
+
+init(devices.waveshare4in2, config, render);

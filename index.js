@@ -33,12 +33,12 @@ function setupKeyInput(driver) {
 }
 
 function init(screen = devices.waveshare4in2,
-    renderCallback = defaultRenderCallback,
-    config = {}) {
-    const configWithDefaults = {...defaultConfig, ...config};
+    config = {},
+    renderCallback = defaultRenderCallback) {
+    const configWithDefaults = { ...defaultConfig, ...config };
 
     const app = express();
-    const wss = new WebSocket.Server({port: configWithDefaults.websocketPort});
+    const wss = new WebSocket.Server({ port: configWithDefaults.websocketPort });
 
     setupKeyInput(screen.driver);
 
@@ -48,4 +48,4 @@ function init(screen = devices.waveshare4in2,
     });
 }
 
-module.exports = {init, devices};
+module.exports = { init, devices };
