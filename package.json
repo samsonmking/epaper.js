@@ -10,6 +10,10 @@
   "author": {
       "name": "Samson King",
       "email": "samson@samsonmking.com",
+      "url": "https://github.com/samsonmking"
+  },
+  "repository": {
+    "type": "git",
       "url": "https://github.com/samsonmking/epaper.js"
   },
   "license": "MIT",

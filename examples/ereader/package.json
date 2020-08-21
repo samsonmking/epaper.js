@@ -7,9 +7,9 @@
     "start": "node ereader.js"
   },
   "author": {
-      "name": "Samson King",
-      "email": "samson@samsonmking.com",
-      "url": "https://github.com/samsonmking/epaper.js"
+    "name": "Samson King",
+    "email": "samson@samsonmking.com",
+    "url": "https://github.com/samsonmking/epaper.js"
   },
   "license": "MIT",
   "dependencies": {
