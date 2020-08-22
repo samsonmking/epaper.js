@@ -92,7 +92,7 @@ sudo reboot
 Install Dependencies
 ```bash
 # Install latest Node.js LTS
-curl -sL install-node.now.sh/lts | bash
+curl -sL install-node.now.sh/lts | sudo bash
 
 sudo apt-get update
 
