@@ -116,5 +116,6 @@ npm install -s epaperjs
 ```
 
 ## Hardware
-[Waveshare 4.2inch Display](https://www.waveshare.com/product/displays/e-paper/epaper-2/4.2inch-e-paper.html)\
+[Waveshare 4.2inch Display](https://www.waveshare.com/product/displays/e-paper/epaper-2/4.2inch-e-paper.htm)
+[Waveshare HAT Raspberry Pi Adapter](https://www.waveshare.com/e-Paper-Driver-HAT.htm)
 [3D Printed Enclosure for PI B+](https://www.thingiverse.com/thing:4576140)
