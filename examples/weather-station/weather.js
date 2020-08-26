@@ -1,3 +1,4 @@
-const {init} = require('epaperjs');
+const {init} = require('../../index.js');
+const devices = require('../../devices.js')
 
-init();
+init(devices.waveshare2in7);
