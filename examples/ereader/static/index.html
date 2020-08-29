@@ -7,7 +7,7 @@
       <script src="epub.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
       <script>
-          const ws = new WebSocket("ws://raspberrypi:8080");
+          const ws = new WebSocket("ws://localhost:8080");
 
           function triggerUpdate() {
               ws.send('render');
