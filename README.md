@@ -1,12 +1,12 @@
 # ePaper.js
-Node.js library for easily creating an ePaper display on a Raspberry PI using HTML and Javascript.
+Node.js library for easily creating an ePaper display on a Raspberry Pi using HTML and Javascript.
 * Render HTML DOM onto ePaper display
 * Simple and extensible Javascript and WebSocket API
-* Currently supports [Waveshare 4.2inch ePaper Module](https://www.waveshare.com/wiki/4.2inch_e-Paper_Module)
+* [Supports multiple Waveshare ePaper Displays](#supported-hardware)
 * High performance, native c++ hardware access
 
-![Example weather station](https://github.com/samsonmking/epaper.js/raw/master/images/weather.jpg)
-![Example ereader gif](https://github.com/samsonmking/epaper.js/raw/master/images/ereader.gif)
+![Example weather station](images/weather.jpg)
+![Example ereader gif](images/ereader.gif)
 ## Working with the API
 ###
 Create `static/index.html`. The contents of this webpage will be rendered onto the ePaper display.
@@ -18,7 +18,7 @@ Create `static/index.html`. The contents of this webpage will be rendered onto t
     <h1>Hello from ePaper.js</h1>
     <script>
         // connect to the WebSocket API
-        const ws = new WebSocket("ws://raspberrypi:8080");
+        const ws = new WebSocket("ws://localhost:8080");
         ws.addEventListener("open", () => {
             // draw contents of DOM onto ePaper display
             ws.send('render');
@@ -115,7 +115,21 @@ Install ePaper.js
 npm install -s epaperjs
 ```
 
-## Hardware
-[Waveshare 4.2inch Display](https://www.waveshare.com/product/displays/e-paper/epaper-2/4.2inch-e-paper.htm)\
-[Waveshare HAT Raspberry Pi Adapter](https://www.waveshare.com/e-Paper-Driver-HAT.htm)\
-[3D Printed Enclosure for PI B+](https://www.thingiverse.com/thing:4576140)
+## Supported Hardware
+| Device                                                                     | Supprted Display Modes |
+| -------------------------------------------------------------------------  | ---------------------- |
+| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)            | Black / White          |
+| [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm)         | Black / White          |
+
+### Adding Support For Additional Displays
+It's easy to extend ePaper.js to support additional Waveshare devices. Displays from other manufacturers should be possible to support as well, as long as there is a C / C++ driver available.
+
+If you would like to request support for another display, please open an issue with the title 'Add support for <Device Make \ Model>'. If you're a developer and have extended support yourself, put up a pull request!
+
+## Feature Backlog
+- [ ] Add support for portrait or landscape display (rotate 90 deg)
+- [ ] Add support for remaining Waveshare SPI ePaper displays
+- [ ] Implement 4 Color Grayscale
+- [ ] Implement Red / White / Black Color Mode
+- [ ] Implement Yellow / White / Black Color Mode
+- [ ] Implement Partial Refresh
