@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer-core');
-const convertPNGto1BitBuffer = require('./image.js');
 
 class Page {
     constructor(browserPage, screen) {
@@ -14,7 +13,6 @@ class Page {
             fullpage: 'true',
             encoding: 'binary'
         });
-        const displayBuffer = await convertPNGto1BitBuffer(pageImage);
 
         if (this.sleeping) {
             this.screen.driver.init();
@@ -23,7 +21,7 @@ class Page {
             clearTimeout(this.handle);
         }
             
-        this.screen.driver.display(displayBuffer);
+        await this.screen.displayPNG(pageImage);
         this.handle = setTimeout(() => {
             this.screen.driver.sleep();
             this.sleeping = true;

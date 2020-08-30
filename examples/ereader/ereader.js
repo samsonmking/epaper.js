@@ -24,4 +24,4 @@ const config = {
     staticDirectory: 'static'
 };
 
-init(devices.waveshare4in2, config, render);
+init(devices.waveshare4in2Vertical, config, render);
