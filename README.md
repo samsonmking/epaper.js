@@ -127,7 +127,7 @@ It's easy to extend ePaper.js to support additional Waveshare devices. Displays 
 If you would like to request support for another display, please open an issue with the title 'Add support for <Device Make \ Model>'. If you're a developer and have extended support yourself, put up a pull request!
 
 ## Feature Backlog
-- [ ] Add support for portrait or landscape display (rotate 90 deg)
+- [x] Add support for portrait or landscape display (rotate 90 deg)
 - [ ] Add support for remaining Waveshare SPI ePaper displays
 - [ ] Implement 4 Color Grayscale
 - [ ] Implement Red / White / Black Color Mode
