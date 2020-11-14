@@ -3,14 +3,14 @@ const devices = require('./devices.js');
 const readline = require('readline');
 const WebSocket = require('ws');
 const renderBrowser = require('./render.js');
-const common = require('./common.js');
+const epaper = require('./common.js');
 
 const defaultConfig = {
     webPort: 3000,
     websocketPort: 8080,
     staticDirectory: 'static',
     url: `http://localhost:3000/index.html`,
-    color_depth: common.GREY //1BitBW or 1Bit4Grey
+    color_depth: epaper.GREY //1BitBW or 1Bit4Grey
 };
 
 const defaultRenderCallback = (page, ws) => {
@@ -50,4 +50,4 @@ function init(screen = devices.waveshare4in2,
     });
 }
 
-module.exports = { init, devices };
+module.exports = { init, devices , epaper};

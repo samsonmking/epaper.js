@@ -40,14 +40,14 @@ init();
 ### Additional Configuration
 **Additional Configuration Options**
 ```js
-const {devices, init} = require('epaperjs');
+const {devices, init, epaper} = require('epaperjs');
 init(devices.waveshare4in2, {
     webPort: 3000,                              // WebServer Port
     websocketPort: 8080,                        // WebSocket API Port
     staticDirectory: 'static',                  // Directory to serve frontend from
     url: `http://localhost:3000/index.html`,    // Initial URL to load
-    color_depth: common.GREY                    // 1BitBW or 1Bit4Grey
-};)
+    color_depth: epaper.GREY                    // 1BitBW or 1Bit4Grey
+});
 ```
 **Extend the server side WebSocket API**
 ```js
