@@ -19,7 +19,7 @@ class Page {
         if (this.sleeping) {
             if (this.color_depth == common.BW) {
                 this.screen.driver.init();
-            } else if (this.color_depth == common.GREY) {
+            } else if (this.color_depth == common.GREY && this.screen.support_grey) {
                 this.screen.driver.init_4Gray();
             }
             this.sleeping = false;
