@@ -3,12 +3,14 @@ const devices = require('./devices.js');
 const readline = require('readline');
 const WebSocket = require('ws');
 const renderBrowser = require('./render.js');
+const common = require('./common.js');
 
 const defaultConfig = {
     webPort: 3000,
     websocketPort: 8080,
     staticDirectory: 'static',
-    url: `http://localhost:3000/index.html`
+    url: `http://localhost:3000/index.html`,
+    color_depth: common.GREY //1BitBW or 1Bit4Grey
 };
 
 const defaultRenderCallback = (page, ws) => {
@@ -44,7 +46,7 @@ function init(screen = devices.waveshare4in2,
 
     app.use(express.static(configWithDefaults.staticDirectory));
     app.listen(configWithDefaults.webPort, () => {
-        renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
+        renderBrowser(screen, wss, renderCallback, configWithDefaults.url, configWithDefaults.color_depth);
     });
 }
 

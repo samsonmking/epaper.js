@@ -45,7 +45,8 @@ init(devices.waveshare4in2, {
     webPort: 3000,                              // WebServer Port
     websocketPort: 8080,                        // WebSocket API Port
     staticDirectory: 'static',                  // Directory to serve frontend from
-    url: `http://localhost:3000/index.html`     // Initial URL to load
+    url: `http://localhost:3000/index.html`,    // Initial URL to load
+    color_depth: common.GREY                    // 1BitBW or 1Bit4Grey
 };)
 ```
 **Extend the server side WebSocket API**
@@ -112,7 +113,7 @@ sudo apt-get install -y build-essential chromium-browser
 **Node.js**\
 Install ePaper.js
 ``` bash
-npm install -s epaperjs
+npm install -S epaperjs
 ```
 
 ## Supported Hardware
@@ -129,7 +130,7 @@ If you would like to request support for another display, please open an issue w
 ## Feature Backlog
 - [x] Add support for portrait or landscape display (rotate 90 deg)
 - [ ] Add support for remaining Waveshare SPI ePaper displays
-- [ ] Implement 4 Color Grayscale
+- [x] Implement 4 Color Grayscale
 - [ ] Implement Red / White / Black Color Mode
 - [ ] Implement Yellow / White / Black Color Mode
 - [ ] Implement Partial Refresh

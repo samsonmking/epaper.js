@@ -1,10 +1,12 @@
 const puppeteer = require('puppeteer-core');
+const common = require('./common.js');
 
 class Page {
-    constructor(browserPage, screen) {
+    constructor(browserPage, screen, color_depth) {
         this.browserPage = browserPage;
         this.screen = screen;
         this.sleeping = false;
+        this.color_depth = color_depth;
     }
 
     async display() {
@@ -15,13 +17,17 @@ class Page {
         });
 
         if (this.sleeping) {
-            this.screen.driver.init();
+            if (this.color_depth == common.BW) {
+                this.screen.driver.init();
+            } else if (this.color_depth == common.GREY) {
+                this.screen.driver.init_4Gray();
+            }
             this.sleeping = false;
-        } else if(this.handle) {
+        } else if (this.handle) {
             clearTimeout(this.handle);
         }
-            
-        await this.screen.displayPNG(pageImage);
+
+        await this.screen.displayPNG(pageImage, this.color_depth);
         this.handle = setTimeout(() => {
             this.screen.driver.sleep();
             this.sleeping = true;
@@ -38,7 +44,7 @@ class Page {
 
 }
 
-async function getPage(screen) {
+async function getPage(screen, color_depth) {
     const browser = await puppeteer.launch({ executablePath: 'chromium-browser' });
     const browserPage = await browser.newPage();
     await browserPage.setViewport({
@@ -46,7 +52,7 @@ async function getPage(screen) {
         height: screen.height,
         deviceScaleFactor: 1
     });
-    return new Page(browserPage, screen);
+    return new Page(browserPage, screen, color_depth);
 }
 
 module.exports = getPage;
