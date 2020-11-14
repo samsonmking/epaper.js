@@ -7,6 +7,7 @@ const waveshare4in2Horizontal = {
     height: 300,
     width: 400,
     driver: waveshare4In2Driver,
+    support_grey: true,
     displayPNG: async function (imgContents, color_depth) {
         const buffer = await convertPNG(imgContents, false, color_depth);
         if (buffer && color_depth == common.GREY) {
@@ -21,6 +22,7 @@ const waveshare4in2Vertical = {
     height: 400,
     width: 300,
     driver: waveshare4In2Driver,
+    support_grey: true,
     displayPNG: async function (imgContents, color_depth) {
         const buffer = await convertPNG(imgContents, true, color_depth);
         if (buffer && color_depth == common.GREY) {
@@ -35,13 +37,10 @@ const waveshare7in5v2Horizontal = {
     height: 480,
     width: 800,
     driver: waveshare7in5v2Driver,
+    support_grey: false,
     displayPNG: async function (imgContents, color_depth) {
-        const buffer = await convertPNG(imgContents, false, color_depth);
-        if (buffer && color_depth == common.GREY) {
-            this.driver.display_4GrayDisplay(buffer);
-        } else if (buffer && color_depth == common.BW) {
-            this.driver.display(buffer);
-        }
+        const buffer = await convertPNG(imgContents, false, common.BW);
+        this.driver.display(buffer);
     }
 };
 
@@ -49,13 +48,10 @@ const waveshare7in2v2Vertical = {
     height: 800,
     width: 480,
     driver: waveshare7in5v2Driver,
+    support_grey: false,
     displayPNG: async function (imgContents, color_depth) {
-        const buffer = await convertPNG(imgContents, true, color_depth);
-        if (buffer && color_depth == common.GREY) {
-            this.driver.display_4GrayDisplay(buffer)
-        } else if (buffer && color_depth == common.BW) {
-            this.driver.display(buffer)
-        }
+        const buffer = await convertPNG(imgContents, true, common.BW);
+        this.driver.display(buffer);
     }
 };
 

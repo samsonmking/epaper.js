@@ -16,23 +16,10 @@ Napi::Value Init(const Napi::CallbackInfo& info) {
     return env.Undefined();
 }
 
-Napi::Value Init_4Gray(const Napi::CallbackInfo& info) {
-    Napi::Env env = info.Env();
-    EPD_4IN2_Init_4Gray();
-    return env.Undefined();
-}
-
 Napi::Value Display(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
     EPD_7IN5_V2_Display(reinterpret_cast<uint8_t *>(jsBuffer.Data()));
-    return env.Undefined();
-}
-
-Napi::Value Display_4GrayDisplay(const Napi::CallbackInfo& info) {
-    Napi::Env env = info.Env();
-    Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
-    EPD_4IN2_4GrayDisplay(reinterpret_cast<uint8_t *>(jsBuffer.Data()));
     return env.Undefined();
 }
 
