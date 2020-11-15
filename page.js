@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer-core');
-const common = require('./common.js');
 
 class Page {
     constructor(browserPage, screen) {
