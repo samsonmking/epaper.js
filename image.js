@@ -1,12 +1,4 @@
 const PNGReader = require('png.js');
-const common = require('./common.js');
-
-function convertPNG(pngBytes, rotated, color_depth) {
-    if (rotated && color_depth && color_depth == common.BW) return convertPNGto1BitBWRotated(pngBytes);
-    if (!rotated && color_depth && color_depth == common.BW) return convertPNGto1BitBW(pngBytes);
-    if (rotated && color_depth && color_depth == common.GREY) return convertPNGto1Bit4GreyRotated(pngBytes);
-    if (!rotated && color_depth && color_depth == common.GREY) return convertPNGto1Bit4Grey(pngBytes);
-}
 
 // https://www.w3.org/TR/AERT/#color-contrast
 const getLuma = (r, g, b) => (r * 0.299) + (g * 0.587) + (b * 0.114);
@@ -146,4 +138,4 @@ function RGBAToHex(rgba) {
     return Number("0x" + r + g + b);
 }
 
-module.exports = convertPNG;
+module.exports = { convertPNGto1BitBW, convertPNGto1BitBWRotated, convertPNGto1Bit4Grey, convertPNGto1Bit4GreyRotated };
