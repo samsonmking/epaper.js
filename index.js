@@ -44,7 +44,7 @@ function init(
         port: configWithDefaults.websocketPort,
     });
 
-    setupKeyInput(screen.driver);
+    if(process.stdin.setRawMode) setupKeyInput(screen.driver);
 
     app.use(express.static(configWithDefaults.staticDirectory));
     app.listen(configWithDefaults.webPort, () => {
