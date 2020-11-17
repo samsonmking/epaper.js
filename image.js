@@ -100,7 +100,7 @@ function convertPNGto1Bit4GreyRotated(pngBytes) {
             const width = png.getWidth();
             const devHeight = width;
             const devWidth = height;
-            const outBuffer = allocBuffer_8(devWidth, devHeight);
+            const outBuffer = allocBuffer_4(devWidth, devHeight);
             var i = 0;
             for (let y = 0; y < height; y++) {
                 for (let x = 0; x < width; x++) {
