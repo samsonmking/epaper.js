@@ -102,13 +102,13 @@ function convertPNGto1Bit4GreyRotated(pngBytes) {
             const devWidth = height;
             const outBuffer = allocBuffer_4(devWidth, devHeight);
             var i = 0;
-            for (let y = 0; y < height; y++) {
-                for (let x = 0; x < width; x++) {
+            for (let x = 0; x < width; x++) {
+                for (let y = 0; y < height; y++) {
                     const outX = y;
-                    const outY = x;
+                    const outY = devHeight - x - 1;
                     i++;
                     if (i % 4 == 0) {
-                        out_index = Math.floor((outX + outY * width) / 4)
+                        out_index = Math.floor((outX + outY * devWidth) / 4)
                         outBuffer[out_index] = (
                             (RGBAToHex(png.getPixel(x, y - 3)) & 0xc0) |
                             (RGBAToHex(png.getPixel(x, y - 2)) & 0xc0) >> 2 |
