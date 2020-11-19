@@ -1,3 +1,3 @@
-const {init} = require('epaperjs');
+const { init } = require('epaperjs');
 
 init();

@@ -1,4 +1,4 @@
-const {devices, init} = require('epaperjs');
+const { devices, init } = require('epaperjs');
 
 const render = (page, ws) => {
     page.onConsoleLog(console.log);
@@ -17,11 +17,10 @@ const render = (page, ws) => {
             ws.send('right');
         }
     });
-
-}
+};
 
 const config = {
-    staticDirectory: 'static'
+    staticDirectory: 'static',
 };
 
 init(devices.waveshare4in2Vertical, config, render);

@@ -1,8 +1,9 @@
 const PNGReader = require('png.js');
 
 // https://www.w3.org/TR/AERT/#color-contrast
-const getLuma = (r, g, b) => (r * 0.299) + (g * 0.587) + (b * 0.114);
-const allocBuffer = (devWidth, devHeight) => Buffer.alloc(Math.ceil(devWidth / 8) * devHeight, 0xff);
+const getLuma = (r, g, b) => r * 0.299 + g * 0.587 + b * 0.114;
+const allocBuffer = (devWidth, devHeight) =>
+    Buffer.alloc(Math.ceil(devWidth / 8) * devHeight, 0xff);
 
 function convertPNGto1BitBW(pngBytes) {
     const reader = new PNGReader(pngBytes);
@@ -19,7 +20,7 @@ function convertPNGto1BitBW(pngBytes) {
                     const [r, g, b, alpha] = png.getPixel(x, y);
                     const luma = getLuma(r, g, b);
                     if (luma < 50) {
-                        out_index = Math.floor((x + y * width) / 8)
+                        out_index = Math.floor((x + y * width) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(x % 8));
                     }
                 }
@@ -48,7 +49,7 @@ function convertPNGto1BitBWRotated(pngBytes) {
                     const [r, g, b, alpha] = png.getPixel(x, y);
                     const luma = getLuma(r, g, b);
                     if (luma < 50) {
-                        out_index = Math.floor((outX + outY * devWidth) / 8)
+                        out_index = Math.floor((outX + outY * devWidth) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(y % 8));
                     }
                 }
