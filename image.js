@@ -21,7 +21,7 @@ function convertPNGto1BitBW(pngBytes) {
                     const [r, g, b, alpha] = png.getPixel(x, y);
                     const luma = getLuma(r, g, b);
                     if (luma < 50) {
-                        out_index = Math.floor((x + y * width) / 8)
+                        out_index = Math.floor((x + y * width) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(x % 8));
                     }
                 }
@@ -50,7 +50,7 @@ function convertPNGto1BitBWRotated(pngBytes) {
                     const [r, g, b, alpha] = png.getPixel(x, y);
                     const luma = getLuma(r, g, b);
                     if (luma < 50) {
-                        out_index = Math.floor((outX + outY * devWidth) / 8)
+                        out_index = Math.floor((outX + outY * devWidth) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(y % 8));
                     }
                 }

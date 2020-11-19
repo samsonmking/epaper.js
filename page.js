@@ -11,7 +11,7 @@ class Page {
         const pageImage = await this.browserPage.screenshot({
             type: 'png',
             fullpage: 'true',
-            encoding: 'binary'
+            encoding: 'binary',
         });
 
         if (this.sleeping) {
@@ -33,18 +33,19 @@ class Page {
     }
 
     onConsoleLog(callback) {
-        this.browserPage.on('console', msg => callback(msg.text()));
+        this.browserPage.on('console', (msg) => callback(msg.text()));
     }
-
 }
 
 async function getPage(screen) {
-    const browser = await puppeteer.launch({ executablePath: 'chromium-browser' });
+    const browser = await puppeteer.launch({
+        executablePath: 'chromium-browser',
+    });
     const browserPage = await browser.newPage();
     await browserPage.setViewport({
         width: screen.width,
         height: screen.height,
-        deviceScaleFactor: 1
+        deviceScaleFactor: 1,
     });
     return new Page(browserPage, screen);
 }

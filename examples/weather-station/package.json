@@ -1,18 +1,18 @@
 {
-  "name": "epaperjs-example-weather-station",
-  "version": "1.0.0",
-  "description": "",
-  "main": "weather.js",
-  "scripts": {
-    "start": "node weather.js"
-  },
-  "author": {
-    "name": "Samson King",
-    "email": "samson@samsonmking.com",
-    "url": "https://github.com/samsonmking/epaper.js"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "epaperjs": "file:../.."
-  }
+    "name": "epaperjs-example-weather-station",
+    "version": "1.0.0",
+    "description": "",
+    "main": "weather.js",
+    "scripts": {
+        "start": "node weather.js"
+    },
+    "author": {
+        "name": "Samson King",
+        "email": "samson@samsonmking.com",
+        "url": "https://github.com/samsonmking/epaper.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "epaperjs": "file:../.."
+    }
 }

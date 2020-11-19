@@ -8,11 +8,11 @@ const defaultConfig = {
     webPort: 3000,
     websocketPort: 8080,
     staticDirectory: 'static',
-    url: `http://localhost:3000/index.html`
+    url: `http://localhost:3000/index.html`,
 };
 
 const defaultRenderCallback = (page, ws) => {
-    page.onConsoleLog(msg => console.log(msg));
+    page.onConsoleLog((msg) => console.log(msg));
 
     ws.on('message', async (message) => {
         if (message === 'render') {
@@ -32,13 +32,17 @@ function setupKeyInput(driver) {
     });
 }
 
-function init(screen = devices.waveshare4in2,
+function init(
+    screen = devices.waveshare4in2,
     config = {},
-    renderCallback = defaultRenderCallback) {
+    renderCallback = defaultRenderCallback
+) {
     const configWithDefaults = { ...defaultConfig, ...config };
 
     const app = express();
-    const wss = new WebSocket.Server({ port: configWithDefaults.websocketPort });
+    const wss = new WebSocket.Server({
+        port: configWithDefaults.websocketPort,
+    });
 
     setupKeyInput(screen.driver);
 
