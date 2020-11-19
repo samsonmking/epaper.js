@@ -1,4 +1,5 @@
 const PNGReader = require('png.js');
+const sharp = require('sharp');
 
 // https://www.w3.org/TR/AERT/#color-contrast
 const getLuma = (r, g, b) => (r * 0.299) + (g * 0.587) + (b * 0.114);
@@ -59,8 +60,9 @@ function convertPNGto1BitBWRotated(pngBytes) {
     });
 }
 
-function convertPNGto1Bit4Grey(pngBytes) {
-    const reader = new PNGReader(pngBytes);
+async function convertPNGto1Bit4Grey(pngBytes) {
+    const pngBytes_L = await sharp(pngBytes).greyscale().png().toBuffer();
+    const reader = new PNGReader(pngBytes_L);
     return new Promise((resolve, reject) => {
         reader.parse((err, png) => {
             if (err) {
@@ -89,8 +91,9 @@ function convertPNGto1Bit4Grey(pngBytes) {
     });
 }
 
-function convertPNGto1Bit4GreyRotated(pngBytes) {
-    const reader = new PNGReader(pngBytes);
+async function convertPNGto1Bit4GreyRotated(pngBytes) {
+    const pngBytes_L = await sharp(pngBytes).greyscale().png().toBuffer();
+    const reader = new PNGReader(pngBytes_L);
     return new Promise((resolve, reject) => {
         reader.parse((err, png) => {
             if (err) {
