@@ -15,7 +15,7 @@ class Page {
         });
 
         if (this.sleeping) {
-            this.screen.driver.init();
+            this.screen.init()
             this.sleeping = false;
         } else if (this.handle) {
             clearTimeout(this.handle);

@@ -58,7 +58,7 @@ init(devices.waveshare4in2, {
     websocketPort: 8080,                        // WebSocket API Port
     staticDirectory: 'static',                  // Directory to serve frontend from
     url: `http://localhost:3000/index.html`     // Initial URL to load
-};)
+});
 ```
 
 **Extend the server side WebSocket API**
@@ -132,9 +132,8 @@ sudo apt-get install -y build-essential chromium-browser
 
 **Node.js**\
 Install ePaper.js
-
-```bash
-npm install -s epaperjs
+``` bash
+npm install -S epaperjs
 ```
 
 ## Supported Hardware
@@ -151,10 +150,9 @@ It's easy to extend ePaper.js to support additional Waveshare devices. Displays 
 If you would like to request support for another display, please open an issue with the title 'Add support for <Device Make \ Model>'. If you're a developer and have extended support yourself, put up a pull request!
 
 ## Feature Backlog
-
--   [x] Add support for portrait or landscape display (rotate 90 deg)
--   [ ] Add support for remaining Waveshare SPI ePaper displays
--   [ ] Implement 4 Color Grayscale
--   [ ] Implement Red / White / Black Color Mode
--   [ ] Implement Yellow / White / Black Color Mode
--   [ ] Implement Partial Refresh
+- [x] Add support for portrait or landscape display (rotate 90 deg)
+- [ ] Add support for remaining Waveshare SPI ePaper displays
+- [x] Implement 4 Color Grayscale
+- [ ] Implement Red / White / Black Color Mode
+- [ ] Implement Yellow / White / Black Color Mode
+- [ ] Implement Partial Refresh
