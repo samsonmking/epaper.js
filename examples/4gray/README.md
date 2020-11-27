@@ -1,5 +1,7 @@
 # Example 4 Color Gray for ePaper.js
 
+![Example ereader gif](../../images/4gray.jpg)
+
 ## Colors
 
 | Color          | HEX Code  |

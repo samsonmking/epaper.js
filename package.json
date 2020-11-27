@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node-gyp rebuild",
-    "clean": "node-gyp clean"
+    "clean": "node-gyp clean",
+    "format": "prettier --write ."
   },
   "author": {
     "name": "Samson King",

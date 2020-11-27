@@ -1,5 +1,7 @@
 # Example Weather Station for ePaper.js
 
+![Example weather station](../../images/weather.jpg)
+
 ## Setup
 
 1. Register [OpenWeather API Key](https://openweathermap.org/api)

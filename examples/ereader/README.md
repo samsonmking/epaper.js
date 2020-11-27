@@ -1,5 +1,7 @@
 # Example eReader for ePaper.js
 
+![Example ereader gif](../../images/ereader.gif)
+
 ## Setup
 
 ```
