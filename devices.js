@@ -12,7 +12,7 @@ const waveshare4in2Horizontal = {
     },
     init: function () {
         this.driver.init();
-    }
+    },
 };
 
 const waveshare4in2Vertical = {
@@ -21,11 +21,11 @@ const waveshare4in2Vertical = {
     driver: waveshare4In2Driver,
     displayPNG: async function (imgContents) {
         const buffer = await image.convertPNGto1BitBWRotated(imgContents);
-        this.driver.display(buffer)
+        this.driver.display(buffer);
     },
     init: function () {
         this.driver.init();
-    }
+    },
 };
 
 const waveshare4in2HorizontalGray = {
@@ -33,12 +33,12 @@ const waveshare4in2HorizontalGray = {
     width: 400,
     driver: waveshare4In2Driver,
     displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1Bit4Grey(imgContents);
-        this.driver.display_4GrayDisplay(buffer)
+        const buffer = await image.convertPNGto4Grey(imgContents);
+        this.driver.display_4GrayDisplay(buffer);
     },
     init: function () {
         this.driver.init_4Gray();
-    }
+    },
 };
 
 const waveshare4in2VerticalGray = {
@@ -46,12 +46,12 @@ const waveshare4in2VerticalGray = {
     width: 300,
     driver: waveshare4In2Driver,
     displayPNG: async function (imgContents, color_depth) {
-        const buffer = await image.convertPNGto1Bit4GreyRotated(imgContents);
-        this.driver.display_4GrayDisplay(buffer)
+        const buffer = await image.convertPNGto4GreyRotated(imgContents);
+        this.driver.display_4GrayDisplay(buffer);
     },
     init: function () {
         this.driver.init_4Gray();
-    }
+    },
 };
 
 const waveshare7in5v2Horizontal = {
@@ -64,7 +64,7 @@ const waveshare7in5v2Horizontal = {
     },
     init: function () {
         this.driver.init();
-    }
+    },
 };
 
 const waveshare7in2v2Vertical = {
@@ -77,7 +77,7 @@ const waveshare7in2v2Vertical = {
     },
     init: function () {
         this.driver.init();
-    }
+    },
 };
 
 const devices = {
@@ -90,7 +90,7 @@ const devices = {
     // default waveshare7in5v2 kept for backwards compatibility with releaes 1.1.0
     waveshare7in5v2: waveshare7in5v2Horizontal,
     waveshare7in5v2Horizontal,
-    waveshare7in2v2Vertical
-}
+    waveshare7in2v2Vertical,
+};
 
 module.exports = devices;

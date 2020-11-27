@@ -52,12 +52,12 @@ init();
 **Additional Configuration Options**
 
 ```js
-const {devices, init} = require('epaperjs');
+const { devices, init } = require('epaperjs');
 init(devices.waveshare4in2, {
-    webPort: 3000,                              // WebServer Port
-    websocketPort: 8080,                        // WebSocket API Port
-    staticDirectory: 'static',                  // Directory to serve frontend from
-    url: `http://localhost:3000/index.html`     // Initial URL to load
+    webPort: 3000, // WebServer Port
+    websocketPort: 8080, // WebSocket API Port
+    staticDirectory: 'static', // Directory to serve frontend from
+    url: `http://localhost:3000/index.html`, // Initial URL to load
 });
 ```
 
@@ -132,7 +132,8 @@ sudo apt-get install -y build-essential chromium-browser
 
 **Node.js**\
 Install ePaper.js
-``` bash
+
+```bash
 npm install -S epaperjs
 ```
 
@@ -140,7 +141,7 @@ npm install -S epaperjs
 
 | Device                                                             | Supprted Display Modes |
 | ------------------------------------------------------------------ | ---------------------- |
-| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)    | Black / White          |
+| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)    | Black / White, 4 Gray  |
 | [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm) | Black / White          |
 
 ### Adding Support For Additional Displays
@@ -150,9 +151,10 @@ It's easy to extend ePaper.js to support additional Waveshare devices. Displays 
 If you would like to request support for another display, please open an issue with the title 'Add support for <Device Make \ Model>'. If you're a developer and have extended support yourself, put up a pull request!
 
 ## Feature Backlog
-- [x] Add support for portrait or landscape display (rotate 90 deg)
-- [ ] Add support for remaining Waveshare SPI ePaper displays
-- [x] Implement 4 Color Grayscale
-- [ ] Implement Red / White / Black Color Mode
-- [ ] Implement Yellow / White / Black Color Mode
-- [ ] Implement Partial Refresh
+
+-   [x] Add support for portrait or landscape display (rotate 90 deg)
+-   [ ] Add support for remaining Waveshare SPI ePaper displays
+-   [x] Implement 4 Color Grayscale
+-   [ ] Implement Red / White / Black Color Mode
+-   [ ] Implement Yellow / White / Black Color Mode
+-   [ ] Implement Partial Refresh

@@ -1,0 +1,18 @@
+{
+    "name": "epaperjs-example-4-gray",
+    "version": "1.0.0",
+    "description": "",
+    "main": "4gray.js",
+    "scripts": {
+        "start": "node 4gray.js"
+    },
+    "author": {
+        "name": "Samson King",
+        "email": "samson@samsonmking.com",
+        "url": "https://github.com/samsonmking/epaper.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "epaperjs": "file:../.."
+    }
+}
