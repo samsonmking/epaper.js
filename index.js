@@ -44,7 +44,14 @@ function init(
         port: configWithDefaults.websocketPort,
     });
 
-    if(process.stdin.setRawMode) setupKeyInput(screen.driver);
+    if (process.stdin.setRawMode) {
+        setupKeyInput(screen.driver);
+    } else {
+        process.on('SIGINT', function () {
+            screen.driver.sleep();
+            process.exit();
+        });
+    }
 
     app.use(express.static(configWithDefaults.staticDirectory));
     app.listen(configWithDefaults.webPort, () => {
