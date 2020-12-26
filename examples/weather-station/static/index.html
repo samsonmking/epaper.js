@@ -94,7 +94,11 @@
 
             ws.addEventListener('open', () => {
                 const updateRecursive = async () => {
-                    await update();
+                    try {
+                        await update();
+                    } catch (ex) {
+                        console.log(`[WARN] Failed to update weather - ${ex}`);
+                    }
                     afterPaint(() => ws.send('render'));
                     setTimeout(updateRecursive, 600000);
                 };

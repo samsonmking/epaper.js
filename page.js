@@ -5,6 +5,10 @@ class Page {
         this.browserPage = browserPage;
         this.screen = screen;
         this.sleeping = false;
+        this.browserPage.on(
+            'error',
+            async (error) => await this._reloadOnError()
+        );
     }
 
     async display() {
@@ -29,11 +33,18 @@ class Page {
     }
 
     async goto(url) {
+        this.lastUrl = url;
         return await this.browserPage.goto(url);
     }
 
     onConsoleLog(callback) {
         this.browserPage.on('console', (msg) => callback(msg.text()));
+    }
+
+    async _reloadOnError() {
+        if (this.lastUrl) {
+            await this.goto(this.lastUrl);
+        }
     }
 }
 
