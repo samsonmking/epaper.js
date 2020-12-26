@@ -59,7 +59,7 @@ const waveshare7in5v2Horizontal = {
     width: 800,
     driver: waveshare7in5v2Driver,
     displayPNG: async function (imgContents) {
-        const buffer = await convertPNG(imgContents);
+        const buffer = await image.convertPNGto1BitBW(imgContents);
         this.driver.display(buffer);
     },
     init: function () {
@@ -72,7 +72,7 @@ const waveshare7in2v2Vertical = {
     width: 480,
     driver: waveshare7in5v2Driver,
     displayPNG: async function (imgContents) {
-        const buffer = await convertPNG(imgContents);
+        const buffer = await image.convertPNGto1BitBWRotated(imgContents);
         this.driver.display(buffer);
     },
     init: function () {
