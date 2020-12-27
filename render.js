@@ -2,7 +2,7 @@ const getPage = require('./page.js');
 
 function setUpDisplay(screen) {
     screen.driver.dev_init();
-    screen.init()
+    screen.init();
     screen.driver.clear();
 }
 

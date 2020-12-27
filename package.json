@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node-gyp rebuild",
     "clean": "node-gyp clean",
-    "format": "prettier --write ."
+    "format:write": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "author": {
     "name": "Samson King",

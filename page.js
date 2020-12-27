@@ -19,7 +19,7 @@ class Page {
         });
 
         if (this.sleeping) {
-            this.screen.init()
+            this.screen.init();
             this.sleeping = false;
         } else if (this.handle) {
             clearTimeout(this.handle);
