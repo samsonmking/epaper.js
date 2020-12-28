@@ -1,5 +1,13 @@
 {
     "trailingComma": "es5",
     "tabWidth": 4,
-    "singleQuote": true
+    "singleQuote": true,
+    "overrides": [
+        {
+            "files": "*.yml",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }
