@@ -1,0 +1,25 @@
+name: Publish
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'images/**'
+      - 'examples/**'
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Setup Docker QEMU (To target RPi ARM)
+        uses: docker/setup-qemu-action@v1.0.1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Publish to npm
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
