@@ -85,9 +85,10 @@ const waveshare7in5bHDHorizontal = {
     height: 528,
     width: 880,
     driver: waveshare7in5bHDDriver,
-    displayPNG: async function (imgContents) {
+    displayPNG: async function (imgContents, redImgContents) {
         const buffer = await image.convertPNGto1BitBW(imgContents);
-        this.driver.display(buffer);
+        const redImgBuffer = await image.convertPNGto1BitBW(redImgContents);
+        this.driver.display(buffer, redImgBuffer);
     },
     init: function () {
         this.driver.init();
@@ -98,9 +99,12 @@ const waveshare7in2bHDVertical = {
     height: 880,
     width: 528,
     driver: waveshare7in5bHDDriver,
-    displayPNG: async function (imgContents) {
+    displayPNG: async function (imgContents, redImgContents) {
         const buffer = await image.convertPNGto1BitBWRotated(imgContents);
-        this.driver.display(buffer);
+        const redImgBuffer = await image.convertPNGto1BitBWRotated(
+            redImgContents
+        );
+        this.driver.display(buffer, redImgBuffer);
     },
     init: function () {
         this.driver.init();
