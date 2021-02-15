@@ -19,7 +19,8 @@ Napi::Value Init(const Napi::CallbackInfo& info) {
 Napi::Value Display(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
-    EPD_7IN5B_HD_Display(reinterpret_cast<uint8_t *>(jsBuffer.Data()), reinterpret_cast<uint8_t *>(jsBuffer.Data()));
+    Napi::Buffer<uint8_t> redjsBuffer = info[1].As<Napi::Buffer<uint8_t>>();
+    EPD_7IN5B_HD_Display(reinterpret_cast<uint8_t *>(jsBuffer.Data()), reinterpret_cast<uint8_t *>(redjsBuffer.Data()));
     return env.Undefined();
 }
 
