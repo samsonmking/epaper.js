@@ -1,3 +1,4 @@
+const { createCanvas, loadImage } = require('canvas');
 const image = require('./image.js');
 const waveshare4In2Driver = require('bindings')('waveshare4in2.node');
 const waveshare7in5v2Driver = require('bindings')('waveshare7in5v2.node');
@@ -80,6 +81,25 @@ const waveshare7in2v2Vertical = {
         this.driver.init();
     },
 };
+const renderCanvas = () => {
+    const canvas = createCanvas(200, 200);
+    const ctx = canvas.getContext('2d');
+
+    // Write "Awesome!"
+    ctx.font = '30px Impact';
+    ctx.rotate(0.1);
+    ctx.fillText('Awesome!', 50, 100);
+
+    // Draw line under text
+    var text = ctx.measureText('Awesome!');
+    ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+    ctx.beginPath();
+    ctx.lineTo(50, 102);
+    ctx.lineTo(50 + text.width, 102);
+    ctx.stroke();
+
+    return canvas.toBuffer();
+};
 
 const waveshare7in5bHDHorizontal = {
     height: 528,
@@ -88,7 +108,7 @@ const waveshare7in5bHDHorizontal = {
     displayPNG: async function (imgContents, redImgContents) {
         const buffer = await image.convertPNGto1BitBW(imgContents);
         const redImgBuffer = await image.convertPNGto1BitBW(redImgContents);
-        this.driver.display(buffer, redImgBuffer);
+        this.driver.display(buffer, renderCanvas());
     },
     init: function () {
         this.driver.init();
@@ -104,7 +124,7 @@ const waveshare7in2bHDVertical = {
         const redImgBuffer = await image.convertPNGto1BitBWRotated(
             redImgContents
         );
-        this.driver.display(buffer, redImgBuffer);
+        this.driver.display(buffer, renderCanvas());
     },
     init: function () {
         this.driver.init();

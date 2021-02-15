@@ -13,6 +13,7 @@
     },
     "license": "MIT",
     "dependencies": {
-        "epaperjs": "file:../.."
+        "epaperjs": "file:../..",
+        "canvas": "^2.6.1"
     }
 }
