@@ -32,6 +32,16 @@ function setupKeyInput(driver) {
     });
 }
 
+function setupExitOnSignal(driver) {
+    const handle = () => {
+        driver.sleep();
+        process.exit();
+    };
+
+    process.on('SIGINT', handle);
+    process.on('SIGTERM', handle);
+}
+
 function init(
     screen = devices.waveshare4in2,
     config = {},
@@ -44,7 +54,11 @@ function init(
         port: configWithDefaults.websocketPort,
     });
 
-    setupKeyInput(screen.driver);
+    if (process.stdin.isTTY) {
+        setupKeyInput(screen.driver);
+    } else {
+        setupExitOnSignal(screen.driver);
+    }
 
     app.use(express.static(configWithDefaults.staticDirectory));
     app.listen(configWithDefaults.webPort, () => {
