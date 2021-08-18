@@ -1,6 +1,7 @@
 const image = require('./image.js');
 const waveshare4In2Driver = require('bindings')('waveshare4in2.node');
 const waveshare7in5v2Driver = require('bindings')('waveshare7in5v2.node');
+const waveshare3In7Driver = require('bindings')('waveshare3in7.node')
 
 const waveshare4in2Horizontal = {
     height: 300,
@@ -80,6 +81,59 @@ const waveshare7in2v2Vertical = {
     },
 };
 
+const waveshare3in7Vertical = {
+    height: 480,
+    width: 280,
+    driver: waveshare3In7Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBW(imgContents);
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare3in7Horizontal = {
+    height: 280,
+    width: 480,
+    driver: waveshare3In7Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBWRotated(imgContents);
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare3in7VerticalGray = {
+    height: 480,
+    width: 280,
+    driver: waveshare3In7Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto4Grey(imgContents);
+        this.driver.display_4Gray(buffer);
+    },
+    init: function () {
+        this.driver.init_4Gray();
+    },
+};
+
+const waveshare3in7HorizontalGray = {
+    height: 280,
+    width: 480,
+    driver: waveshare3In7Driver,
+    displayPNG: async function (imgContents, color_depth) {
+        const buffer = await image.convertPNGto4GreyRotated(imgContents);
+        this.driver.display_4Gray(buffer);
+    },
+    init: function () {
+        this.driver.init_4Gray();
+    },
+};
+
+
 const devices = {
     // default waveshare4in2 kept for backwards compatibility with release 1.0.0
     waveshare4in2: waveshare4in2Horizontal,
@@ -91,6 +145,12 @@ const devices = {
     waveshare7in5v2: waveshare7in5v2Horizontal,
     waveshare7in5v2Horizontal,
     waveshare7in2v2Vertical,
+    // default
+    waveshare3in7: waveshare3in7HorizontalGray,
+    waveshare3in7Horizontal,
+    waveshare3in7HorizontalGray,
+    waveshare3in7Vertical,
+    waveshare3in7VerticalGray,
 };
 
 module.exports = devices;
