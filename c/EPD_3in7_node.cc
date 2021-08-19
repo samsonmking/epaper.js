@@ -12,7 +12,10 @@ Napi::Number DEV_Init(const Napi::CallbackInfo& info) {
 
 Napi::Value Init(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
-    //if previously used in 4gray mode I think it must be cleared with 4gray clear before it can be used in 1gray mode. This will clear it on initialization of 1 gray mode.
+    /*
+    if previously used in 4gray mode a residual image remains after init/clear/display in 1 Gray mode. 
+    This will init as 4gray and clear it before init as 1gray mode ensuring a clear screen when entering 1 gray mode.
+    */
     EPD_3IN7_4Gray_Init();
     EPD_3IN7_4Gray_Clear();
     EPD_3IN7_1Gray_Init();
@@ -25,7 +28,6 @@ Napi::Value Init_4Gray(const Napi::CallbackInfo& info) {
     return env.Undefined();
 }
 
-//Calling display() in 1gray mode after previously diaplaying a 4gray image will not ovewrite the entire display. 
 Napi::Value Display(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
