@@ -1,7 +1,7 @@
 const image = require('./image.js');
 const waveshare4In2Driver = require('bindings')('waveshare4in2.node');
 const waveshare7in5v2Driver = require('bindings')('waveshare7in5v2.node');
-const waveshare3In7Driver = require('bindings')('waveshare3in7.node')
+const waveshare3In7Driver = require('bindings')('waveshare3in7.node');
 
 const waveshare4in2Horizontal = {
     height: 300,
@@ -132,7 +132,6 @@ const waveshare3in7HorizontalGray = {
         this.driver.init_4Gray();
     },
 };
-
 
 const devices = {
     // default waveshare4in2 kept for backwards compatibility with release 1.0.0
