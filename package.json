@@ -1,6 +1,6 @@
 {
     "name": "epaperjs",
-    "version": "1.3.4",
+    "version": "1.3.5",
     "description": "Simple e-Paper display on a Raspberry Pi using Javascript and HTML",
     "main": "index.js",
     "scripts": {
