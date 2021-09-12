@@ -33,6 +33,69 @@ function convertPNGto1BitBW(pngBytes) {
     });
 }
 
+function convertPNGto1BitBW2in13V2(pngBytes) {
+    const reader = new PNGReader(pngBytes);
+    return new Promise((resolve, reject) => {
+        reader.parse((err, png) => {
+            if (err) {
+                return reject(err);
+            }
+            const height = png.getHeight();
+            const width = png.getWidth();
+            const lineWidth =
+                width % 8 === 0
+                    ? Math.floor(width / 8)
+                    : Math.floor(width / 8) + 1;
+            const outBuffer = allocBuffer_8(width, height);
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const [r, g, b, alpha] = png.getPixel(x, y);
+                    const luma = getLuma(r, g, b);
+                    const outX = width - x;
+                    if (luma < 50) {
+                        out_index = Math.floor(outX / 8) + y * lineWidth;
+                        outBuffer[out_index] &= ~(0x80 >> outX % 8);
+                    }
+                }
+            }
+            resolve(outBuffer);
+        });
+    });
+}
+
+function convertPNGto1BitBW2in13V2Rotated(pngBytes) {
+    const reader = new PNGReader(pngBytes);
+    return new Promise((resolve, reject) => {
+        reader.parse((err, png) => {
+            if (err) {
+                return reject(err);
+            }
+            const height = png.getHeight();
+            const width = png.getWidth();
+            const devHeight = width;
+            const devWidth = height;
+            const lineWidth =
+                devWidth % 8 === 0
+                    ? Math.floor(devWidth / 8)
+                    : Math.floor(devWidth / 8) + 1;
+            const outBuffer = allocBuffer_8(devWidth, devHeight);
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const outX = y;
+                    const outY = width - (devHeight - x - 1) - 1;
+                    const [r, g, b, alpha] = png.getPixel(x, y);
+                    const luma = getLuma(r, g, b);
+                    if (luma < 50) {
+                        out_index = Math.floor(outX / 8) + outY * lineWidth;
+                        outBuffer[out_index] &= ~(0x80 >> y % 8);
+                    }
+                }
+            }
+            resolve(outBuffer);
+        });
+    });
+}
+
 function convertPNGto1BitBWRotated(pngBytes) {
     const reader = new PNGReader(pngBytes);
     return new Promise((resolve, reject) => {
@@ -144,4 +207,6 @@ module.exports = {
     convertPNGto1BitBWRotated,
     convertPNGto4Grey,
     convertPNGto4GreyRotated,
+    convertPNGto1BitBW2in13V2,
+    convertPNGto1BitBW2in13V2Rotated,
 };

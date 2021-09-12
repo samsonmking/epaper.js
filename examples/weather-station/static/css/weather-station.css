@@ -90,8 +90,23 @@ body {
     text-transform: uppercase;
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (min-width: 251px) and (max-width: 300px) {
     html {
         font-size: 13px;
+    }
+}
+
+@media only screen and (min-width: 151px) and (max-width: 250px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 150px) {
+    html {
+        font-size: 8px;
+    }
+    .date {
+        flex-direction: column;
     }
 }
