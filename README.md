@@ -139,11 +139,13 @@ npm install -S epaperjs
 
 ## Supported Hardware
 
-| Device                                                             | Supprted Display Modes |
-| ------------------------------------------------------------------ | ---------------------- |
-| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)    | Black / White, 4 Gray  |
-| [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm) | Black / White          |
-| [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm) | Black / White, 4 Gray  |
+| Device                                                                        | Supprted Display Modes |
+| ----------------------------------------------------------------------------- | ---------------------- |
+| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)               | Black / White, 4 Gray  |
+| [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm)            | Black / White          |
+| [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm)       | Black / White, 4 Gray  |
+| [Waveshare 2.13" hat v2](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT) | Black / White          |
+| [Waveshare 2.13" v2 hat](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT) | Black / White          |
 
 ### Adding Support For Additional Displays
 

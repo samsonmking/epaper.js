@@ -2,6 +2,7 @@ const image = require('./image.js');
 const waveshare4In2Driver = require('bindings')('waveshare4in2.node');
 const waveshare7in5v2Driver = require('bindings')('waveshare7in5v2.node');
 const waveshare3In7Driver = require('bindings')('waveshare3in7.node');
+const waveshare2in13v2Driver = require('bindings')('waveshare2in13v2.node');
 
 const waveshare4in2Horizontal = {
     height: 300,
@@ -133,6 +134,34 @@ const waveshare3in7HorizontalGray = {
     },
 };
 
+const waveshare2in13v2Vertical = {
+    height: 250,
+    width: 122,
+    driver: waveshare2in13v2Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBW2in13V2(imgContents);
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare2in13v2Horizontal = {
+    height: 122,
+    width: 250,
+    driver: waveshare2in13v2Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBW2in13V2Rotated(
+            imgContents
+        );
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
 const devices = {
     // default waveshare4in2 kept for backwards compatibility with release 1.0.0
     waveshare4in2: waveshare4in2Horizontal,
@@ -150,6 +179,9 @@ const devices = {
     waveshare3in7HorizontalGray,
     waveshare3in7Vertical,
     waveshare3in7VerticalGray,
+    waveshare2in13v2: waveshare2in13v2Horizontal,
+    waveshare2in13v2Horizontal,
+    waveshare2in13v2Vertical,
 };
 
 module.exports = devices;
