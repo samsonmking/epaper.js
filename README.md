@@ -1,4 +1,4 @@
-# ePaper.js
+![ePaper.js](images/logo.svg)
 
 Node.js library for easily creating an ePaper display on a Raspberry Pi using HTML and Javascript.
 
