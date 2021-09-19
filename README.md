@@ -1,5 +1,5 @@
 ![ePaper.js](images/logo.svg) \
-![Discord](https://img.shields.io/discord/888893320309379122?label=chat&logo=discord&style=flat-square)
+[![Discord](https://img.shields.io/discord/888893320309379122?label=chat&logo=discord&style=flat-square)](https://discord.com/channels/888893320309379122)
 
 Node.js library for easily creating an ePaper display on a Raspberry Pi using HTML and Javascript.
 
