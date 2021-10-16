@@ -51,6 +51,7 @@ class Page {
 async function getPage(screen) {
     const browser = await puppeteer.launch({
         executablePath: 'chromium-browser',
+        args: ['--font-render-hinting=slight'],
     });
     const browserPage = await browser.newPage();
     await browserPage.setViewport({
