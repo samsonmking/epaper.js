@@ -1,11 +1,10 @@
 {
     "name": "epaperjs",
-    "version": "1.5.0",
+    "version": "2.0.0-alpha.0",
     "description": "Simple e-Paper display on a Raspberry Pi using Javascript and HTML",
     "main": "index.js",
     "scripts": {
-        "build": "node-gyp rebuild",
-        "clean": "node-gyp clean",
+        "preinstall": "npx only-allow pnpm",
         "format:write": "prettier --write .",
         "format:check": "prettier --check ."
     },
@@ -23,7 +22,6 @@
         "node-gyp": "^7.1.2",
         "prettier": "2.1.2"
     },
-    "gypfile": true,
     "dependencies": {
         "bindings": "^1.5.0",
         "express": "^4.17.1",

@@ -1,0 +1,15 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1,
+    "workspacePrefix": "/home/pi/epaper.js"
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_NO_SCRIPT",
+    "err": {
+      "name": "pnpm",
+      "message": "Missing script: node-gyp",
+      "code": "ERR_PNPM_NO_SCRIPT",
+      "stack": "pnpm: Missing script: node-gyp\n    at Object.handler (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:129523:15)\n    at async /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:133689:20\n    at async run (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:133664:34)\n    at async runPnpm (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:133875:5)\n    at async /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:133867:7"
+    }
+  }
+}

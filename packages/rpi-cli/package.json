@@ -1,0 +1,34 @@
+{
+  "name": "@epaperjs/rpi-cli",
+  "version": "2.0.0-alpha.0",
+  "description": "> TODO: description",
+  "author": "samsonmking <samson@samsonmking.com>",
+  "homepage": "https://github.com/samsonmking/epaper.js#readme",
+  "license": "ISC",
+  "main": "lib/rpi-cli.js",
+  "bin": {
+    "rpi-cli": "bin/rpi-cli"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samsonmking/epaper.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@epaperjs/core": "workspace:^",
+    "yargs": "^17.2.1"
+  },
+  "bugs": {
+    "url": "https://github.com/samsonmking/epaper.js/issues"
+  }
+}
