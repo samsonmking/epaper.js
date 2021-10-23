@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@types/node': ^16.11.4
       bindings: ^1.5.0
       express: ^4.17.1
       node-addon-api: ^3.2.1
@@ -12,6 +13,7 @@ importers:
       prettier: 2.1.2
       puppeteer-core: ^4.0.1
       sharp: ^0.26.3
+      typescript: ^4.4.4
       ws: ^7.5.5
     dependencies:
       bindings: 1.5.0
@@ -22,44 +24,50 @@ importers:
       sharp: 0.26.3
       ws: 7.5.5
     devDependencies:
+      '@types/node': 16.11.4
       node-gyp: 7.1.2
       prettier: 2.1.2
+      typescript: 4.4.4
 
   packages/core:
     specifiers:
       '@epaperjs/rpi-2in13-v2': workspace:^
+      '@types/node': ^16.11.4
+      typescript: ^4.4.4
     dependencies:
       '@epaperjs/rpi-2in13-v2': link:../rpi-2in13-v2
-
-  packages/rpi-2in13-bc:
-    specifiers: {}
+    devDependencies:
+      '@types/node': 16.11.4
+      typescript: 4.4.4
 
   packages/rpi-2in13-v2:
-    specifiers: {}
-
-  packages/rpi-3in7:
-    specifiers: {}
-
-  packages/rpi-4in2:
-    specifiers: {}
-
-  packages/rpi-7in5-v2:
     specifiers: {}
 
   packages/rpi-cli:
     specifiers:
       '@epaperjs/core': workspace:^
+      '@types/yargs': ^17.0.4
       yargs: ^17.2.1
     dependencies:
       '@epaperjs/core': link:../core
       yargs: 17.2.1
+    devDependencies:
+      '@types/yargs': 17.0.4
 
 packages:
 
   /@types/node/16.11.4:
     resolution: {integrity: sha512-TMgXmy0v2xWyuCSCJM6NCna2snndD8yvQF67J29ipdzMcsPa9u+o0tjF5+EQNdhcuZplYuouYqpc4zcd5I6amQ==}
-    dev: false
-    optional: true
+
+  /@types/yargs-parser/20.2.1:
+    resolution: {integrity: sha512-7tFImggNeNBVMsn0vLrpn1H1uPrUBdnARPTpZoitY37ZrdJREzf7I16tMrlK3hen349gr1NYh8CmZQa7CTG6Aw==}
+    dev: true
+
+  /@types/yargs/17.0.4:
+    resolution: {integrity: sha512-D/wihO9WFYqwsmJI0e0qS+U09wIQtYRSBJlXWjTFGjouEuOCy0BU4N/ZK5utb00S5lW/9LO7vOpvGDd8M06NvQ==}
+    dependencies:
+      '@types/yargs-parser': 20.2.1
+    dev: true
 
   /@types/yauzl/2.9.2:
     resolution: {integrity: sha512-8uALY5LTvSuHgloDVUvWP3pIauILm+8/0pDMokuDYIoNsOkSwd5AiHBTSEJjKTDcZr5z8UpgOWZkxBF4iJftoA==}
@@ -102,7 +110,6 @@ packages:
   /ansi-regex/5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
-    dev: false
 
   /ansi-styles/4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
@@ -397,7 +404,6 @@ packages:
 
   /emoji-regex/8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
-    dev: false
 
   /encodeurl/1.0.2:
     resolution: {integrity: sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=}
@@ -713,7 +719,6 @@ packages:
   /is-fullwidth-code-point/3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
-    dev: false
 
   /is-typedarray/1.0.0:
     resolution: {integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=}
@@ -1274,7 +1279,6 @@ packages:
       emoji-regex: 8.0.0
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.1
-    dev: false
 
   /string_decoder/1.1.1:
     resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
@@ -1298,7 +1302,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       ansi-regex: 5.0.1
-    dev: false
 
   /strip-json-comments/2.0.1:
     resolution: {integrity: sha1-PFMZQukIwml8DsNEhYwobHygpgo=}
@@ -1371,6 +1374,12 @@ packages:
       mime-types: 2.1.33
     dev: false
 
+  /typescript/4.4.4:
+    resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
   /unbzip2-stream/1.4.3:
     resolution: {integrity: sha512-mlExGW4w71ebDJviH16lQLtZS32VKqsSfk80GCfUlwT/4/hNRFsoscrF/c++9xinkMzECL1uL9DDwXqFWkruPg==}
     dependencies:
@@ -1428,7 +1437,7 @@ packages:
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
 
   /wrap-ansi/7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}

@@ -1,23 +1,26 @@
-"use strict";
 const express = require('express');
 const devices = require('./devices.js');
 const readline = require('readline');
 const WebSocket = require('ws');
 const renderBrowser = require('./render.js');
+
 const defaultConfig = {
     webPort: 3000,
     websocketPort: 8080,
     staticDirectory: 'src/static',
     url: `http://localhost:3000/index.html`,
 };
+
 const defaultRenderCallback = (page, ws) => {
     page.onConsoleLog((msg) => console.log(msg));
+
     ws.on('message', async (message) => {
         if (message === 'render') {
             await page.display();
         }
     });
 };
+
 function setupKeyInput(driver) {
     readline.emitKeypressEvents(process.stdin);
     process.stdin.setRawMode(true);
@@ -28,29 +31,40 @@ function setupKeyInput(driver) {
         }
     });
 }
+
 function setupExitOnSignal(driver) {
     const handle = () => {
         driver.sleep();
         process.exit();
     };
+
     process.on('SIGINT', handle);
     process.on('SIGTERM', handle);
 }
-function init(screen = devices.waveshare2in13v2, staticDirectory, config = {}, renderCallback = defaultRenderCallback) {
+
+function init(
+    screen = devices.waveshare2in13v2,
+    staticDirectory,
+    config = {},
+    renderCallback = defaultRenderCallback
+) {
     const configWithDefaults = { ...defaultConfig, staticDirectory, ...config };
+
     const app = express();
     const wss = new WebSocket.Server({
         port: configWithDefaults.websocketPort,
     });
+
     if (process.stdin.isTTY) {
         setupKeyInput(screen.driver);
-    }
-    else {
+    } else {
         setupExitOnSignal(screen.driver);
     }
+
     app.use(express.static(configWithDefaults.staticDirectory));
     app.listen(configWithDefaults.webPort, () => {
         renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
     });
 }
+
 module.exports = { init, devices };

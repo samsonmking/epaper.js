@@ -1,0 +1,20 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "sourceMap": false,
+        "declaration": false,
+        "declarationMap": false,
+        "composite": false
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.js"
+    ],
+    "references": [
+        {
+            "path": "../core"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "lib",
+        "rootDir": "src"
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.js"
+    ],
+    "references": [
+        {
+            "path": "../rpi-2in13-v2"
+        }
+    ]
+}

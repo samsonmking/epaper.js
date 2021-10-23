@@ -25,5 +25,9 @@
   },
   "dependencies": {
     "@epaperjs/rpi-2in13-v2": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.4",
+    "typescript": "^4.4.4"
   }
 }

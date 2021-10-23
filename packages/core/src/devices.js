@@ -1,10 +1,10 @@
-"use strict";
 const image = require('./image.js');
 // const waveshare4In2Driver = require('bindings')('waveshare4in2.node');
 // const waveshare7in5v2Driver = require('bindings')('waveshare7in5v2.node');
 // const waveshare3In7Driver = require('bindings')('waveshare3in7.node');
 const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 // const waveshare2in13bcDriver = require('bindings')('waveshare2in13bc.node');
+
 // const waveshare4in2Horizontal = {
 //     height: 300,
 //     width: 400,
@@ -17,6 +17,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init();
 //     },
 // };
+
 // const waveshare4in2Vertical = {
 //     height: 400,
 //     width: 300,
@@ -29,6 +30,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init();
 //     },
 // };
+
 // const waveshare4in2HorizontalGray = {
 //     height: 300,
 //     width: 400,
@@ -41,6 +43,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init_4Gray();
 //     },
 // };
+
 // const waveshare4in2VerticalGray = {
 //     height: 400,
 //     width: 300,
@@ -53,6 +56,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init_4Gray();
 //     },
 // };
+
 // const waveshare7in5v2Horizontal = {
 //     height: 480,
 //     width: 800,
@@ -65,6 +69,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init();
 //     },
 // };
+
 // const waveshare7in2v2Vertical = {
 //     height: 800,
 //     width: 480,
@@ -77,6 +82,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init();
 //     },
 // };
+
 // const waveshare3in7Vertical = {
 //     height: 480,
 //     width: 280,
@@ -89,6 +95,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init();
 //     },
 // };
+
 // const waveshare3in7Horizontal = {
 //     height: 280,
 //     width: 480,
@@ -101,6 +108,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init();
 //     },
 // };
+
 // const waveshare3in7VerticalGray = {
 //     height: 480,
 //     width: 280,
@@ -113,6 +121,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init_4Gray();
 //     },
 // };
+
 // const waveshare3in7HorizontalGray = {
 //     height: 280,
 //     width: 480,
@@ -125,6 +134,7 @@ const waveshare2in13v2Driver = require('@epaperjs/rpi-2in13-v2');
 //         this.driver.init_4Gray();
 //     },
 // };
+
 const waveshare2in13v2Vertical = {
     height: 250,
     width: 122,
@@ -137,18 +147,22 @@ const waveshare2in13v2Vertical = {
         this.driver.init();
     },
 };
+
 const waveshare2in13v2Horizontal = {
     height: 122,
     width: 250,
     driver: waveshare2in13v2Driver,
     displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBW2in13V2Rotated(imgContents);
+        const buffer = await image.convertPNGto1BitBW2in13V2Rotated(
+            imgContents
+        );
         this.driver.display(buffer);
     },
     init: function () {
         this.driver.init();
     },
 };
+
 // const waveshare2in13bcHorizontal = {
 //     height: 104,
 //     width: 212,
@@ -162,6 +176,7 @@ const waveshare2in13v2Horizontal = {
 //         this.driver.init();
 //     },
 // };
+
 // const waveshare2in13bcVertical = {
 //     height: 212,
 //     width: 104,
@@ -175,6 +190,7 @@ const waveshare2in13v2Horizontal = {
 //         this.driver.init();
 //     },
 // };
+
 const devices = {
     // default waveshare4in2 kept for backwards compatibility with release 1.0.0
     // waveshare4in2: waveshare4in2Horizontal,
@@ -199,4 +215,5 @@ const devices = {
     // waveshare2in13bcVertical,
     // waveshare2in13bc: waveshare2in13bcHorizontal,
 };
+
 module.exports = devices;

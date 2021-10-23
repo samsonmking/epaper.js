@@ -22,6 +22,7 @@
     "url": "git+https://github.com/samsonmking/epaper.js.git"
   },
   "scripts": {
+    "compile": "tsc --build",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
@@ -30,5 +31,8 @@
   },
   "bugs": {
     "url": "https://github.com/samsonmking/epaper.js/issues"
+  },
+  "devDependencies": {
+    "@types/yargs": "^17.0.4"
   }
 }

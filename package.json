@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
+        "compile": "pnpm tsc -b tsconfig.packages.json",
         "format:write": "prettier --write .",
         "format:check": "prettier --check ."
     },
@@ -19,8 +20,10 @@
     },
     "license": "MIT",
     "devDependencies": {
+        "@types/node": "^16.11.4",
         "node-gyp": "^7.1.2",
-        "prettier": "2.1.2"
+        "prettier": "2.1.2",
+        "typescript": "^4.4.4"
     },
     "dependencies": {
         "bindings": "^1.5.0",

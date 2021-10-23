@@ -18,8 +18,8 @@
     "url": "git+https://github.com/samsonmking/epaper.js.git"
   },
   "scripts": {
-    "build": "pnpm node-gyp rebuild",
-    "clean": "pnpm node-gyp clean"
+    "build": "node-gyp rebuild",
+    "clean": "node-gyp clean"
   },
   "bugs": {
     "url": "https://github.com/samsonmking/epaper.js/issues"

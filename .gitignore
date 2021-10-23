@@ -1,5 +1,10 @@
-node_modules/
-build/
+# editor
 *.o
 *.swp
-lerna-debug.log
+
+# build
+node_modules/
+build/
+dist/
+lib/
+.pnpm-debug.log
