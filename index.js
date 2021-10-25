@@ -49,21 +49,26 @@ function init(
 ) {
     const configWithDefaults = { ...defaultConfig, ...config };
 
-    const app = express();
-    const wss = new WebSocket.Server({
-        port: configWithDefaults.websocketPort,
-    });
-
     if (process.stdin.isTTY) {
         setupKeyInput(screen.driver);
     } else {
         setupExitOnSignal(screen.driver);
     }
 
-    app.use(express.static(configWithDefaults.staticDirectory));
-    app.listen(configWithDefaults.webPort, () => {
-        renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
+    const wss = new WebSocket.Server({
+        port: configWithDefaults.websocketPort,
     });
+
+    if (!configWithDefaults.skipWebServer) {
+        const app = express();
+
+        app.use(express.static(configWithDefaults.staticDirectory));
+        app.listen(configWithDefaults.webPort, () => {
+            renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
+        });
+    } else {
+        renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
+    }
 }
 
 module.exports = { init, devices };
