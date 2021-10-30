@@ -4,6 +4,10 @@ const waveshare7in5v2Driver = require('bindings')('waveshare7in5v2.node');
 const waveshare3In7Driver = require('bindings')('waveshare3in7.node');
 const waveshare2in13v2Driver = require('bindings')('waveshare2in13v2.node');
 const waveshare2in13bcDriver = require('bindings')('waveshare2in13bc.node');
+const waveshare2in7Driver = require('bindings')('waveshare2in7.node');
+const waveshare2in7bDriver = require('bindings')('waveshare2in7b.node');
+const waveshare2in7v2Driver = require('bindings')('waveshare2in7v2.node');
+const waveshare2in7v2bDriver = require('bindings')('waveshare2in7v2b.node');
 
 const waveshare4in2Horizontal = {
     height: 300,
