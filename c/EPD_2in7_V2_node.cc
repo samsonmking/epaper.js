@@ -12,26 +12,26 @@ Napi::Number DEV_Init(const Napi::CallbackInfo& info) {
 
 Napi::Value Init(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
-    EPD_2IN13_V2_Init(EPD_2IN13_V2_FULL);
+    EPD_2IN7_V2_Init(EPD_2IN7_V2_FULL);
     return env.Undefined();
 }
 
 Napi::Value Display(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
-    EPD_2IN13_V2_Display(reinterpret_cast<uint8_t *>(jsBuffer.Data()));
+    EPD_2IN7_V2_Display(reinterpret_cast<uint8_t *>(jsBuffer.Data()));
     return env.Undefined();
 }
 
 Napi::Value Clear(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
-    EPD_2IN13_V2_Clear();
+    EPD_2IN7_V2_Clear();
     return env.Undefined();
 }
 
 Napi::Value Sleep(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
-    EPD_2IN13_V2_Sleep();
+    EPD_2IN7_V2_Sleep();
     return env.Undefined();
 }
 
