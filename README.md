@@ -148,6 +148,7 @@ npm install -S epaperjs
 | [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm)         | Black / White, 4 Gray  |
 | [Waveshare 2.13" hat v2](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT)   | Black / White          |
 | [Waveshare 2.13" bc](<https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT_(B)>) | Black / White          |
+| [Waveshare 2.7"](<https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT>)          | Black / White          |
 
 ### Adding Support For Additional Displays
 
