@@ -195,6 +195,116 @@ const waveshare2in13bcVertical = {
     },
 };
 
+const waveshare2in7v2Vertical = {
+    height: 176,
+    width: 264,
+    driver: waveshare2in7v2Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBW2in13V2(imgContents);
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare2in7Horizontal = {
+    height: 176,
+    width: 264,
+    driver: waveshare2in7Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBW2in13V2Rotated(
+            imgContents
+        );
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+const waveshare2in7Vertical = {
+    height: 264,
+    width: 176,
+    driver: waveshare2in7Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBW2in13V2(imgContents);
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare2in7v2Horizontal = {
+    height: 264,
+    width: 176,
+    driver: waveshare2in7v2Driver,
+    displayPNG: async function (imgContents) {
+        const buffer = await image.convertPNGto1BitBW2in13V2Rotated(
+            imgContents
+        );
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare2in7bHorizontal = {
+    height: 264,
+    width: 176,
+    driver: waveshare2in7bDriver,
+    displayPNG: async function (imgContents) {
+        const blackBuffer = await image.convertPNGto1BitBWRotated(imgContents);
+        const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
+        this.driver.display(blackBuffer, emptyBuffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare2in7bVertical = {
+    height: 176,
+    width: 264,
+    driver: waveshare2in7bDriver,
+    displayPNG: async function (imgContents) {
+        const blackBuffer = await image.convertPNGto1BitBW(imgContents);
+        const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
+        this.driver.display(blackBuffer, emptyBuffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+const waveshare2in7V2bHorizontal = {
+    height: 264,
+    width: 176,
+    driver: waveshare2in7v2bDriver,
+    displayPNG: async function (imgContents) {
+        const blackBuffer = await image.convertPNGto1BitBWRotated(imgContents);
+        const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
+        this.driver.display(blackBuffer, emptyBuffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare2in7V2bVertical = {
+    height: 176,
+    width: 264,
+    driver: waveshare2in7v2bDriver,
+    displayPNG: async function (imgContents) {
+        const blackBuffer = await image.convertPNGto1BitBW(imgContents);
+        const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
+        this.driver.display(blackBuffer, emptyBuffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
 const devices = {
     // default waveshare4in2 kept for backwards compatibility with release 1.0.0
     waveshare4in2: waveshare4in2Horizontal,
@@ -217,6 +327,14 @@ const devices = {
     waveshare2in13v2Vertical,
     waveshare2in13bcHorizontal,
     waveshare2in13bcVertical,
+    waveshare2in7b: waveshare2in7bHorizontal,
+    waveshare2in7bVertical,
+    waveshare2in7v2: waveshare2in7v2Horizontal,
+    waveshare2in7v2Vertical,
+    waveshare2in7: waveshare2in7Horizontal,
+    waveshare2in7Vertical,
+    waveshare2in7V2b: waveshare2in7V2bHorizontal,
+    waveshare2in7V2bVertical,
     waveshare2in13bc: waveshare2in13bcHorizontal,
 };
 
