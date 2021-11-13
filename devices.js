@@ -7,7 +7,7 @@ const waveshare2in13bcDriver = require('bindings')('waveshare2in13bc.node');
 const waveshare2in7Driver = require('bindings')('waveshare2in7.node');
 const waveshare2in7bDriver = require('bindings')('waveshare2in7b.node');
 const waveshare2in7v2Driver = require('bindings')('waveshare2in7v2.node');
-const waveshare2in7v2bDriver = require('bindings')('waveshare2in7v2b.node');
+const waveshare2in7v2bDriver = require('bindings')('waveshare2in7bv2.node');
 
 const waveshare4in2Horizontal = {
     height: 300,
@@ -327,6 +327,7 @@ const devices = {
     waveshare2in13v2Vertical,
     waveshare2in13bcHorizontal,
     waveshare2in13bcVertical,
+    waveshare2in13bc: waveshare2in13bcHorizontal,
     waveshare2in7b: waveshare2in7bHorizontal,
     waveshare2in7bVertical,
     waveshare2in7v2: waveshare2in7v2Horizontal,
@@ -335,7 +336,6 @@ const devices = {
     waveshare2in7Vertical,
     waveshare2in7V2b: waveshare2in7V2bHorizontal,
     waveshare2in7V2bVertical,
-    waveshare2in13bc: waveshare2in13bcHorizontal,
 };
 
 module.exports = devices;
