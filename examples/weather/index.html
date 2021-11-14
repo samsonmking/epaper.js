@@ -6,7 +6,6 @@
         <title>Weather Station</title>
         <link rel="stylesheet" href="css/weather-station.css" />
         <link rel="stylesheet" href="lib/css/weather-icons.min.css" />
-        <script src="api-key.js"></script>
     </head>
     <body>
         <div class="container">
@@ -38,8 +37,6 @@
             const getDateNumbersElement = () =>
                 document.getElementById('date-numbers');
 
-            const ws = new WebSocket('ws://localhost:8080');
-
             async function getWeather(zip) {
                 if (!apiKey) {
                     console.error(
@@ -52,7 +49,15 @@
                 return await responce.json();
             }
 
-            async function update() {
+            async function displayWeather(zipCode, apiKey) {
+                if (!zipCode) {
+                    console.error('zip code not specified');
+                    return;
+                }
+                if(!apiKey) {
+                    console.error('api key not specified');
+                    return;
+                }
                 const weatherData = await getWeather('02130');
                 const epoch = weatherData.dt;
                 const isNight = () => epoch >= weatherData.sys.sunset;
@@ -89,22 +94,11 @@
                 }/${date.getDate()}`;
             }
 
-            const afterPaint = (cb) =>
-                requestAnimationFrame(() => requestAnimationFrame(cb));
+            const searchParams = new URLSearchParams(window.location.search);
+            const zip = searchParams.get('zip');
+            const apiKey = searchParams.get('apiKey');
 
-            ws.addEventListener('open', () => {
-                const updateRecursive = async () => {
-                    try {
-                        await update();
-                    } catch (ex) {
-                        console.log(`[WARN] Failed to update weather - ${ex}`);
-                    }
-                    afterPaint(() => ws.send('render'));
-                    setTimeout(updateRecursive, 600000);
-                };
-
-                document.fonts.ready.then(updateRecursive);
-            });
+            displayWeather(zip, apiKey);
         </script>
     </body>
 </html>
