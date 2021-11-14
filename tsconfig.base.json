@@ -14,6 +14,6 @@
     "composite": true,
     "declarationMap": true,
     "declaration": true,
-    "allowJs": true
+    "allowJs": false
   }
 }

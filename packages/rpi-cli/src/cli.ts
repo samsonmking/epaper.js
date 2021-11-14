@@ -1,4 +1,5 @@
 import yargs from 'yargs/yargs';
+import { DisplayCommand } from './commands';
 
 export function cli(processArgs: string[]) {
     yargs(processArgs)
@@ -16,8 +17,17 @@ export function cli(processArgs: string[]) {
                         describe: 'URL to display',
                         type: 'string',
                     });
+            },
+            (args: DisplayArgs) => {
+                const displayCommand = new DisplayCommand();
+                displayCommand.display(args.deviceType, args.url);
             }
         )
         .demandCommand(1, 'No command specified - you must specify a command')
         .help().argv;
+}
+
+interface DisplayArgs {
+    deviceType: string;
+    url: string;
 }

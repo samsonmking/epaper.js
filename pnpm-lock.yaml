@@ -5,23 +5,13 @@ importers:
   .:
     specifiers:
       '@types/node': ^16.11.4
-      bindings: ^1.5.0
       express: ^4.17.1
-      node-addon-api: ^3.2.1
       node-gyp: ^7.1.2
-      png.js: ^0.2.1
       prettier: 2.1.2
-      puppeteer-core: ^4.0.1
-      sharp: ^0.26.3
       typescript: ^4.4.4
       ws: ^7.5.5
     dependencies:
-      bindings: 1.5.0
       express: 4.17.1
-      node-addon-api: 3.2.1
-      png.js: 0.2.1
-      puppeteer-core: 4.0.1
-      sharp: 0.26.3
       ws: 7.5.5
     devDependencies:
       '@types/node': 16.11.4
@@ -31,33 +21,96 @@ importers:
 
   packages/core:
     specifiers:
-      '@epaperjs/rpi-2in13-v2': workspace:^
       '@types/node': ^16.11.4
+      '@types/png.js': ^0.2.1
+      '@types/puppeteer-core': ^5.4.0
+      '@types/sharp': ^0.29.2
+      png.js: ^0.2.1
+      puppeteer-core: ^4.0.1
+      sharp: ^0.26.3
       typescript: ^4.4.4
     dependencies:
-      '@epaperjs/rpi-2in13-v2': link:../rpi-2in13-v2
+      png.js: 0.2.1
+      puppeteer-core: 4.0.1
+      sharp: 0.26.3
     devDependencies:
       '@types/node': 16.11.4
+      '@types/png.js': 0.2.1
+      '@types/puppeteer-core': 5.4.0
+      '@types/sharp': 0.29.2
       typescript: 4.4.4
 
+  packages/rpi-2in13-bc:
+    specifiers: {}
+
   packages/rpi-2in13-v2:
+    specifiers:
+      '@epaperjs/core': workspace:^
+      '@types/bindings': ^1.5.1
+      bindings: ^1.5.0
+      node-addon-api: ^3.2.1
+    dependencies:
+      '@epaperjs/core': link:../core
+      bindings: 1.5.0
+      node-addon-api: 3.2.1
+    devDependencies:
+      '@types/bindings': 1.5.1
+
+  packages/rpi-3in7:
+    specifiers: {}
+
+  packages/rpi-4in2:
+    specifiers: {}
+
+  packages/rpi-7in5-v2:
     specifiers: {}
 
   packages/rpi-cli:
     specifiers:
       '@epaperjs/core': workspace:^
+      '@epaperjs/rpi-2in13-v2': workspace:^
       '@types/yargs': ^17.0.4
       yargs: ^17.2.1
     dependencies:
       '@epaperjs/core': link:../core
       yargs: 17.2.1
+    optionalDependencies:
+      '@epaperjs/rpi-2in13-v2': link:../rpi-2in13-v2
     devDependencies:
       '@types/yargs': 17.0.4
 
 packages:
 
+  /@types/bindings/1.5.1:
+    resolution: {integrity: sha512-8HzueDeoxGXdsJ0Ep7TOXHGN+woRTWa1bAds30r5we7PCC3P5zrSTRknePLn/KYAubgQv5t/1zkonnStHLCWOg==}
+    dependencies:
+      '@types/node': 16.11.4
+    dev: true
+
   /@types/node/16.11.4:
     resolution: {integrity: sha512-TMgXmy0v2xWyuCSCJM6NCna2snndD8yvQF67J29ipdzMcsPa9u+o0tjF5+EQNdhcuZplYuouYqpc4zcd5I6amQ==}
+
+  /@types/png.js/0.2.1:
+    resolution: {integrity: sha512-olfUT/xcfoDIjAUAg6GQ6snMbQNjcj0/On/kZa1QwoZDjWNpYZHuGhOZykweS94HselcFu1RNgBK8JtLx45m4w==}
+    dev: true
+
+  /@types/puppeteer-core/5.4.0:
+    resolution: {integrity: sha512-yqRPuv4EFcSkTyin6Yy17pN6Qz2vwVwTCJIDYMXbE3j8vTPhv0nCQlZOl5xfi0WHUkqvQsjAR8hAfjeMCoetwg==}
+    dependencies:
+      '@types/puppeteer': 5.4.4
+    dev: true
+
+  /@types/puppeteer/5.4.4:
+    resolution: {integrity: sha512-3Nau+qi69CN55VwZb0ATtdUAlYlqOOQ3OfQfq0Hqgc4JMFXiQT/XInlwQ9g6LbicDslE6loIFsXFklGh5XmI6Q==}
+    dependencies:
+      '@types/node': 16.11.4
+    dev: true
+
+  /@types/sharp/0.29.2:
+    resolution: {integrity: sha512-tIbMvtPa8kMyFMKNhpsPT1HO3CgXLuiCAA8bxHAGAZLyALpYvYc4hUu3pu0+3oExQA5LwvHrWp+OilgXCYVQgg==}
+    dependencies:
+      '@types/node': 16.11.4
+    dev: true
 
   /@types/yargs-parser/20.2.1:
     resolution: {integrity: sha512-7tFImggNeNBVMsn0vLrpn1H1uPrUBdnARPTpZoitY37ZrdJREzf7I16tMrlK3hen349gr1NYh8CmZQa7CTG6Aw==}

@@ -4,18 +4,17 @@
   "description": "> TODO: description",
   "author": "samsonmking <samson@samsonmking.com>",
   "homepage": "https://github.com/samsonmking/epaper.js#readme",
-  "license": "ISC",
+  "license": "MIT",
   "main": "lib/rpi-cli.js",
   "bin": {
     "rpi-cli": "bin/rpi-cli"
   },
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "dist": "dist"
   },
   "files": [
     "bin",
-    "lib"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -27,12 +26,16 @@
   },
   "dependencies": {
     "@epaperjs/core": "workspace:^",
-    "yargs": "^17.2.1"
+    "yargs": "^17.2.1",
+    "@epaperjs/rpi-2in13-v2": "workspace:^"
   },
   "bugs": {
     "url": "https://github.com/samsonmking/epaper.js/issues"
   },
   "devDependencies": {
     "@types/yargs": "^17.0.4"
+  },
+  "optionalDependencies": {
+    "@epaperjs/rpi-2in13-v2": "workspace:^"
   }
 }

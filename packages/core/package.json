@@ -1,33 +1,38 @@
 {
-  "name": "@epaperjs/core",
-  "version": "2.0.0-alpha.0",
-  "description": "> TODO: description",
-  "author": "samsonmking <samson@samsonmking.com>",
-  "homepage": "https://github.com/samsonmking/epaper.js#readme",
-  "license": "ISC",
-  "main": "lib/core.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/samsonmking/epaper.js.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "bugs": {
-    "url": "https://github.com/samsonmking/epaper.js/issues"
-  },
-  "dependencies": {
-    "@epaperjs/rpi-2in13-v2": "workspace:^"
-  },
-  "devDependencies": {
-    "@types/node": "^16.11.4",
-    "typescript": "^4.4.4"
-  }
+    "name": "@epaperjs/core",
+    "version": "2.0.0-alpha.0",
+    "description": "> TODO: description",
+    "author": "samsonmking <samson@samsonmking.com>",
+    "homepage": "https://github.com/samsonmking/epaper.js#readme",
+    "license": "MIT",
+    "main": "lib/index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/samsonmking/epaper.js.git"
+    },
+    "scripts": {
+        "compile": "tsc"
+    },
+    "bugs": {
+        "url": "https://github.com/samsonmking/epaper.js/issues"
+    },
+    "devDependencies": {
+        "@types/node": "^16.11.4",
+        "@types/png.js": "^0.2.1",
+        "@types/puppeteer-core": "^5.4.0",
+        "@types/sharp": "^0.29.2",
+        "typescript": "^4.4.4"
+    },
+    "dependencies": {
+        "puppeteer-core": "^4.0.1",
+        "png.js": "^0.2.1",
+        "sharp": "^0.26.3"
+    }
 }

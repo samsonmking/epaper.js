@@ -1,5 +1,5 @@
 const express = require('express');
-const devices = require('./devices.js');
+const devices = require('./devices.js.ignore/index.js');
 const readline = require('readline');
 const WebSocket = require('ws');
 const renderBrowser = require('./render.js');

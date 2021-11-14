@@ -1,28 +1,36 @@
 {
-  "name": "@epaperjs/rpi-2in13-v2",
-  "version": "2.0.0-alpha.0",
-  "description": "> TODO: description",
-  "author": "samsonmking <samson@samsonmking.com>",
-  "homepage": "https://github.com/samsonmking/epaper.js#readme",
-  "license": "ISC",
-  "main": "lib/rpi-2in13-v2.js",
-  "directories": {
-    "src": "src",
-    "test": "__tests__"
-  },
-  "files": [
-    "src"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/samsonmking/epaper.js.git"
-  },
-  "scripts": {
-    "build": "node-gyp rebuild",
-    "clean": "node-gyp clean"
-  },
-  "bugs": {
-    "url": "https://github.com/samsonmking/epaper.js/issues"
-  },
-  "gypfile": true
+    "name": "@epaperjs/rpi-2in13-v2",
+    "version": "2.0.0-alpha.0",
+    "description": "> TODO: description",
+    "author": "samsonmking <samson@samsonmking.com>",
+    "homepage": "https://github.com/samsonmking/epaper.js#readme",
+    "license": "MIT",
+    "main": "lib/rpi2In13V2.js",
+    "directories": {
+        "src": "lib"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/samsonmking/epaper.js.git"
+    },
+    "scripts": {
+        "build": "node-gyp rebuild",
+        "clean": "node-gyp clean",
+        "clean:build": "pnpm clean && pnpm build"
+    },
+    "bugs": {
+        "url": "https://github.com/samsonmking/epaper.js/issues"
+    },
+    "dependencies": {
+        "@epaperjs/core": "workspace:^",
+        "node-addon-api": "^3.2.1",
+        "bindings": "^1.5.0"
+    },
+    "gypfile": true,
+    "devDependencies": {
+        "@types/bindings": "^1.5.1"
+    }
 }

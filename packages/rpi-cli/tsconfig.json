@@ -4,9 +4,7 @@
         "outDir": "dist",
         "rootDir": "src",
         "sourceMap": false,
-        "declaration": false,
-        "declarationMap": false,
-        "composite": false
+        "declarationMap": false
     },
     "include": [
         "src/**/*.ts",
@@ -15,6 +13,9 @@
     "references": [
         {
             "path": "../core"
+        },
+        {
+            "path": "../rpi-2in13-v2"
         }
     ]
 }

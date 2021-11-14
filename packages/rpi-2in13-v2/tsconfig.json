@@ -9,5 +9,8 @@
         "src/**/*.js"
     ],
     "references": [
+        {
+            "path": "../core"
+        }
     ]
 }
