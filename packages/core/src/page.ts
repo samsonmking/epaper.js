@@ -1,8 +1,7 @@
 import puppeteer from 'puppeteer-core';
-import { DisplayDevice } from './api';
 
-export class Page {
-    constructor(private readonly browserPage: puppeteer.Page) {}
+export class BrowserPage {
+    constructor(private readonly browser: puppeteer.Browser, private readonly browserPage: puppeteer.Page) {}
 
     async display(url: string): Promise<Buffer> {
         await this.browserPage.goto(url, {
@@ -15,12 +14,16 @@ export class Page {
         });
     }
 
+    async close() {
+        await this.browser.close();
+    }
+
     onConsoleLog(callback: (msg: string) => void) {
         this.browserPage.on('console', (msg) => callback(msg.text()));
     }
 }
 
-export async function getPage(width: number, height: number) {
+export async function getBrowserPage(width: number, height: number) {
     const browser = await puppeteer.launch({
         executablePath: 'chromium-browser',
         args: ['--font-render-hinting=slight'],
@@ -31,5 +34,5 @@ export async function getPage(width: number, height: number) {
         height,
         deviceScaleFactor: 1,
     });
-    return new Page(browserPage);
+    return new BrowserPage(browser, browserPage);
 }

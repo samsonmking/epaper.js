@@ -4,7 +4,7 @@ import { DisplayCommand } from './commands';
 export function cli(processArgs: string[]) {
     yargs(processArgs)
         .usage('Usage $0 <command>')
-        .command(
+        .command<DisplayArgs>(
             'display <deviceType> <url>',
             'display a single rendition of the URL',
             (yargs) => {
@@ -18,9 +18,9 @@ export function cli(processArgs: string[]) {
                         type: 'string',
                     });
             },
-            (args: DisplayArgs) => {
+            async (args) => {
                 const displayCommand = new DisplayCommand();
-                displayCommand.display(args.deviceType, args.url);
+                await displayCommand.display(args.deviceType, args.url);
             }
         )
         .demandCommand(1, 'No command specified - you must specify a command')

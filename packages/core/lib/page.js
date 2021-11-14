@@ -3,10 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPage = exports.Page = void 0;
+exports.getBrowserPage = exports.BrowserPage = void 0;
 const puppeteer_core_1 = __importDefault(require("puppeteer-core"));
-class Page {
-    constructor(browserPage) {
+class BrowserPage {
+    constructor(browser, browserPage) {
+        this.browser = browser;
         this.browserPage = browserPage;
     }
     async display(url) {
@@ -19,12 +20,15 @@ class Page {
             encoding: 'binary',
         });
     }
+    async close() {
+        await this.browser.close();
+    }
     onConsoleLog(callback) {
         this.browserPage.on('console', (msg) => callback(msg.text()));
     }
 }
-exports.Page = Page;
-async function getPage(width, height) {
+exports.BrowserPage = BrowserPage;
+async function getBrowserPage(width, height) {
     const browser = await puppeteer_core_1.default.launch({
         executablePath: 'chromium-browser',
         args: ['--font-render-hinting=slight'],
@@ -35,6 +39,6 @@ async function getPage(width, height) {
         height,
         deviceScaleFactor: 1,
     });
-    return new Page(browserPage);
+    return new BrowserPage(browser, browserPage);
 }
-exports.getPage = getPage;
+exports.getBrowserPage = getBrowserPage;

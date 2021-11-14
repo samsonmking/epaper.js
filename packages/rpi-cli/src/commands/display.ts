@@ -1,4 +1,4 @@
-import { getPage } from '@epaperjs/core';
+import { getBrowserPage } from '@epaperjs/core';
 import { DeviceFactory } from '../deviceFactory';
 
 export class DisplayCommand {
@@ -15,9 +15,10 @@ export class DisplayCommand {
         }
         displayDevice.init();
 
-        const page = await getPage(displayDevice.width, displayDevice.height);
-        const imgOfUrl = await page.display(url);
-        displayDevice.displayPng(imgOfUrl);
+        const browserPage = await getBrowserPage(displayDevice.width, displayDevice.height);
+        const imgOfUrl = await browserPage.display(url);
+        await displayDevice.displayPng(imgOfUrl);
         displayDevice.sleep();
+        await browserPage.close();
     }
 }
