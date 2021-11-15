@@ -1,4 +1,4 @@
-import { getBrowserPage } from '@epaperjs/core';
+import { getBrowserPage, Orientation } from '@epaperjs/core';
 import { DeviceFactory } from '../deviceFactory';
 
 export class DisplayCommand {
@@ -8,10 +8,13 @@ export class DisplayCommand {
         this.deviceFactory = new DeviceFactory();
     }
 
-    async display(deviceType: string, url: string) {
+    async display(deviceType: string, url: string, orientation?: string) {
         const displayDevice = await this.deviceFactory.getDevice(deviceType);
         if (!displayDevice) {
             throw new Error(`device type ${deviceType} not recognized`);
+        }
+        if (orientation) {
+            displayDevice.orientation = orientation === 'v' ? Orientation.Vertical : Orientation.Horizontal;
         }
         displayDevice.init();
 

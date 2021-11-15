@@ -102,33 +102,7 @@ body {
     }
 }
 
-@media only screen and (min-width: 151px) and (max-width: 212px) {
-    html {
-        font-size: 8px;
-    }
-    #temp-icon {
-        font-size: 6rem;
-    }
-    #temp-range {
-        font-size: 1.5rem;
-        font-weight: bolder;
-    }
-    #description {
-        font-size: 1.6rem;
-        font-weight: bolder;
-    }
-}
-
-@media only screen and (max-width: 150px) {
-    html {
-        font-size: 8px;
-    }
-    .date {
-        flex-direction: column;
-    }
-}
-
-@media only screen and (max-width: 104px) {
+@media only screen and (max-width: 212px) {
     html {
         font-size: 7px;
     }
