@@ -15,15 +15,20 @@ jobs:
       - name: Install Dependencies
         uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
         with:
-          entrypoint: npm
+          entrypoint: pnpm
           args: install
-      - name: Build
+      - name: Build Bindings
         uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
         with:
-          entrypoint: npm
-          args: run build
+          entrypoint: pnpm
+          args: clean:build
+      - name: Build Typescript
+        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
+        with:
+          entrypoint: pnpm
+          args: clean:compile
       - name: Check Formatting
         uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
         with:
-          entrypoint: npm
-          args: run format:check
+          entrypoint: pnpm
+          args: format:check
