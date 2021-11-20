@@ -1,5 +1,5 @@
 ![ePaper.js](images/logo.svg) \
-[![Discord](https://img.shields.io/discord/888893320309379122?label=chat&logo=discord&style=flat-square)](https://discord.com/channels/888893320309379122)
+[![Discord](https://img.shields.io/discord/888893320309379122?label=chat&logo=discord&style=flat-square)](https://discord.gg/cGJJ6CFSxM)
 
 Node.js library for easily creating an ePaper display on a Raspberry Pi using HTML and Javascript.
 
@@ -37,7 +37,7 @@ Create `static/index.html`. The contents of this webpage will be rendered onto t
 
 From Node.js initialize ePaper.js. This does the following:
 
--   Creates a webserver that serves `index.html` from the `static` directory
+-   Creates a webserver that serves `index.html` from the `static` directory, or serves a page from an external web server
 -   Loads index.html in a headless instance of Chromium, using [Puppeteer](https://github.com/puppeteer/puppeteer)
 -   Creates a WebSocket API that the frontend can use to trigger a display refresh, or perform custom actions
 -   Renders the contents of the browser DOM onto the ePaper display
@@ -58,6 +58,7 @@ init(devices.waveshare4in2, {
     webPort: 3000, // WebServer Port
     websocketPort: 8080, // WebSocket API Port
     staticDirectory: 'static', // Directory to serve frontend from
+    skipWebServer: false, // If set to true will not create a local web server
     url: `http://localhost:3000/index.html`, // Initial URL to load
 });
 ```
@@ -147,6 +148,7 @@ npm install -S epaperjs
 | [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm)         | Black / White, 4 Gray  |
 | [Waveshare 2.13" hat v2](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT)   | Black / White          |
 | [Waveshare 2.13" bc](<https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT_(B)>) | Black / White          |
+| [Waveshare 2.7"](https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT)            | Black / White          |
 
 ### Adding Support For Additional Displays
 

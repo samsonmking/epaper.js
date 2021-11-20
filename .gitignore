@@ -1,6 +1,7 @@
 # editor
 *.o
 *.swp
+.idea
 
 # build
 node_modules/

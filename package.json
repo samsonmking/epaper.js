@@ -16,6 +16,16 @@
         "email": "samson@samsonmking.com",
         "url": "https://github.com/samsonmking"
     },
+    "contributors": [
+        {
+            "name": "Elad Shaham",
+            "url": "https://github.com/eshaham"
+        },
+        {
+            "name": "Sven Schoeni",
+            "url": "https://github.com/schoes"
+        }
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/samsonmking/epaper.js"
