@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Setup Docker QEMU (To target RPi ARM)
-        uses: docker/setup-qemu-action@v1.0.1
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
+          platforms: arm/v7
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Dependencies
