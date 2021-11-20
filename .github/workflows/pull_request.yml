@@ -13,17 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Dependencies
-        uses: docker://ghcr.io/samsonmking/epaperjs-docker:latest
+        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v1.0.0
         with:
           entrypoint: npm
           args: install
       - name: Build
-        uses: docker://ghcr.io/samsonmking/epaperjs-docker:latest
+        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v1.0.0
         with:
           entrypoint: npm
           args: run build
       - name: Check Formatting
-        uses: docker://ghcr.io/samsonmking/epaperjs-docker:latest
+        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v1.0.0
         with:
           entrypoint: npm
           args: run format:check
