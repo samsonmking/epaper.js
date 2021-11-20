@@ -42,12 +42,7 @@ function setupExitOnSignal(driver) {
     process.on('SIGTERM', handle);
 }
 
-function init(
-    screen = devices.waveshare2in13v2,
-    staticDirectory,
-    config = {},
-    renderCallback = defaultRenderCallback
-) {
+function init(screen = devices.waveshare2in13v2, staticDirectory, config = {}, renderCallback = defaultRenderCallback) {
     const configWithDefaults = { ...defaultConfig, staticDirectory, ...config };
 
     if (process.stdin.isTTY) {

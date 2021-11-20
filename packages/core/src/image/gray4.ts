@@ -19,10 +19,8 @@ export async function convertPNGto4Grey(pngBytes: Buffer) {
                         const out_index = Math.floor((x + y * width) / 4);
                         outBuffer[out_index] =
                             (getGrayPixel(png.getPixel(x - 3, y)) & 0xc0) |
-                            ((getGrayPixel(png.getPixel(x - 2, y)) & 0xc0) >>
-                                2) |
-                            ((getGrayPixel(png.getPixel(x - 1, y)) & 0xc0) >>
-                                4) |
+                            ((getGrayPixel(png.getPixel(x - 2, y)) & 0xc0) >> 2) |
+                            ((getGrayPixel(png.getPixel(x - 1, y)) & 0xc0) >> 4) |
                             ((getGrayPixel(png.getPixel(x, y)) & 0xc0) >> 6);
                     }
                 }
@@ -51,15 +49,11 @@ export async function convertPNGto4GreyRotated(pngBytes: Buffer) {
                     const outX = y;
                     const outY = devHeight - x - 1;
                     if (++i % 4 == 0) {
-                        const out_index = Math.floor(
-                            (outX + outY * devWidth) / 4
-                        );
+                        const out_index = Math.floor((outX + outY * devWidth) / 4);
                         outBuffer[out_index] =
                             (getGrayPixel(png.getPixel(x, y - 3)) & 0xc0) |
-                            ((getGrayPixel(png.getPixel(x, y - 2)) & 0xc0) >>
-                                2) |
-                            ((getGrayPixel(png.getPixel(x, y - 1)) & 0xc0) >>
-                                4) |
+                            ((getGrayPixel(png.getPixel(x, y - 2)) & 0xc0) >> 2) |
+                            ((getGrayPixel(png.getPixel(x, y - 1)) & 0xc0) >> 4) |
                             ((getGrayPixel(png.getPixel(x, y)) & 0xc0) >> 6);
                     }
                 }

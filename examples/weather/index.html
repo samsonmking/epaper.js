@@ -28,14 +28,11 @@
         <script>
             const getIconElement = () => document.getElementById('temp-icon');
             const getTempNowElement = () => document.getElementById('temp-now');
-            const getTempHighElement = () =>
-                document.getElementById('temp-max');
+            const getTempHighElement = () => document.getElementById('temp-max');
             const getTempLowElement = () => document.getElementById('temp-min');
-            const getDescriptionElement = () =>
-                document.getElementById('description');
+            const getDescriptionElement = () => document.getElementById('description');
             const getDateDayElement = () => document.getElementById('date-day');
-            const getDateNumbersElement = () =>
-                document.getElementById('date-numbers');
+            const getDateNumbersElement = () => document.getElementById('date-numbers');
 
             async function getWeather(zip) {
                 if (!apiKey) {
@@ -54,7 +51,7 @@
                     console.error('zip code not specified');
                     return;
                 }
-                if(!apiKey) {
+                if (!apiKey) {
                     console.error('api key not specified');
                     return;
                 }
@@ -62,36 +59,17 @@
                 const epoch = weatherData.dt;
                 const isNight = () => epoch >= weatherData.sys.sunset;
 
-                const iconClassName = `wi-owm-${isNight() ? 'night' : 'day'}-${
-                    weatherData.weather[0].id
-                }`;
+                const iconClassName = `wi-owm-${isNight() ? 'night' : 'day'}-${weatherData.weather[0].id}`;
                 getIconElement().className = `wi ${iconClassName}`;
-                getTempNowElement().innerHTML = Math.round(
-                    weatherData.main.temp
-                );
-                getTempHighElement().innerHTML = Math.round(
-                    weatherData.main.temp_max
-                );
-                getTempLowElement().innerHTML = Math.round(
-                    weatherData.main.temp_min
-                );
-                getDescriptionElement().innerHTML =
-                    weatherData.weather[0].description;
+                getTempNowElement().innerHTML = Math.round(weatherData.main.temp);
+                getTempHighElement().innerHTML = Math.round(weatherData.main.temp_max);
+                getTempLowElement().innerHTML = Math.round(weatherData.main.temp_min);
+                getDescriptionElement().innerHTML = weatherData.weather[0].description;
 
                 const date = new Date();
-                const days = [
-                    'Sunday',
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                    'Saturday',
-                ];
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 getDateDayElement().innerHTML = days[date.getDay()];
-                getDateNumbersElement().innerHTML = `${
-                    date.getMonth() + 1
-                }/${date.getDate()}`;
+                getDateNumbersElement().innerHTML = `${date.getMonth() + 1}/${date.getDate()}`;
             }
 
             const searchParams = new URLSearchParams(window.location.search);

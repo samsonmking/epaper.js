@@ -4,9 +4,6 @@
         "outDir": "lib",
         "rootDir": "src"
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.js"
-    ],
+    "include": ["src/**/*.ts", "src/**/*.js"],
     "references": []
 }

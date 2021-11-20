@@ -1,7 +1,14 @@
-**/node_modules
-build
-package-lock.json
-c
-images
-**/lib
+# editor
+.vscode/
 .idea
+
+#build
+node_modules/
+build/
+dist/
+lib/
+images
+pnpm-lock.yaml
+tsconfig.tsbuildinfo
+.pnpm-store/
+.pnpm-debug.log

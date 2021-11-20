@@ -1,41 +1,41 @@
 {
-  "name": "@epaperjs/rpi-cli",
-  "version": "2.0.0-alpha.0",
-  "description": "> TODO: description",
-  "author": "samsonmking <samson@samsonmking.com>",
-  "homepage": "https://github.com/samsonmking/epaper.js#readme",
-  "license": "MIT",
-  "main": "lib/rpi-cli.js",
-  "bin": {
-    "rpi-cli": "bin/rpi-cli"
-  },
-  "directories": {
-    "dist": "dist"
-  },
-  "files": [
-    "bin",
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/samsonmking/epaper.js.git"
-  },
-  "scripts": {
-    "compile": "tsc --build",
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "dependencies": {
-    "@epaperjs/core": "workspace:^",
-    "yargs": "^17.2.1",
-    "@epaperjs/rpi-2in13-v2": "workspace:^"
-  },
-  "bugs": {
-    "url": "https://github.com/samsonmking/epaper.js/issues"
-  },
-  "devDependencies": {
-    "@types/yargs": "^17.0.4"
-  },
-  "optionalDependencies": {
-    "@epaperjs/rpi-2in13-v2": "workspace:^"
-  }
+    "name": "@epaperjs/rpi-cli",
+    "version": "2.0.0-alpha.0",
+    "description": "> TODO: description",
+    "author": "samsonmking <samson@samsonmking.com>",
+    "homepage": "https://github.com/samsonmking/epaper.js#readme",
+    "license": "MIT",
+    "main": "lib/rpi-cli.js",
+    "bin": {
+        "rpi-cli": "bin/rpi-cli"
+    },
+    "directories": {
+        "dist": "dist"
+    },
+    "files": [
+        "bin",
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/samsonmking/epaper.js.git"
+    },
+    "scripts": {
+        "compile": "tsc --build",
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "dependencies": {
+        "@epaperjs/core": "workspace:^",
+        "yargs": "^17.2.1",
+        "@epaperjs/rpi-2in13-v2": "workspace:^"
+    },
+    "bugs": {
+        "url": "https://github.com/samsonmking/epaper.js/issues"
+    },
+    "devDependencies": {
+        "@types/yargs": "^17.0.4"
+    },
+    "optionalDependencies": {
+        "@epaperjs/rpi-2in13-v2": "workspace:^"
+    }
 }
