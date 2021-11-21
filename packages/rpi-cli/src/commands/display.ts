@@ -9,12 +9,9 @@ export class DisplayCommand {
     }
 
     async display(deviceType: string, url: string, orientation?: string) {
-        const displayDevice = await this.deviceFactory.getDevice(deviceType);
+        const displayDevice = await this.deviceFactory.getDevice(deviceType, this.getOrientation(orientation));
         if (!displayDevice) {
             throw new Error(`device type ${deviceType} not recognized`);
-        }
-        if (orientation) {
-            displayDevice.orientation = orientation === 'v' ? Orientation.Vertical : Orientation.Horizontal;
         }
         displayDevice.init();
 
@@ -23,5 +20,9 @@ export class DisplayCommand {
         await displayDevice.displayPng(imgOfUrl);
         displayDevice.sleep();
         await browserPage.close();
+    }
+
+    private getOrientation(orientation: string | undefined): Orientation {
+        return orientation === 'v' ? Orientation.Vertical : Orientation.Horizontal;
     }
 }

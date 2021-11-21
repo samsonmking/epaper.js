@@ -9,20 +9,18 @@ import bindings from 'bindings';
 import { Driver } from './driver';
 
 export class Rpi2In13V2 implements DisplayDevice {
+    public readonly colorMode = ColorMode.Gray1;
+    public readonly height: number;
+    public readonly width: number;
     private readonly driver: Driver;
-    public orientation = Orientation.Horizontal;
-    public colorMode = ColorMode.Gray4;
+    private readonly converter: (img: Buffer) => Promise<Buffer>;
 
-    constructor() {
+    constructor(public readonly orientation: Orientation) {
         this.driver = bindings('waveshare2in13v2.node');
-    }
-
-    public get height() {
-        return this.orientation === Orientation.Horizontal ? 122 : 250;
-    }
-
-    public get width() {
-        return this.orientation === Orientation.Horizontal ? 250 : 122;
+        this.height = orientation === Orientation.Horizontal ? 122 : 250;
+        this.width = orientation === Orientation.Horizontal ? 250 : 122;
+        this.converter =
+            orientation === Orientation.Horizontal ? convertPNGto1BitBW2in13V2Rotated : convertPNGto1BitBW2in13V2;
     }
 
     public init() {
@@ -39,9 +37,7 @@ export class Rpi2In13V2 implements DisplayDevice {
     }
 
     public async displayPng(img: Buffer) {
-        const converter =
-            this.orientation === Orientation.Horizontal ? convertPNGto1BitBW2in13V2Rotated : convertPNGto1BitBW2in13V2;
-        const blackBuffer = await converter(img);
+        const blackBuffer = await this.converter(img);
         this.driver.display(blackBuffer);
     }
 }

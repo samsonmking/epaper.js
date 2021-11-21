@@ -6,8 +6,8 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "clean": "tsc --build --clean",
-        "compile": "tsc --build",
-        "clean:compile": "pnpm clean && pnpm compile",
+        "build": "tsc --build",
+        "build:clean": "pnpm clean && pnpm build",
         "format:write": "prettier --write .",
         "format:check": "prettier --check ."
     },

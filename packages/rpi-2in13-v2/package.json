@@ -4,6 +4,9 @@
     "description": "> TODO: description",
     "author": "samsonmking <samson@samsonmking.com>",
     "homepage": "https://github.com/samsonmking/epaper.js#readme",
+    "bugs": {
+        "url": "https://github.com/samsonmking/epaper.js/issues"
+    },
     "license": "MIT",
     "main": "lib/rpi2In13V2.js",
     "directories": {
@@ -19,10 +22,7 @@
     "scripts": {
         "build": "node-gyp rebuild",
         "clean": "node-gyp clean",
-        "clean:build": "pnpm clean && pnpm build"
-    },
-    "bugs": {
-        "url": "https://github.com/samsonmking/epaper.js/issues"
+        "build:clean": "pnpm clean && pnpm build"
     },
     "dependencies": {
         "@epaperjs/core": "workspace:^",

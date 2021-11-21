@@ -10,6 +10,9 @@
         },
         {
             "path": "packages/rpi-2in13-v2"
+        },
+        {
+            "path": "packages/rpi-2in13-bc"
         }
     ]
 }

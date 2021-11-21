@@ -41,7 +41,17 @@ importers:
       typescript: 4.4.4
 
   packages/rpi-2in13-bc:
-    specifiers: {}
+    specifiers:
+      '@epaperjs/core': workspace:^
+      '@types/bindings': ^1.5.1
+      bindings: ^1.5.0
+      node-addon-api: ^3.2.1
+    dependencies:
+      '@epaperjs/core': link:../core
+      bindings: 1.5.0
+      node-addon-api: 3.2.1
+    devDependencies:
+      '@types/bindings': 1.5.1
 
   packages/rpi-2in13-v2:
     specifiers:
@@ -68,6 +78,7 @@ importers:
   packages/rpi-cli:
     specifiers:
       '@epaperjs/core': workspace:^
+      '@epaperjs/rpi-2in13-bc': workspace:^
       '@epaperjs/rpi-2in13-v2': workspace:^
       '@types/yargs': ^17.0.4
       yargs: ^17.2.1
@@ -75,6 +86,7 @@ importers:
       '@epaperjs/core': link:../core
       yargs: 17.2.1
     optionalDependencies:
+      '@epaperjs/rpi-2in13-bc': link:../rpi-2in13-bc
       '@epaperjs/rpi-2in13-v2': link:../rpi-2in13-v2
     devDependencies:
       '@types/yargs': 17.0.4

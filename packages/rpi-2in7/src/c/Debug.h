@@ -1,13 +1,16 @@
 /*****************************************************************************
-* | File      	:   EPD_2in7b_V2.h
+* | File      	:	Debug.h
 * | Author      :   Waveshare team
-* | Function    :   2.7inch e-paper b V2
+* | Function    :	debug with printf
 * | Info        :
+*   Image scanning
+*      Please use progressive scanning to generate images or fonts
 *----------------
-* |	This version:   V1.0
-* | Date        :   2020-10-20
-* | Info        :
-* -----------------------------------------------------------------------------
+* |	This version:   V2.0
+* | Date        :   2018-10-30
+* | Info        :   
+*   1.USE_DEBUG -> DEBUG, If you need to see the debug information, 
+*    clear the execution: make DEBUG=-DDEBUG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -27,19 +30,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
+
 ******************************************************************************/
-#ifndef __EPD_2IN7B_V2_H_
-#define __EPD_2IN7B_V2_H_
+#ifndef __DEBUG_H
+#define __DEBUG_H
 
-#include "DEV_Config.h"
+#include <stdio.h>
 
-// Display resolution
-#define EPD_2IN7B_V2_WIDTH       176
-#define EPD_2IN7B_V2_HEIGHT      264
-
-void EPD_2IN7B_V2_Init(void);
-void EPD_2IN7B_V2_Clear(void);
-void EPD_2IN7B_V2_Display(UBYTE *Imageblack, UBYTE *Imagered);
-void EPD_2IN7B_V2_Sleep(void);
+#if DEBUG
+	#define Debug(__info,...) printf("Debug: " __info,##__VA_ARGS__)
+#else
+	#define Debug(__info,...)  
+#endif
 
 #endif
+

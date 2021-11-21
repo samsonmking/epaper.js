@@ -36,6 +36,7 @@
         "@types/yargs": "^17.0.4"
     },
     "optionalDependencies": {
-        "@epaperjs/rpi-2in13-v2": "workspace:^"
+        "@epaperjs/rpi-2in13-v2": "workspace:^",
+        "@epaperjs/rpi-2in13-bc": "workspace:^"
     }
 }

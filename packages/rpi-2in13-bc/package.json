@@ -4,11 +4,13 @@
     "description": "> TODO: description",
     "author": "samsonmking <samson@samsonmking.com>",
     "homepage": "https://github.com/samsonmking/epaper.js#readme",
-    "license": "ISC",
-    "main": "lib/rpi-2in13-bc.js",
+    "bugs": {
+        "url": "https://github.com/samsonmking/epaper.js/issues"
+    },
+    "license": "MIT",
+    "main": "lib/rpi2In13Bc.js",
     "directories": {
-        "lib": "lib",
-        "test": "__tests__"
+        "lib": "lib"
     },
     "files": [
         "lib"
@@ -18,9 +20,17 @@
         "url": "git+https://github.com/samsonmking/epaper.js.git"
     },
     "scripts": {
-        "test": "echo \"Error: run tests from root\" && exit 1"
+        "build": "node-gyp rebuild",
+        "clean": "node-gyp clean",
+        "build:clean": "pnpm clean && pnpm build"
     },
-    "bugs": {
-        "url": "https://github.com/samsonmking/epaper.js/issues"
+    "dependencies": {
+        "@epaperjs/core": "workspace:^",
+        "node-addon-api": "^3.2.1",
+        "bindings": "^1.5.0"
+    },
+    "gypfile": true,
+    "devDependencies": {
+        "@types/bindings": "^1.5.1"
     }
 }
