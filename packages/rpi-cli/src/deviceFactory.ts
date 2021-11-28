@@ -6,6 +6,7 @@ export class DeviceFactory {
         this.deviceMap = new Map<string, (orientation: Orientation) => Promise<DisplayDevice>>([
             ['rpi-2in13-v2', async (orientation) => await this.getRpi2in13V2(orientation)],
             ['rpi-2in13-bc', async (orientation) => await this.getRpi2In13Bc(orientation)],
+            ['rpi-4in2', async (orientation) => await this.getRpi4In2(orientation)],
         ]);
     }
 
@@ -25,5 +26,10 @@ export class DeviceFactory {
     private async getRpi2In13Bc(orientation: Orientation): Promise<DisplayDevice> {
         const { Rpi2In13BC } = await import('@epaperjs/rpi-2in13-bc');
         return new Rpi2In13BC(orientation);
+    }
+
+    private async getRpi4In2(orientation: Orientation): Promise<DisplayDevice> {
+        const { Rpi4In2 } = await import('@epaperjs/rpi-4in2');
+        return new Rpi4In2(orientation);
     }
 }

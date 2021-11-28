@@ -37,6 +37,7 @@
     },
     "optionalDependencies": {
         "@epaperjs/rpi-2in13-v2": "workspace:^",
-        "@epaperjs/rpi-2in13-bc": "workspace:^"
+        "@epaperjs/rpi-2in13-bc": "workspace:^",
+        "@epaperjs/rpi-4in2": "workspace:^"
     }
 }
