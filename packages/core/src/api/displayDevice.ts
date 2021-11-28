@@ -1,12 +1,14 @@
-export enum ColorMode {
-    Gray1 = 'GRAY_1',
-    Gray4 = 'GRAY_4',
-}
+export const ColorMode = {
+    Black: 'black',
+    Gray4: 'gray4',
+};
+export type ColorMode = typeof ColorMode[keyof typeof ColorMode];
 
-export enum Orientation {
-    Horizontal = 'H',
-    Vertical = 'V',
-}
+export const Orientation = {
+    Horizontal: 'h',
+    Vertical: 'v',
+};
+export type Orientation = typeof Orientation[keyof typeof Orientation];
 
 export interface DisplayDevice {
     orientation: Orientation;

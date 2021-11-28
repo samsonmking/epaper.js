@@ -3,13 +3,13 @@ import bindings from 'bindings';
 import { Driver } from './driver';
 
 export class Rpi2In13BC implements DisplayDevice {
-    public colorMode = ColorMode.Gray1;
+    public colorMode = ColorMode.Black;
     public readonly height: number;
     public readonly width: number;
     private readonly driver: Driver;
     private readonly converter: (img: Buffer) => Promise<Buffer>;
 
-    constructor(public readonly orientation: Orientation) {
+    constructor(public readonly orientation: Orientation = Orientation.Horizontal) {
         this.driver = bindings('waveshare2in13bc.node');
         this.height = orientation === Orientation.Horizontal ? 104 : 212;
         this.width = orientation === Orientation.Horizontal ? 212 : 104;

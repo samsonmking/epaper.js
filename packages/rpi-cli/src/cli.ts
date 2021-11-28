@@ -1,3 +1,4 @@
+import { ColorMode, Orientation } from '@epaperjs/core';
 import yargs from 'yargs/yargs';
 import { DisplayCommand } from './commands';
 
@@ -11,8 +12,13 @@ export function cli(processArgs: string[]) {
                 yargs
                     .option('orientation', {
                         alias: 'o',
-                        choices: ['h', 'v'],
+                        choices: Object.values(Orientation),
                         describe: 'desired orientation:\n(h)orizontal, (v)ertical',
+                    })
+                    .option('colorMode', {
+                        alias: 'c',
+                        choices: Object.values(ColorMode),
+                        describe: 'desired color mode',
                     })
                     .positional('deviceType', {
                         describe: 'The type of screen connected to your device',
@@ -25,7 +31,7 @@ export function cli(processArgs: string[]) {
             },
             async (args) => {
                 const displayCommand = new DisplayCommand();
-                await displayCommand.display(args.deviceType, args.url, args.orientation);
+                await displayCommand.display(args.deviceType, args.url, args.orientation, args.colorMode);
             }
         )
         .demandCommand(1, 'No command specified - you must specify a command')
@@ -35,6 +41,6 @@ export function cli(processArgs: string[]) {
 interface DisplayArgs {
     deviceType: string;
     url: string;
-    orientation?: string;
-    colorMode?: string;
+    orientation?: Orientation;
+    colorMode?: ColorMode;
 }
