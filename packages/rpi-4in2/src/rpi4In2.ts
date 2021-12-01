@@ -26,6 +26,10 @@ export class Rpi4In2 implements DisplayDevice {
 
     public init() {
         this.driver.dev_init();
+        this.wake();
+    }
+
+    public wake() {
         if (this.colorMode === ColorMode.Gray4) {
             this.driver.init_4Gray();
         } else {

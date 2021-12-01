@@ -14,6 +14,7 @@ export interface DisplayDevice {
     readonly width: number;
     colorMode: ColorMode;
     init(): void;
+    wake(): void;
     clear(): void;
     sleep(): void;
     displayPng(img: Buffer): Promise<void>;
