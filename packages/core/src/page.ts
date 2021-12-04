@@ -4,9 +4,12 @@ export class SinglePage {
     constructor(private readonly browser: puppeteer.Browser, private readonly browserPage: puppeteer.Page) {}
 
     async display(url: string): Promise<Buffer> {
-        await this.browserPage.goto(url, {
+        const responce = await this.browserPage.goto(url, {
             waitUntil: 'networkidle2',
         });
+        if (!responce?.ok()) {
+            throw new Error(`Error occured navigating to ${url}: ${responce?.statusText()}`);
+        }
         return await this.browserPage.screenshot({
             type: 'png',
             fullPage: false,
