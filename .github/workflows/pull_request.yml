@@ -17,16 +17,11 @@ jobs:
         with:
           entrypoint: pnpm
           args: install
-      - name: Build C Modules
+      - name: Build
         uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
         with:
           entrypoint: pnpm
-          args: -r clean:compile
-      - name: Build Typescript
-        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
-        with:
-          entrypoint: pnpm
-          args: clean:compile
+          args: -r build
       - name: Check Formatting
         uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
         with:
