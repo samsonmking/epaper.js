@@ -1,9 +1,9 @@
-import { BrowserPage, ColorMode, DisplayDevice, getBrowserPage, Orientation } from '@epaperjs/core';
+import { SinglePage, ColorMode, DisplayDevice, getBrowserPage, Orientation } from '@epaperjs/core';
 import { getDevice } from '../deviceFactory';
 
 export class RefreshCommand {
     private displayDevice?: DisplayDevice;
-    private browserPage?: BrowserPage;
+    private browserPage?: SinglePage;
 
     constructor() {
         process.on('SIGINT', () => this.onExit());

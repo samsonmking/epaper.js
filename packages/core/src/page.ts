@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer-core';
 
-export class BrowserPage {
+export class SinglePage {
     constructor(private readonly browser: puppeteer.Browser, private readonly browserPage: puppeteer.Page) {}
 
     async display(url: string): Promise<Buffer> {
@@ -28,11 +28,12 @@ export async function getBrowserPage(width: number, height: number) {
         executablePath: 'chromium-browser',
         args: ['--font-render-hinting=slight'],
     });
-    const browserPage = await browser.newPage();
+    const context = await browser.createIncognitoBrowserContext();
+    const browserPage = await context.newPage();
     await browserPage.setViewport({
         width,
         height,
         deviceScaleFactor: 1,
     });
-    return new BrowserPage(browser, browserPage);
+    return new SinglePage(browser, browserPage);
 }
