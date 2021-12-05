@@ -37,7 +37,6 @@ export class RefreshCommand {
         } catch (e) {
             throw e;
         } finally {
-            console.log('finally');
             this.onExit();
         }
     }
