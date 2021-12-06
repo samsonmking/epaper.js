@@ -1,15 +1,19 @@
 import puppeteer from 'puppeteer-core';
 
 export class SinglePage {
+    private readonly HTTP_NOT_MODIFIED = 304;
+
     constructor(private readonly browser: puppeteer.Browser, private readonly browserPage: puppeteer.Page) {}
 
     async display(url: string): Promise<Buffer> {
         const responce = await this.browserPage.goto(url, {
             waitUntil: 'networkidle2',
         });
-        if (!responce?.ok()) {
+        if (!responce?.ok() && responce?.status() !== this.HTTP_NOT_MODIFIED) {
+            console.log(responce);
             throw new Error(`Error occured navigating to ${url}: ${responce?.statusText()}`);
         }
+
         return await this.browserPage.screenshot({
             type: 'png',
             fullPage: false,
