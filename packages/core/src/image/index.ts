@@ -1,2 +1,2 @@
-export * from './gray1';
-export * from './gray4';
+export * as BlackConverters from './black';
+export * as Gray4Converters from './gray4';

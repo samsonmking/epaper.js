@@ -1,10 +1,4 @@
-import {
-    ColorMode,
-    DisplayDevice,
-    Orientation,
-    convertPNGto1BitBW2in13V2,
-    convertPNGto1BitBW2in13V2Rotated,
-} from '@epaperjs/core';
+import { ColorMode, DisplayDevice, Orientation, BlackConverters } from '@epaperjs/core';
 import bindings from 'bindings';
 import { Driver } from './driver';
 
@@ -20,7 +14,9 @@ export class Rpi2In13V2 implements DisplayDevice {
         this.height = orientation === Orientation.Horizontal ? 122 : 250;
         this.width = orientation === Orientation.Horizontal ? 250 : 122;
         this.converter =
-            orientation === Orientation.Horizontal ? convertPNGto1BitBW2in13V2Rotated : convertPNGto1BitBW2in13V2;
+            orientation === Orientation.Horizontal
+                ? BlackConverters.fromPng2In13V2Rotate90
+                : BlackConverters.fromPng2In13V2;
     }
 
     public init() {

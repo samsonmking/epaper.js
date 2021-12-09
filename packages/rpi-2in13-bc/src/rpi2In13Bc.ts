@@ -1,4 +1,4 @@
-import { ColorMode, DisplayDevice, Orientation, convertPNGto1BitBWRotated, convertPNGto1BitBW } from '@epaperjs/core';
+import { ColorMode, DisplayDevice, Orientation, BlackConverters } from '@epaperjs/core';
 import bindings from 'bindings';
 import { Driver } from './driver';
 
@@ -13,7 +13,8 @@ export class Rpi2In13BC implements DisplayDevice {
         this.driver = bindings('waveshare2in13bc.node');
         this.height = orientation === Orientation.Horizontal ? 104 : 212;
         this.width = orientation === Orientation.Horizontal ? 212 : 104;
-        this.converter = orientation === Orientation.Horizontal ? convertPNGto1BitBWRotated : convertPNGto1BitBW;
+        this.converter =
+            orientation === Orientation.Horizontal ? BlackConverters.fromPngRotate90 : BlackConverters.fromPng;
     }
 
     public init() {

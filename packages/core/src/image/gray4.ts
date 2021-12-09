@@ -1,7 +1,7 @@
 import PNGReader from 'png.js';
 import sharp from 'sharp';
 
-export async function convertPNGto4Grey(pngBytes: Buffer): Promise<Buffer> {
+export async function fromPng(pngBytes: Buffer): Promise<Buffer> {
     const pngBytes_L = await sharp(pngBytes).greyscale().png().toBuffer();
     const reader = new PNGReader(pngBytes_L);
     return new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ export async function convertPNGto4Grey(pngBytes: Buffer): Promise<Buffer> {
     });
 }
 
-export async function convertPNGto4GreyRotated(pngBytes: Buffer): Promise<Buffer> {
+export async function fromPngRotate90(pngBytes: Buffer): Promise<Buffer> {
     const pngBytes_L = await sharp(pngBytes).greyscale().png().toBuffer();
     const reader = new PNGReader(pngBytes_L);
     return new Promise((resolve, reject) => {
