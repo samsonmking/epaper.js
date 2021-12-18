@@ -119,10 +119,6 @@ curl -sL install-node.now.sh/lts | sudo bash
 sudo apt-get update
 
 # Install wiringpi
-sudo apt-get install -y wiringpi
-
-# For Pi 4, you need to update wiringpi (skip otherwise)：
-cd /tmp
 wget https://project-downloads.drogon.net/wiringpi-latest.deb
 sudo dpkg -i wiringpi-latest.deb
 #You will get 2.52 information if you've installed it correctly
