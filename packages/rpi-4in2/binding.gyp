@@ -2,7 +2,10 @@
     "targets": [
         {
             "target_name": "waveshare4in2",
-            "cflags!": [ "-fno-exceptions" ],
+            "cflags!": [
+                "-fno-exceptions",
+                "-Wextra"
+            ],
             "cflags_cc!": [ "-fno-exceptions" ],
             "sources": [ 
                 "./src/c/EPD_4in2_node.cc",
@@ -13,8 +16,7 @@
             ],
             "defines": [
                 "RPI",
-                "USE_DEV_LIB",
-                "NAPI_DISABLE_CPP_EXCEPTIONS"
+                "USE_DEV_LIB"
             ],
             "include_dirs": [
                 "<!@(node -p \"require('node-addon-api').include\")"
