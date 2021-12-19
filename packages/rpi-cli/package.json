@@ -26,18 +26,18 @@
     },
     "dependencies": {
         "@epaperjs/core": "workspace:^",
-        "yargs": "^17.2.1",
-        "@epaperjs/rpi-2in13-v2": "workspace:^"
+        "@epaperjs/rpi-2in13-v2": "workspace:^",
+        "yargs": "^17.3.0"
     },
     "bugs": {
         "url": "https://github.com/samsonmking/epaper.js/issues"
     },
     "devDependencies": {
-        "@types/yargs": "^17.0.4"
+        "@types/yargs": "^17.0.7"
     },
     "optionalDependencies": {
-        "@epaperjs/rpi-2in13-v2": "workspace:^",
         "@epaperjs/rpi-2in13-bc": "workspace:^",
+        "@epaperjs/rpi-2in13-v2": "workspace:^",
         "@epaperjs/rpi-4in2": "workspace:^"
     }
 }

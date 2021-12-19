@@ -14,11 +14,11 @@ export class SinglePage {
             throw new Error(`Error occured navigating to ${url}: ${responce?.statusText()}`);
         }
 
-        return await this.browserPage.screenshot({
+        return (await this.browserPage.screenshot({
             type: 'png',
             fullPage: false,
             encoding: 'binary',
-        });
+        })) as Buffer;
     }
 
     async close() {

@@ -26,8 +26,9 @@
     },
     "dependencies": {
         "@epaperjs/core": "workspace:^",
-        "node-addon-api": "^3.2.1",
-        "bindings": "^1.5.0"
+        "bindings": "^1.5.0",
+        "node-addon-api": "^4.2.0",
+        "node-gyp": "^8.4.1"
     },
     "gypfile": true,
     "devDependencies": {
