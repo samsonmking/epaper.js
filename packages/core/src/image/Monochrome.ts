@@ -13,7 +13,6 @@ export class MonochromeHScan {
         const optionsWithDefaults: Required<ImageOptions> = { ...defaultOptions, ...options };
         const input = await this.pngReader.parse();
         const { height, width } = input;
-        console.log(height, width);
         if (optionsWithDefaults.rotate90Degrees) {
             const devHeight = width;
             const devWidth = height;

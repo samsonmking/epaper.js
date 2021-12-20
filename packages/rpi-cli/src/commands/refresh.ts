@@ -44,6 +44,7 @@ export class RefreshCommand {
     private onExit() {
         this.displayDevice?.sleep();
         this.browserPage?.close();
+        process.exit(0);
     }
 
     private sleep(seconds: number = 15) {

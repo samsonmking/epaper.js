@@ -34,8 +34,9 @@ export class DisplayCommand {
             this.onExit();
         }
     }
-    private onExit() {
+    private async onExit() {
         this.displayDevice?.sleep();
-        this.browserPage?.close();
+        await this.browserPage?.close();
+        process.exit(0);
     }
 }
