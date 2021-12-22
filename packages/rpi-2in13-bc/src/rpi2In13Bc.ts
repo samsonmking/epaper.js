@@ -3,12 +3,15 @@ import bindings from 'bindings';
 import { Driver } from './driver';
 
 export class Rpi2In13BC implements DisplayDevice {
-    public colorMode = ColorMode.Black;
     public readonly height: number;
     public readonly width: number;
     private readonly driver: Driver;
 
-    constructor(public readonly orientation: Orientation = Orientation.Horizontal) {
+    constructor(public readonly orientation = Orientation.Horizontal, public readonly colorMode = ColorMode.Red) {
+        const supportedColorModes = [ColorMode.Black, ColorMode.Red];
+        if (!supportedColorModes.includes(colorMode)) {
+            throw new Error(`Only ColorModes: ${supportedColorModes} are supported`);
+        }
         this.driver = bindings('waveshare2in13bc.node');
         this.height = orientation === Orientation.Horizontal ? 104 : 212;
         this.width = orientation === Orientation.Horizontal ? 212 : 104;
@@ -34,7 +37,10 @@ export class Rpi2In13BC implements DisplayDevice {
     public async displayPng(img: Buffer) {
         const converter = new MonochromeHScan(img);
         const blackBuffer = await converter.toBlack({ rotate90Degrees: this.orientation === Orientation.Horizontal });
-        const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
-        this.driver.display(blackBuffer, emptyBuffer);
+        const redBuffer =
+            this.colorMode === ColorMode.Red
+                ? await converter.toRed({ rotate90Degrees: this.orientation === Orientation.Horizontal })
+                : Buffer.alloc(blackBuffer.length, 0xff);
+        this.driver.display(blackBuffer, redBuffer);
     }
 }

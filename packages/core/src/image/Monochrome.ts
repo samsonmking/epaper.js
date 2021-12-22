@@ -1,6 +1,6 @@
 import { DefaultOptions as defaultOptions, ImageOptions } from './imageOptions';
-import { PngReader } from './pngReader';
-import { blackThreshold } from './threshold';
+import { PngReader, RGBAPixel } from './pngReader';
+import { blackThreshold, hsvThreshold } from './threshold';
 
 export class MonochromeHScan {
     private readonly pngReader;
@@ -9,7 +9,22 @@ export class MonochromeHScan {
         this.pngReader = new PngReader(pngInput);
     }
 
-    public async toBlack(options: ImageOptions = {}): Promise<Buffer> {
+    public toBlack(options: ImageOptions = {}): Promise<Buffer> {
+        const fullOpts: Required<ImageOptions> = { ...defaultOptions, ...options };
+        return this.toThreshold(fullOpts, (pixel) => blackThreshold(pixel, fullOpts.blackThreshold));
+    }
+
+    public toRed(options: ImageOptions = {}): Promise<Buffer> {
+        const fullOpts: Required<ImageOptions> = { ...defaultOptions, ...options };
+        return this.toThreshold(fullOpts, (pixel) =>
+            hsvThreshold(pixel, fullOpts.redLowerThreshold, fullOpts.redUpperThreshold)
+        );
+    }
+
+    private async toThreshold(
+        options: Required<ImageOptions>,
+        threshold: (pixel: RGBAPixel) => boolean
+    ): Promise<Buffer> {
         const optionsWithDefaults: Required<ImageOptions> = { ...defaultOptions, ...options };
         const input = await this.pngReader.parse();
         const { height, width } = input;
@@ -22,7 +37,7 @@ export class MonochromeHScan {
                     const outX = y;
                     const outY = devHeight - x - 1;
                     const pixel = input.getPixel(x, y);
-                    if (blackThreshold(pixel, optionsWithDefaults.blackThreshold) === 0) {
+                    if (threshold(pixel)) {
                         const out_index = Math.floor((outX + outY * devWidth) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(y % 8));
                     }
@@ -34,7 +49,7 @@ export class MonochromeHScan {
             for (let y = 0; y < height; y++) {
                 for (let x = 0; x < width; x++) {
                     const pixel = input.getPixel(x, y);
-                    if (blackThreshold(pixel, optionsWithDefaults.blackThreshold) === 0) {
+                    if (threshold(pixel)) {
                         const out_index = Math.floor((x + y * width) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(x % 8));
                     }
@@ -67,7 +82,7 @@ export class MonochromeVScan {
                     const outX = y;
                     const outY = width - (devHeight - x - 1) - 1;
                     const pixel = input.getPixel(x, y);
-                    if (blackThreshold(pixel, optionsWithDefaults.blackThreshold) === 0) {
+                    if (blackThreshold(pixel, optionsWithDefaults.blackThreshold)) {
                         const out_index = Math.floor(outX / 8) + outY * lineWidth;
                         outBuffer[out_index] &= ~(0x80 >> y % 8);
                     }
@@ -81,7 +96,7 @@ export class MonochromeVScan {
                 for (let x = 0; x < width; x++) {
                     const pixel = input.getPixel(x, y);
                     const outX = width - x;
-                    if (blackThreshold(pixel, optionsWithDefaults.blackThreshold) === 0) {
+                    if (blackThreshold(pixel, optionsWithDefaults.blackThreshold)) {
                         const out_index = Math.floor(outX / 8) + y * lineWidth;
                         outBuffer[out_index] &= ~(0x80 >> outX % 8);
                     }

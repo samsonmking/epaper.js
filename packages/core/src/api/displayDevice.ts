@@ -1,6 +1,7 @@
 export enum ColorMode {
     Black = 'black',
     Gray4 = 'gray',
+    Red = 'red',
 }
 
 export enum Orientation {

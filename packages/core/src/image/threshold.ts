@@ -1,9 +1,30 @@
 import tinycolor from 'tinycolor2';
 import { RGBAPixel } from './pngReader';
 
+export type HSVA = [h: number, s: number, v: number, a: number];
+
 export function blackThreshold(pixel: RGBAPixel, thresh: number) {
     const [r, g, b, a] = pixel;
     // r, g, and b will all have the same values if greyscale
     const { r: grey } = tinycolor({ r, g, b, a }).greyscale().toRgb();
-    return grey < thresh ? 0 : 255;
+    return grey < thresh;
+}
+
+export function hsvThreshold(pixel: RGBAPixel, lowerBound: HSVA, upperBound: HSVA) {
+    const [r, g, b, inputa] = pixel;
+    const inputColor = tinycolor({ r, g, b, a: inputa });
+    const { h, s, v, a } = inputColor.toHsv();
+    const [hl, sl, vl, al] = lowerBound;
+    const [hu, su, vu, au] = upperBound;
+
+    const hInRange = hl > hu ? inRangeOr(h, hl, hu) : inRangeAnd(h, hl, hu);
+    return hInRange && inRangeAnd(s, sl, su) && inRangeAnd(v, vl, vu) && inRangeAnd(a, al, au);
+}
+
+function inRangeAnd(value: number, lower: number, upper: number) {
+    return value >= lower && value <= upper;
+}
+
+function inRangeOr(value: number, lower: number, upper: number) {
+    return value >= lower || value <= upper;
 }

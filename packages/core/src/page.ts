@@ -10,7 +10,6 @@ export class SinglePage {
             waitUntil: 'networkidle2',
         });
         if (!responce?.ok() && responce?.status() !== this.HTTP_NOT_MODIFIED) {
-            console.log(responce);
             throw new Error(`Error occured navigating to ${url}: ${responce?.statusText()}`);
         }
 
