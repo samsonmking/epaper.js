@@ -11,6 +11,10 @@ export class Rpi4In2 implements DisplayDevice {
         public readonly orientation: Orientation = Orientation.Horizontal,
         public readonly colorMode: ColorMode = ColorMode.Gray4
     ) {
+        const supportedColorModes = [ColorMode.Black, ColorMode.Gray4];
+        if (!supportedColorModes.includes(colorMode)) {
+            throw new Error(`Only color modes: [${supportedColorModes}] are supported`);
+        }
         this.driver = bindings('waveshare4in2.node');
         this.height = this.orientation === Orientation.Horizontal ? 300 : 400;
         this.width = this.orientation === Orientation.Horizontal ? 400 : 300;

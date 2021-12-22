@@ -10,7 +10,7 @@ export class Rpi2In13BC implements DisplayDevice {
     constructor(public readonly orientation = Orientation.Horizontal, public readonly colorMode = ColorMode.Red) {
         const supportedColorModes = [ColorMode.Black, ColorMode.Red];
         if (!supportedColorModes.includes(colorMode)) {
-            throw new Error(`Only ColorModes: ${supportedColorModes} are supported`);
+            throw new Error(`Only color modes: [${supportedColorModes}] are supported`);
         }
         this.driver = bindings('waveshare2in13bc.node');
         this.height = orientation === Orientation.Horizontal ? 104 : 212;

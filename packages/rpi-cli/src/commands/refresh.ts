@@ -1,4 +1,4 @@
-import { SinglePage, ColorMode, DisplayDevice, getBrowserPage, Orientation } from '@epaperjs/core';
+import { DisplayDevice, getBrowserPage, SinglePage } from '@epaperjs/core';
 import { getDevice } from '../deviceFactory';
 import { Command } from './command';
 import { DisplayArgs } from './display';
