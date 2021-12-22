@@ -7,7 +7,7 @@ export interface ImageOptions {
     redUpperThreshold?: HSVA;
 }
 
-export const DefaultOptions: Required<ImageOptions> = {
+export const defaultOptions: Required<ImageOptions> = {
     rotate90Degrees: false,
     blackThreshold: 90,
     redLowerThreshold: [340, 0.5, 0.5, 0.75],

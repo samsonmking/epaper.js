@@ -1,4 +1,4 @@
-import { ColorMode, BlackConverters, Gray4Converters, DisplayDevice, Orientation } from '@epaperjs/core';
+import { ColorMode, DisplayDevice, GrayHScan, MonochromeHScan, Orientation } from '@epaperjs/core';
 import bindings from 'bindings';
 import { Driver } from './driver';
 
@@ -50,16 +50,14 @@ export class Rpi4In2 implements DisplayDevice {
     }
 
     private async displayPngBW(img: Buffer) {
-        const converter =
-            this.orientation === Orientation.Horizontal ? BlackConverters.fromPng : BlackConverters.fromPngRotate90;
-        const blackBuffer = await converter(img);
+        const converter = new MonochromeHScan(img);
+        const blackBuffer = await converter.toBlack({ rotate90Degrees: this.orientation === Orientation.Vertical });
         this.driver.display(blackBuffer);
     }
 
     private async displayPngGray4(img: Buffer) {
-        const converter =
-            this.orientation === Orientation.Horizontal ? Gray4Converters.fromPng : Gray4Converters.fromPngRotate90;
-        const grayBuffer = await converter(img);
+        const converter = new GrayHScan(img);
+        const grayBuffer = await converter.to4Gray({ rotate90Degrees: this.orientation === Orientation.Vertical });
         this.driver.display_4GrayDisplay(grayBuffer);
     }
 }

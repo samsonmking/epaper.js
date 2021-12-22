@@ -1,4 +1,4 @@
-import { ColorMode, DisplayDevice, Orientation, BlackConverters } from '@epaperjs/core';
+import { ColorMode, DisplayDevice, MonochromeVScan, Orientation } from '@epaperjs/core';
 import bindings from 'bindings';
 import { Driver } from './driver';
 
@@ -6,7 +6,6 @@ export class Rpi2In13V2 implements DisplayDevice {
     public readonly height: number;
     public readonly width: number;
     private readonly driver: Driver;
-    private readonly converter: (img: Buffer) => Promise<Buffer>;
 
     constructor(
         public readonly orientation: Orientation = Orientation.Horizontal,
@@ -18,10 +17,6 @@ export class Rpi2In13V2 implements DisplayDevice {
         this.driver = bindings('waveshare2in13v2.node');
         this.height = orientation === Orientation.Horizontal ? 122 : 250;
         this.width = orientation === Orientation.Horizontal ? 250 : 122;
-        this.converter =
-            orientation === Orientation.Horizontal
-                ? BlackConverters.fromPng2In13V2Rotate90
-                : BlackConverters.fromPng2In13V2;
     }
 
     public init() {
@@ -42,7 +37,8 @@ export class Rpi2In13V2 implements DisplayDevice {
     }
 
     public async displayPng(img: Buffer) {
-        const blackBuffer = await this.converter(img);
+        const converter = new MonochromeVScan(img);
+        const blackBuffer = await converter.toBlack({ rotate90Degrees: this.orientation === Orientation.Horizontal });
         this.driver.display(blackBuffer);
     }
 }
