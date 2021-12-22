@@ -22,14 +22,14 @@ importers:
       '@types/tinycolor2': ^1.4.3
       png.js: ^0.2.1
       pngjs: ^6.0.0
-      puppeteer-core: ^10.4.0
+      puppeteer-core: 10.0.0
       sharp: ^0.29.3
       tinycolor2: ^1.4.2
       typescript: ^4.5.4
     dependencies:
       png.js: 0.2.1
       pngjs: 6.0.0
-      puppeteer-core: 10.4.0
+      puppeteer-core: 10.0.0
       sharp: 0.29.3
       tinycolor2: 1.4.2
     devDependencies:
@@ -208,7 +208,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.1
+      debug: 4.3.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -456,8 +456,8 @@ packages:
     hasBin: true
     dev: false
 
-  /devtools-protocol/0.0.901419:
-    resolution: {integrity: sha512-4INMPwNm9XRpBukhNbF7OB6fNTTCaI8pzy/fXg0xQzAy5h3zL1P8xT3QazgKqBrb/hAYwIBizqDBZ7GtJE74QQ==}
+  /devtools-protocol/0.0.883894:
+    resolution: {integrity: sha512-33idhm54QJzf3Q7QofMgCvIVSd2o9H3kQPWaKT/fhoZh+digc+WSiMhbkeG3iN79WY4Hwr9G05NpbhEVrsOYAg==}
     dev: false
 
   /emoji-regex/8.0.0:
@@ -502,7 +502,7 @@ packages:
     engines: {node: '>= 10.17.0'}
     hasBin: true
     dependencies:
-      debug: 4.3.1
+      debug: 4.3.3
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
@@ -627,7 +627,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.1
+      debug: 4.3.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1044,12 +1044,12 @@ packages:
       once: 1.4.0
     dev: false
 
-  /puppeteer-core/10.4.0:
-    resolution: {integrity: sha512-KU8zyb7AIOqNjLCN3wkrFXxh+EVaG+zrs2P03ATNjc3iwSxHsu5/EvZiREpQ/IJiT9xfQbDVgKcsvRuzLCxglQ==}
+  /puppeteer-core/10.0.0:
+    resolution: {integrity: sha512-kaNsKhNYcayHnlwpkBf1w/lhyi1zUSHGLgh5z6DwhTbTrVN0pQHjWj7/TNBooop5Ehv0H7KFuH5QTbxrRFeDdA==}
     engines: {node: '>=10.18.1'}
     dependencies:
       debug: 4.3.1
-      devtools-protocol: 0.0.901419
+      devtools-protocol: 0.0.883894
       extract-zip: 2.0.1
       https-proxy-agent: 5.0.0
       node-fetch: 2.6.1

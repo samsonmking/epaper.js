@@ -1,6 +1,7 @@
 import { ColorMode, Orientation } from '@epaperjs/core';
 import yargs, { Options, PositionalOptions } from 'yargs';
 import { DisplayArgs, DisplayCommand, RefreshArgs, RefreshCommand } from './commands';
+import { Command } from './commands/command';
 import { ConsoleLogger } from './logger';
 
 const orientationArgs: Options = {
@@ -52,12 +53,8 @@ export function cli(processArgs: string[]) {
                     .positional('url', urlArgs);
             },
             async (args) => {
-                try {
-                    const displayCommand = new DisplayCommand();
-                    await displayCommand.display(args);
-                } catch (e) {
-                    handleError(e, args);
-                }
+                const displayCommand = new DisplayCommand();
+                executeCommand(displayCommand, args);
             }
         )
         .command<RefreshArgs>(
@@ -73,12 +70,8 @@ export function cli(processArgs: string[]) {
                     .positional('url', urlArgs);
             },
             async (args) => {
-                try {
-                    const refreshCommand = new RefreshCommand();
-                    await refreshCommand.refresh(args);
-                } catch (e) {
-                    handleError(e, args);
-                }
+                const refreshCommand = new RefreshCommand();
+                executeCommand(refreshCommand, args);
             }
         )
         .demandCommand(1, 'No command specified - you must specify a command')
@@ -86,12 +79,17 @@ export function cli(processArgs: string[]) {
         .help().argv;
 }
 
-function handleError(error: any, args: yargs.Arguments<BaseArgs>) {
-    const logger = new ConsoleLogger(args.debug);
-    if (error instanceof Error) {
-        logger.error(error);
-    } else {
-        logger.error('Unknown error occurred');
+async function executeCommand<T extends BaseArgs>(command: Command<T>, args: T) {
+    process.on('SIGINT', () => command.dispose());
+    process.on('SIGTERM', () => command.dispose());
+    try {
+        await command.execute(args);
+        await command.dispose();
+    } catch (e) {
+        const logger = new ConsoleLogger(args.debug);
+        const definedError = e instanceof Error ? e : 'Unknown error occurred';
+        logger.error(definedError);
+        await command.dispose();
+        process.exit(1);
     }
-    process.exit(1);
 }

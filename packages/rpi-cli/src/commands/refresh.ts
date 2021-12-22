@@ -1,50 +1,39 @@
 import { SinglePage, ColorMode, DisplayDevice, getBrowserPage, Orientation } from '@epaperjs/core';
 import { getDevice } from '../deviceFactory';
+import { Command } from './command';
 import { DisplayArgs } from './display';
 
 export interface RefreshArgs extends DisplayArgs {
     time?: number;
 }
 
-export class RefreshCommand {
+export class RefreshCommand implements Command<RefreshArgs> {
     private displayDevice?: DisplayDevice;
     private browserPage?: SinglePage;
 
-    constructor() {
-        process.on('SIGINT', () => this.onExit());
-        process.on('SIGTERM', () => this.onExit());
-    }
+    public async execute(refreshArgs: RefreshArgs) {
+        const { deviceType, orientation, colorMode, url, time } = refreshArgs;
 
-    public async refresh(refreshArgs: RefreshArgs) {
-        try {
-            const { deviceType, orientation, colorMode, url, time } = refreshArgs;
+        this.displayDevice = await getDevice(deviceType, orientation, colorMode);
+        if (!this.displayDevice) {
+            throw new Error(`device type ${deviceType} not recognized`);
+        }
+        this.displayDevice.init();
 
-            this.displayDevice = await getDevice(deviceType, orientation, colorMode);
-            if (!this.displayDevice) {
-                throw new Error(`device type ${deviceType} not recognized`);
-            }
-            this.displayDevice.init();
+        this.browserPage = await getBrowserPage(this.displayDevice.width, this.displayDevice.height);
 
-            this.browserPage = await getBrowserPage(this.displayDevice.width, this.displayDevice.height);
-
-            while (true) {
-                const imgOfUrl = await this.browserPage.display(url);
-                this.displayDevice.wake();
-                await this.displayDevice.displayPng(imgOfUrl);
-                this.displayDevice.sleep();
-                await this.sleep(time);
-            }
-        } catch (e) {
-            throw e;
-        } finally {
-            this.onExit();
+        while (true) {
+            const imgOfUrl = await this.browserPage.display(url);
+            this.displayDevice.wake();
+            await this.displayDevice.displayPng(imgOfUrl);
+            this.displayDevice.sleep();
+            await this.sleep(time);
         }
     }
 
-    private onExit() {
+    public async dispose() {
         this.displayDevice?.sleep();
-        this.browserPage?.close();
-        process.exit(0);
+        await this.browserPage?.close();
     }
 
     private sleep(seconds: number = 15) {

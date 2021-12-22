@@ -35,7 +35,7 @@
     "dependencies": {
         "png.js": "^0.2.1",
         "pngjs": "^6.0.0",
-        "puppeteer-core": "^10.4.0",
+        "puppeteer-core": "10.0.0",
         "sharp": "^0.29.3",
         "tinycolor2": "^1.4.2"
     }
