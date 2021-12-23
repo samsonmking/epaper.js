@@ -82,7 +82,19 @@ importers:
       '@types/bindings': 1.5.1
 
   packages/rpi-7in5-v2:
-    specifiers: {}
+    specifiers:
+      '@epaperjs/core': workspace:^
+      '@types/bindings': ^1.5.1
+      bindings: ^1.5.0
+      node-addon-api: ^4.2.0
+      node-gyp: ^8.4.1
+    dependencies:
+      '@epaperjs/core': link:../core
+      bindings: 1.5.0
+      node-addon-api: 4.2.0
+      node-gyp: 8.4.1
+    devDependencies:
+      '@types/bindings': 1.5.1
 
   packages/rpi-cli:
     specifiers:
@@ -90,16 +102,17 @@ importers:
       '@epaperjs/rpi-2in13-bc': workspace:^
       '@epaperjs/rpi-2in13-v2': workspace:^
       '@epaperjs/rpi-4in2': workspace:^
+      '@epaperjs/rpi-7in5-v2': workspace:^
       '@types/yargs': ^17.0.7
       yargs: ^17.3.0
     dependencies:
       '@epaperjs/core': link:../core
-      yargs: 17.3.0
-    optionalDependencies:
-      '@epaperjs/rpi-2in13-bc': link:../rpi-2in13-bc
       '@epaperjs/rpi-2in13-v2': link:../rpi-2in13-v2
-      '@epaperjs/rpi-4in2': link:../rpi-4in2
+      yargs: 17.3.0
     devDependencies:
+      '@epaperjs/rpi-2in13-bc': link:../rpi-2in13-bc
+      '@epaperjs/rpi-4in2': link:../rpi-4in2
+      '@epaperjs/rpi-7in5-v2': link:../rpi-7in5-v2
       '@types/yargs': 17.0.7
 
 packages:
@@ -214,11 +227,6 @@ packages:
       indent-string: 4.0.0
     dev: false
 
-  /ansi-regex/2.1.1:
-    resolution: {integrity: sha1-w7M6te42DYbg5ijwRorn7yfWVN8=}
-    engines: {node: '>=0.10.0'}
-    dev: false
-
   /ansi-regex/5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
@@ -327,11 +335,6 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
-    dev: false
-
-  /code-point-at/1.1.0:
-    resolution: {integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=}
-    engines: {node: '>=0.10.0'}
     dev: false
 
   /color-convert/2.0.1:
@@ -592,13 +595,6 @@ packages:
     resolution: {integrity: sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=}
     dev: false
 
-  /is-fullwidth-code-point/1.0.0:
-    resolution: {integrity: sha1-754xOG8DGn8NZDr4L95QxFfvAMs=}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      number-is-nan: 1.0.1
-    dev: false
-
   /is-fullwidth-code-point/3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
@@ -784,11 +780,6 @@ packages:
       console-control-strings: 1.1.0
       gauge: 4.0.0
       set-blocking: 2.0.0
-    dev: false
-
-  /number-is-nan/1.0.1:
-    resolution: {integrity: sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=}
-    engines: {node: '>=0.10.0'}
     dev: false
 
   /once/1.4.0:
@@ -987,15 +978,6 @@ packages:
       minipass: 3.1.6
     dev: false
 
-  /string-width/1.0.2:
-    resolution: {integrity: sha1-EYvfW4zcUaKn5w0hHgfisLmxB9M=}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      code-point-at: 1.1.0
-      is-fullwidth-code-point: 1.0.0
-      strip-ansi: 3.0.1
-    dev: false
-
   /string-width/4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
     engines: {node: '>=8'}
@@ -1009,13 +991,6 @@ packages:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
     dependencies:
       safe-buffer: 5.2.1
-    dev: false
-
-  /strip-ansi/3.0.1:
-    resolution: {integrity: sha1-ajhfuIU9lS1f8F0Oiq+UJ43GPc8=}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      ansi-regex: 2.1.1
     dev: false
 
   /strip-ansi/6.0.1:
@@ -1105,7 +1080,7 @@ packages:
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
     dev: false
 
   /wrap-ansi/7.0.0:

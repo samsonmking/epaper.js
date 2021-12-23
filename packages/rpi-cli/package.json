@@ -33,11 +33,22 @@
         "url": "https://github.com/samsonmking/epaper.js/issues"
     },
     "devDependencies": {
-        "@types/yargs": "^17.0.7"
-    },
-    "optionalDependencies": {
+        "@types/yargs": "^17.0.7",
         "@epaperjs/rpi-2in13-bc": "workspace:^",
         "@epaperjs/rpi-2in13-v2": "workspace:^",
-        "@epaperjs/rpi-4in2": "workspace:^"
+        "@epaperjs/rpi-4in2": "workspace:^",
+        "@epaperjs/rpi-7in5-v2": "workspace:^"
+    },
+    "peerDependencies": {
+        "@epaperjs/rpi-2in13-bc": "workspace:^",
+        "@epaperjs/rpi-2in13-v2": "workspace:^",
+        "@epaperjs/rpi-4in2": "workspace:^",
+        "@epaperjs/rpi-7in5-v2": "workspace:^"
+    },
+    "peerDependenciesMeta": {
+        "@epaperjs/rpi-2in13-bc": { "optional": true},
+        "@epaperjs/rpi-2in13-v2": {"optional": true},
+        "@epaperjs/rpi-4in2": {"optional": true},
+        "@epaperjs/rpi-7in5-v2": {"optional": true}
     }
 }

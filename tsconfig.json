@@ -16,6 +16,9 @@
         },
         {
             "path": "packages/rpi-4in2"
+        },
+        {
+            "path": "packages/rpi-7in5-v2"
         }
     ]
 }

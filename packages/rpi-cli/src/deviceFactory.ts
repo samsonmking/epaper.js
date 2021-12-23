@@ -16,6 +16,7 @@ const deviceMap = new Map<string, (orientation?: Orientation, colorMode?: ColorM
     ['rpi-2in13-v2', getRpi2in13V2],
     ['rpi-2in13-bc', getRpi2In13Bc],
     ['rpi-4in2', getRpi4In2],
+    ['rpi-7in5-v2', getRpi7in5V2],
 ]);
 
 async function getRpi2in13V2(orientation?: Orientation, colorMode?: ColorMode): Promise<DisplayDevice> {
@@ -31,4 +32,9 @@ async function getRpi2In13Bc(orientation?: Orientation, colorMode?: ColorMode): 
 async function getRpi4In2(orientation?: Orientation, colorMode?: ColorMode): Promise<DisplayDevice> {
     const { Rpi4In2 } = await import('@epaperjs/rpi-4in2');
     return new Rpi4In2(orientation, colorMode);
+}
+
+async function getRpi7in5V2(orientation?: Orientation, colorMode?: ColorMode): Promise<DisplayDevice> {
+    const { Rpi7In5V2 } = await import('@epaperjs/rpi-7in5-v2');
+    return new Rpi7In5V2(orientation, colorMode);
 }
