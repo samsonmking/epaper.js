@@ -9,6 +9,12 @@
             "options": {
                 "tabWidth": 2
             }
+        },
+        {
+            "files": "binding.gyp",
+            "options": {
+                "parser": "json"
+            }
         }
     ]
 }

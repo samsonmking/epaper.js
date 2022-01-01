@@ -63,6 +63,21 @@ importers:
     devDependencies:
       '@types/bindings': 1.5.1
 
+  packages/rpi-2in7:
+    specifiers:
+      '@epaperjs/core': workspace:^
+      '@types/bindings': ^1.5.1
+      bindings: ^1.5.0
+      node-addon-api: ^4.2.0
+      node-gyp: ^8.4.1
+    dependencies:
+      '@epaperjs/core': link:../core
+      bindings: 1.5.0
+      node-addon-api: 4.2.0
+      node-gyp: 8.4.1
+    devDependencies:
+      '@types/bindings': 1.5.1
+
   packages/rpi-3in7:
     specifiers: {}
 
@@ -101,6 +116,7 @@ importers:
       '@epaperjs/core': workspace:^
       '@epaperjs/rpi-2in13-bc': workspace:^
       '@epaperjs/rpi-2in13-v2': workspace:^
+      '@epaperjs/rpi-2in7': workspace:^
       '@epaperjs/rpi-4in2': workspace:^
       '@epaperjs/rpi-7in5-v2': workspace:^
       '@types/yargs': ^17.0.7
@@ -111,6 +127,7 @@ importers:
       yargs: 17.3.0
     devDependencies:
       '@epaperjs/rpi-2in13-bc': link:../rpi-2in13-bc
+      '@epaperjs/rpi-2in7': link:../rpi-2in7
       '@epaperjs/rpi-4in2': link:../rpi-4in2
       '@epaperjs/rpi-7in5-v2': link:../rpi-7in5-v2
       '@types/yargs': 17.0.7
