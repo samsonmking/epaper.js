@@ -2,7 +2,7 @@ import { defaultOptions, ImageOptions } from './imageOptions';
 import { PngReader, RGBAPixel } from './pngReader';
 import { blackThreshold, hsvThreshold } from './threshold';
 
-export class MonochromeHScan {
+export class MonochromeLR {
     private readonly pngReader;
 
     constructor(pngInput: Buffer) {
@@ -59,7 +59,7 @@ export class MonochromeHScan {
     }
 }
 
-export class MonochromeVScan {
+export class MonochromeRL {
     private readonly pngReader;
 
     constructor(pngInput: Buffer) {

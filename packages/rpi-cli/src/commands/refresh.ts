@@ -18,7 +18,7 @@ export class RefreshCommand implements Command<RefreshArgs> {
         if (!this.displayDevice) {
             throw new Error(`device type ${deviceType} not recognized`);
         }
-        this.displayDevice.init();
+        this.displayDevice.connect();
 
         this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);
 

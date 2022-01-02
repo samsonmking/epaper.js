@@ -1,4 +1,4 @@
-import { ColorMode, DisplayDevice, MonochromeHScan, Orientation } from '@epaperjs/core';
+import { ColorMode, DisplayDevice, MonochromeLR, Orientation } from '@epaperjs/core';
 import bindings from 'bindings';
 import { Driver } from './driver';
 
@@ -17,7 +17,7 @@ export class Rpi2In13BC implements DisplayDevice {
         this.width = orientation === Orientation.Horizontal ? 212 : 104;
     }
 
-    public init() {
+    public connect() {
         this.driver.dev_init();
         this.wake();
     }
@@ -35,7 +35,7 @@ export class Rpi2In13BC implements DisplayDevice {
     }
 
     public async displayPng(img: Buffer) {
-        const converter = new MonochromeHScan(img);
+        const converter = new MonochromeLR(img);
         const blackBuffer = await converter.toBlack({ rotate90Degrees: this.orientation === Orientation.Horizontal });
         const redBuffer =
             this.colorMode === ColorMode.Red

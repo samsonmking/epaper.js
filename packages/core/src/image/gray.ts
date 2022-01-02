@@ -2,7 +2,7 @@ import { defaultOptions, ImageOptions } from './imageOptions';
 import { PngReader } from './pngReader';
 import { gray4Threshold } from './threshold';
 
-export class GrayHScan {
+export class GrayLR {
     private readonly pngReader;
 
     constructor(pngInput: Buffer) {

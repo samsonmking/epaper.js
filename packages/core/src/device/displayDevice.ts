@@ -14,7 +14,7 @@ export interface DisplayDevice {
     readonly height: number;
     readonly width: number;
     colorMode: ColorMode;
-    init(): void;
+    connect(): void;
     wake(): void;
     clear(): void;
     sleep(): void;

@@ -11,7 +11,7 @@ export class ClearCommand implements Command<BaseArgs> {
         if (!this.displayDevice) {
             throw new Error(`device type ${deviceType} not recognized`);
         }
-        this.displayDevice.init();
+        this.displayDevice.connect();
         this.displayDevice.clear();
     }
 
