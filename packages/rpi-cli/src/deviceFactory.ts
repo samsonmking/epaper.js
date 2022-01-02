@@ -44,3 +44,8 @@ async function getRpi2In7(orientation?: Orientation, colorMode?: ColorMode): Pro
     const { Rpi2In7 } = await import('@epaperjs/rpi-2in7');
     return new Rpi2In7(orientation, colorMode);
 }
+
+async function getRpi3In7(orientation?: Orientation, colorMode?: ColorMode): Promise<DisplayDevice> {
+    const { Rpi3In7 } = await import('@epaperjs/rpi-3in7');
+    return new Rpi3In7(orientation, colorMode);
+}
