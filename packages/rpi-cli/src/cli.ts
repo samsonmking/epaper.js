@@ -1,6 +1,7 @@
 import { ColorMode, Orientation } from '@epaperjs/core';
 import yargs, { Options, PositionalOptions } from 'yargs';
 import { DisplayArgs, DisplayCommand, RefreshArgs, RefreshCommand } from './commands';
+import { ClearCommand } from './commands/clear';
 import { Command } from './commands/command';
 import { ConsoleLogger } from './logger';
 
@@ -79,6 +80,17 @@ export function cli(processArgs: string[]) {
             async (args) => {
                 const refreshCommand = new RefreshCommand();
                 executeCommand(refreshCommand, args);
+            }
+        )
+        .command<BaseArgs>(
+            'clear [options] <deviceType>',
+            'clear the display',
+            (yargs) => {
+                yargs.option('debug', debugArgs).positional('deviceType', deviceTypeArgs);
+            },
+            async (args) => {
+                const clearCommand = new ClearCommand();
+                executeCommand(clearCommand, args);
             }
         )
         .demandCommand(1, 'No command specified - you must specify a command')

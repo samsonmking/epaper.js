@@ -16,15 +16,15 @@ export class DisplayCommand implements Command<DisplayArgs> {
     public async execute(displayArgs: DisplayArgs) {
         const { deviceType, orientation, colorMode, url } = displayArgs;
 
-        const displayDevice = await getDevice(deviceType, orientation, colorMode);
-        if (!displayDevice) {
+        this.displayDevice = await getDevice(deviceType, orientation, colorMode);
+        if (!this.displayDevice) {
             throw new Error(`device type ${deviceType} not recognized`);
         }
-        displayDevice.init();
+        this.displayDevice.init();
 
-        this.browserPage = await getPageRpi(displayDevice.width, displayDevice.height);
+        this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);
         const imgOfUrl = await this.browserPage.screenshot(url, { delay: displayArgs.screenshotDelay });
-        await displayDevice.displayPng(imgOfUrl);
+        await this.displayDevice.displayPng(imgOfUrl);
     }
 
     public async dispose() {
