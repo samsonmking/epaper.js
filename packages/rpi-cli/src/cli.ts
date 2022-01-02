@@ -16,8 +16,8 @@ const colorArgs: Options = {
     describe: 'desired color mode',
 };
 
-const timeArgs: Options = {
-    alias: 't',
+const intervalArgs: Options = {
+    alias: 'i',
     number: true,
     describe: 'amount of time in seconds between refreshes',
 };
@@ -38,6 +38,11 @@ const debugArgs: Options = {
     describe: 'log stacktraces and browser errors to console',
 };
 
+const screenshotDelayArgs: Options = {
+    number: true,
+    describe: 'optional delay after loading url before taking screenshot (milliseconds)',
+};
+
 export function cli(processArgs: string[]) {
     yargs(processArgs)
         .usage('Usage $0 <command> [options]')
@@ -49,6 +54,7 @@ export function cli(processArgs: string[]) {
                     .option('orientation', orientationArgs)
                     .option('colorMode', colorArgs)
                     .option('debug', debugArgs)
+                    .option('screenshotDelay', screenshotDelayArgs)
                     .positional('deviceType', deviceTypeArgs)
                     .positional('url', urlArgs);
             },
@@ -62,10 +68,11 @@ export function cli(processArgs: string[]) {
             'display the URL every n seconds',
             (yargs) => {
                 yargs
-                    .option('time', timeArgs)
+                    .option('interval', intervalArgs)
                     .option('orientation', orientationArgs)
                     .option('colorMode', colorArgs)
                     .option('debug', debugArgs)
+                    .option('screenshotDelay', screenshotDelayArgs)
                     .positional('deviceType', deviceTypeArgs)
                     .positional('url', urlArgs);
             },

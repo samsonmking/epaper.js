@@ -1,4 +1,4 @@
-import { ColorMode, DisplayDevice, getBrowserPage, Orientation, SinglePage } from '@epaperjs/core';
+import { ColorMode, DisplayDevice, getPageRpi, Orientation, BrowserPage } from '@epaperjs/core';
 import { getDevice } from '../deviceFactory';
 import { Command } from './command';
 
@@ -6,11 +6,12 @@ export interface DisplayArgs extends BaseArgs {
     url: string;
     orientation?: Orientation;
     colorMode?: ColorMode;
+    screenshotDelay?: number;
 }
 
 export class DisplayCommand implements Command<DisplayArgs> {
     private displayDevice?: DisplayDevice;
-    private browserPage?: SinglePage;
+    private browserPage?: BrowserPage;
 
     public async execute(displayArgs: DisplayArgs) {
         const { deviceType, orientation, colorMode, url } = displayArgs;
@@ -21,8 +22,8 @@ export class DisplayCommand implements Command<DisplayArgs> {
         }
         displayDevice.init();
 
-        this.browserPage = await getBrowserPage(displayDevice.width, displayDevice.height);
-        const imgOfUrl = await this.browserPage.display(url);
+        this.browserPage = await getPageRpi(displayDevice.width, displayDevice.height);
+        const imgOfUrl = await this.browserPage.screenshot(url, { delay: displayArgs.screenshotDelay });
         await displayDevice.displayPng(imgOfUrl);
     }
 

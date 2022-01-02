@@ -1,18 +1,24 @@
 import puppeteer from 'puppeteer-core';
 
-export class SinglePage {
+export interface ScreenshotOptions {
+    delay?: number;
+}
+
+export class BrowserPage {
     private readonly HTTP_NOT_MODIFIED = 304;
 
     constructor(private readonly browser: puppeteer.Browser, private readonly browserPage: puppeteer.Page) {}
 
-    async display(url: string): Promise<Buffer> {
+    async screenshot(url: string, options: ScreenshotOptions = {}): Promise<Buffer> {
         const responce = await this.browserPage.goto(url, {
             waitUntil: 'networkidle2',
         });
         if (!responce?.ok() && responce?.status() !== this.HTTP_NOT_MODIFIED) {
             throw new Error(`Error occured navigating to ${url}: ${responce?.statusText()}`);
         }
-
+        if (options.delay) {
+            await this.browserPage.waitForTimeout(options.delay);
+        }
         return (await this.browserPage.screenshot({
             type: 'png',
             fullPage: false,
@@ -29,7 +35,7 @@ export class SinglePage {
     }
 }
 
-export async function getBrowserPage(width: number, height: number) {
+export async function getPageRpi(width: number, height: number) {
     const browser = await puppeteer.launch({
         executablePath: 'chromium-browser',
         args: ['--font-render-hinting=slight'],
@@ -41,5 +47,5 @@ export async function getBrowserPage(width: number, height: number) {
         height,
         deviceScaleFactor: 1,
     });
-    return new SinglePage(browser, browserPage);
+    return new BrowserPage(browser, browserPage);
 }

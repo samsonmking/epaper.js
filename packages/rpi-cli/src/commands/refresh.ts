@@ -1,4 +1,4 @@
-import { DisplayDevice, getBrowserPage, SinglePage } from '@epaperjs/core';
+import { DisplayDevice, getPageRpi, BrowserPage } from '@epaperjs/core';
 import { getDevice } from '../deviceFactory';
 import { Command } from './command';
 import { DisplayArgs } from './display';
@@ -9,7 +9,7 @@ export interface RefreshArgs extends DisplayArgs {
 
 export class RefreshCommand implements Command<RefreshArgs> {
     private displayDevice?: DisplayDevice;
-    private browserPage?: SinglePage;
+    private browserPage?: BrowserPage;
 
     public async execute(refreshArgs: RefreshArgs) {
         const { deviceType, orientation, colorMode, url, time } = refreshArgs;
@@ -20,10 +20,10 @@ export class RefreshCommand implements Command<RefreshArgs> {
         }
         this.displayDevice.init();
 
-        this.browserPage = await getBrowserPage(this.displayDevice.width, this.displayDevice.height);
+        this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);
 
         while (true) {
-            const imgOfUrl = await this.browserPage.display(url);
+            const imgOfUrl = await this.browserPage.screenshot(url, { delay: refreshArgs.screenshotDelay });
             this.displayDevice.wake();
             await this.displayDevice.displayPng(imgOfUrl);
             this.displayDevice.sleep();
