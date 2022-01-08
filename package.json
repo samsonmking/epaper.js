@@ -1,9 +1,6 @@
 {
-    "name": "epaperjs",
-    "version": "2.0.0-alpha.0",
     "private": true,
     "description": "Simple e-Paper display on a Raspberry Pi using Javascript and HTML",
-    "main": "index.js",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "clean": "tsc --build --clean",
