@@ -7,7 +7,7 @@
     "license": "MIT",
     "main": "lib/rpi-cli.js",
     "bin": {
-        "rpi-cli": "bin/rpi-cli"
+        "ejs": "bin/rpi-cli"
     },
     "directories": {
         "dist": "dist"
@@ -49,11 +49,23 @@
         "@epaperjs/rpi-3in7": "workspace:^"
     },
     "peerDependenciesMeta": {
-        "@epaperjs/rpi-2in13-bc": { "optional": true},
-        "@epaperjs/rpi-2in13-v2": {"optional": true},
-        "@epaperjs/rpi-4in2": {"optional": true},
-        "@epaperjs/rpi-7in5-v2": {"optional": true},
-        "@epaperjs/rpi-2in7": {"optional": true},
-        "@epaperjs/rpi-3in7": {"optional": true}
+        "@epaperjs/rpi-2in13-bc": {
+            "optional": true
+        },
+        "@epaperjs/rpi-2in13-v2": {
+            "optional": true
+        },
+        "@epaperjs/rpi-4in2": {
+            "optional": true
+        },
+        "@epaperjs/rpi-7in5-v2": {
+            "optional": true
+        },
+        "@epaperjs/rpi-2in7": {
+            "optional": true
+        },
+        "@epaperjs/rpi-3in7": {
+            "optional": true
+        }
     }
 }
