@@ -18,12 +18,30 @@ function convertPNGto1BitBW(pngBytes) {
             const height = png.getHeight();
             const width = png.getWidth();
             const outBuffer = allocBuffer_8(width, height);
+
+            const quants = (new Array(width).fill(1).map(() => new Array(height).fill(0)));
+            const storeQuantErr = (x, y, v) => {
+                if (x < 0 || x >= width || y >= height) return;
+                quants[x][y] += v
+            }
+
             for (let y = 0; y < height; y++) {
                 for (let x = 0; x < width; x++) {
-                    const [r, g, b, alpha] = png.getPixel(x, y);
+                    const [r, g, b] = png.getPixel(x, y);
                     const luma = getLuma(r, g, b);
-                    if (luma < 50) {
-                        out_index = Math.floor((x + y * width) / 8);
+
+
+                    const oldValue = luma + quants[x][y];
+                    const value = Math.round(oldValue / 255) * 255;
+                    const qu_err = oldValue - value;
+
+                    storeQuantErr(x+1, y  , qu_err * 7/16);
+                    storeQuantErr(x-1, y+1, qu_err * 3/16);
+                    storeQuantErr(x  , y+1, qu_err * 5/16);
+                    storeQuantErr(x+1, y+1, qu_err * 1/16);
+
+                    if (value < 128) {
+                        const out_index = Math.floor((x + y * width) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(x % 8));
                     }
                 }
@@ -53,7 +71,7 @@ function convertPNGto1BitBW2in13V2(pngBytes) {
                     const luma = getLuma(r, g, b);
                     const outX = width - x;
                     if (luma < 50) {
-                        out_index = Math.floor(outX / 8) + y * lineWidth;
+                        const out_index = Math.floor(outX / 8) + y * lineWidth;
                         outBuffer[out_index] &= ~(0x80 >> outX % 8);
                     }
                 }
@@ -86,7 +104,7 @@ function convertPNGto1BitBW2in13V2Rotated(pngBytes) {
                     const [r, g, b, alpha] = png.getPixel(x, y);
                     const luma = getLuma(r, g, b);
                     if (luma < 50) {
-                        out_index = Math.floor(outX / 8) + outY * lineWidth;
+                        const out_index = Math.floor(outX / 8) + outY * lineWidth;
                         outBuffer[out_index] &= ~(0x80 >> y % 8);
                     }
                 }
@@ -115,7 +133,7 @@ function convertPNGto1BitBWRotated(pngBytes) {
                     const [r, g, b, alpha] = png.getPixel(x, y);
                     const luma = getLuma(r, g, b);
                     if (luma < 50) {
-                        out_index = Math.floor((outX + outY * devWidth) / 8);
+                        const out_index = Math.floor((outX + outY * devWidth) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(y % 8));
                     }
                 }
@@ -140,7 +158,7 @@ async function convertPNGto4Grey(pngBytes) {
             for (let y = 0; y < height; y++) {
                 for (let x = 0; x < width; x++) {
                     if (++i % 4 == 0) {
-                        out_index = Math.floor((x + y * width) / 4);
+                        const out_index = Math.floor((x + y * width) / 4);
                         outBuffer[out_index] =
                             (getGrayPixel(png.getPixel(x - 3, y)) & 0xc0) |
                             ((getGrayPixel(png.getPixel(x - 2, y)) & 0xc0) >>
@@ -175,7 +193,7 @@ async function convertPNGto4GreyRotated(pngBytes) {
                     const outX = y;
                     const outY = devHeight - x - 1;
                     if (++i % 4 == 0) {
-                        out_index = Math.floor((outX + outY * devWidth) / 4);
+                        const out_index = Math.floor((outX + outY * devWidth) / 4);
                         outBuffer[out_index] =
                             (getGrayPixel(png.getPixel(x, y - 3)) & 0xc0) |
                             ((getGrayPixel(png.getPixel(x, y - 2)) & 0xc0) >>
@@ -193,7 +211,7 @@ async function convertPNGto4GreyRotated(pngBytes) {
 
 function getGrayPixel(rgba) {
     // In a grayscale image: r, g, b are all set to the same value and a == 255
-    [pixel] = rgba;
+    let [pixel] = rgba;
     if (pixel === 0xc0) {
         pixel = 0x80;
     } else if (pixel === 0x80) {
