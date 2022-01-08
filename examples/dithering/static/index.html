@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dithering Example</title>
+        <style>
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                display: flex;
+                flex-flow: row nowrap;
+                place-content: center;
+                place-items: stretch;
+            }
+
+            section {
+                flex: 1 1 0px;
+            }
+
+            .picture {
+                display: flex;
+                place-items: center;
+                background-image: linear-gradient(45deg, black, pink);
+            }
+            .picture img {
+                max-width: 95vw;
+                max-height: 100vh;
+            }
+
+
+            .gradient-color {
+                /* https://stackoverflow.com/questions/56418763/creating-the-perfect-rainbow-gradient-in-css */
+                background-image: linear-gradient(
+                    0deg,
+                    rgba(255, 0, 0, 1) 0%,
+                    rgba(255, 154, 0, 1) 10%,
+                    rgba(208, 222, 33, 1) 20%,
+                    rgba(79, 220, 74, 1) 30%,
+                    rgba(63, 218, 216, 1) 40%,
+                    rgba(47, 201, 226, 1) 50%,
+                    rgba(28, 127, 238, 1) 60%,
+                    rgba(95, 21, 242, 1) 70%,
+                    rgba(186, 12, 248, 1) 80%,
+                    rgba(251, 7, 217, 1) 90%,
+                    rgba(255, 0, 0, 1) 100%
+                );
+            }
+            .gradient-bw {
+                background-image: linear-gradient(0deg, black, white);
+            }
+
+        </style>
+    </head>
+    <body>
+        <section class="gradient-color"></section>
+        <!-- https://pixabay.com/photos/tower-bridge-london-eve-980961/ -->
+        <section class="picture"><img src="./towerbridge.jpg" /></section>
+        <section class="gradient-bw"></section>
+        <script>
+            document.querySelector('.picture img').addEventListener('load', () => {
+                const ws = new WebSocket('ws://localhost:8080');
+                ws.addEventListener('open', () => {
+                    ws.send('render')
+                });
+            })
+        </script>
+    </body>
+</html>

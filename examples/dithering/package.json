@@ -1,0 +1,18 @@
+{
+    "name": "epaperjs-example-dithering",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dithering.js",
+    "scripts": {
+        "start": "node dithering.js"
+    },
+    "author": {
+        "name": "Jack Cannon",
+        "email": "jackc@annon.co.uk",
+        "url": "https://github.com/samsonmking/epaper.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "epaperjs": "file:../.."
+    }
+}
