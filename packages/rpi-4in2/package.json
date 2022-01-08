@@ -1,6 +1,7 @@
 {
     "name": "@epaperjs/rpi-4in2",
     "version": "2.0.0-alpha.0",
+    "private": false,
     "description": "> TODO: description",
     "author": "samsonmking <samson@samsonmking.com>",
     "homepage": "https://github.com/samsonmking/epaper.js#readme",
