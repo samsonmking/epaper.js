@@ -6,6 +6,7 @@ export class Rpi7In5V2 implements DisplayDevice {
     public readonly height: number;
     public readonly width: number;
     private readonly driver: Driver;
+    private sleeping = true;
     constructor(public readonly orientation = Orientation.Horizontal, public readonly colorMode = ColorMode.Black) {
         if (colorMode !== ColorMode.Black) {
             throw new Error('Only black color mode is supported');
@@ -22,6 +23,7 @@ export class Rpi7In5V2 implements DisplayDevice {
 
     public wake(): void {
         this.driver.init();
+        this.sleeping = false;
     }
 
     public clear(): void {
@@ -29,7 +31,10 @@ export class Rpi7In5V2 implements DisplayDevice {
     }
 
     public sleep(): void {
-        this.driver.sleep();
+        if (!this.sleeping) {
+            this.driver.sleep();
+            this.sleeping = true;
+        }
     }
 
     public async displayPng(img: Buffer): Promise<void> {
