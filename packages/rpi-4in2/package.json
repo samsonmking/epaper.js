@@ -1,6 +1,6 @@
 {
     "name": "@epaperjs/rpi-4in2",
-    "version": "2.0.0-rc.0",
+    "version": "2.0.0-rc.1",
     "private": false,
     "description": "> TODO: description",
     "author": "samsonmking <samson@samsonmking.com>",
@@ -10,11 +10,10 @@
     },
     "license": "MIT",
     "main": "lib/rpi4In2.js",
-    "directories": {
-        "src": "lib"
-    },
     "files": [
-        "lib"
+        "lib",
+        "src/c",
+        "binding.gyp"
     ],
     "repository": {
         "type": "git",
