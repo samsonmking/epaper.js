@@ -1,14 +1,16 @@
 const express = require('express');
-const devices = require('./devices.js');
+const devices = require('./devices');
 const readline = require('readline');
 const WebSocket = require('ws');
-const renderBrowser = require('./render.js');
+const renderBrowser = require('./render');
 
 const defaultConfig = {
     webPort: 3000,
     websocketPort: 8080,
     staticDirectory: 'static',
     url: `http://localhost:3000/index.html`,
+    skipWebServer: false,
+    enableDithering: false,
 };
 
 const defaultRenderCallback = (page, ws) => {
@@ -64,10 +66,22 @@ function init(
 
         app.use(express.static(configWithDefaults.staticDirectory));
         app.listen(configWithDefaults.webPort, () => {
-            renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
+            renderBrowser(
+                screen,
+                wss,
+                renderCallback,
+                configWithDefaults.url,
+                configWithDefaults
+            );
         });
     } else {
-        renderBrowser(screen, wss, renderCallback, configWithDefaults.url);
+        renderBrowser(
+            screen,
+            wss,
+            renderCallback,
+            configWithDefaults.url,
+            configWithDefaults
+        );
     }
 }
 

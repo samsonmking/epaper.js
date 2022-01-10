@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer-core');
 
 class Page {
-    constructor(browserPage, screen) {
+    constructor(browserPage, screen, config) {
         this.browserPage = browserPage;
         this.screen = screen;
+        this.config = config || {};
         this.sleeping = false;
         this.browserPage.on(
             'error',
@@ -25,7 +26,7 @@ class Page {
             clearTimeout(this.handle);
         }
 
-        await this.screen.displayPNG(pageImage);
+        await this.screen.displayPNG(pageImage, this.config.enableDithering);
         this.handle = setTimeout(() => {
             this.screen.driver.sleep();
             this.sleeping = true;
@@ -48,7 +49,7 @@ class Page {
     }
 }
 
-async function getPage(screen) {
+async function getPage(screen, config) {
     const browser = await puppeteer.launch({
         executablePath: 'chromium-browser',
         args: ['--font-render-hinting=slight'],
@@ -59,7 +60,7 @@ async function getPage(screen) {
         height: screen.height,
         deviceScaleFactor: 1,
     });
-    return new Page(browserPage, screen);
+    return new Page(browserPage, screen, config);
 }
 
 module.exports = getPage;

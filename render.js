@@ -1,4 +1,4 @@
-const getPage = require('./page.js');
+const getPage = require('./page');
 
 function setUpDisplay(screen) {
     screen.driver.dev_init();
@@ -6,9 +6,9 @@ function setUpDisplay(screen) {
     screen.driver.clear();
 }
 
-async function renderBrowser(screen, wss, epaperApp, url) {
+async function renderBrowser(screen, wss, epaperApp, url, config) {
     setUpDisplay(screen);
-    const page = await getPage(screen);
+    const page = await getPage(screen, config);
     wss.on('connection', (ws) => {
         epaperApp(page, ws);
     });
