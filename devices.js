@@ -13,8 +13,8 @@ const waveshare4in2Horizontal = {
     height: 300,
     width: 400,
     driver: waveshare4In2Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBW(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBW(imgContents, dither);
         this.driver.display(buffer);
     },
     init: function () {
@@ -26,8 +26,11 @@ const waveshare4in2Vertical = {
     height: 400,
     width: 300,
     driver: waveshare4In2Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBWRotated(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBWRotated(
+            imgContents,
+            dither
+        );
         this.driver.display(buffer);
     },
     init: function () {
@@ -39,7 +42,7 @@ const waveshare4in2HorizontalGray = {
     height: 300,
     width: 400,
     driver: waveshare4In2Driver,
-    displayPNG: async function (imgContents) {
+    displayPNG: async function (imgContents, dither) {
         const buffer = await image.convertPNGto4Grey(imgContents);
         this.driver.display_4GrayDisplay(buffer);
     },
@@ -65,8 +68,8 @@ const waveshare7in5v2Horizontal = {
     height: 480,
     width: 800,
     driver: waveshare7in5v2Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBW(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBW(imgContents, dither);
         this.driver.display(buffer);
     },
     init: function () {
@@ -74,12 +77,15 @@ const waveshare7in5v2Horizontal = {
     },
 };
 
-const waveshare7in2v2Vertical = {
+const waveshare7in5v2Vertical = {
     height: 800,
     width: 480,
     driver: waveshare7in5v2Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBWRotated(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBWRotated(
+            imgContents,
+            dither
+        );
         this.driver.display(buffer);
     },
     init: function () {
@@ -91,8 +97,8 @@ const waveshare3in7Vertical = {
     height: 480,
     width: 280,
     driver: waveshare3In7Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBW(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBW(imgContents, dither);
         this.driver.display(buffer);
     },
     init: function () {
@@ -104,8 +110,11 @@ const waveshare3in7Horizontal = {
     height: 280,
     width: 480,
     driver: waveshare3In7Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBWRotated(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBWRotated(
+            imgContents,
+            dither
+        );
         this.driver.display(buffer);
     },
     init: function () {
@@ -117,7 +126,7 @@ const waveshare3in7VerticalGray = {
     height: 480,
     width: 280,
     driver: waveshare3In7Driver,
-    displayPNG: async function (imgContents) {
+    displayPNG: async function (imgContents, dither) {
         const buffer = await image.convertPNGto4Grey(imgContents);
         this.driver.display_4Gray(buffer);
     },
@@ -143,7 +152,7 @@ const waveshare2in13v2Vertical = {
     height: 250,
     width: 122,
     driver: waveshare2in13v2Driver,
-    displayPNG: async function (imgContents) {
+    displayPNG: async function (imgContents, dither) {
         const buffer = await image.convertPNGto1BitBW2in13V2(imgContents);
         this.driver.display(buffer);
     },
@@ -156,7 +165,7 @@ const waveshare2in13v2Horizontal = {
     height: 122,
     width: 250,
     driver: waveshare2in13v2Driver,
-    displayPNG: async function (imgContents) {
+    displayPNG: async function (imgContents, dither) {
         const buffer = await image.convertPNGto1BitBW2in13V2Rotated(
             imgContents
         );
@@ -171,8 +180,11 @@ const waveshare2in13bcHorizontal = {
     height: 104,
     width: 212,
     driver: waveshare2in13bcDriver,
-    displayPNG: async function (imgContents) {
-        const blackBuffer = await image.convertPNGto1BitBWRotated(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const blackBuffer = await image.convertPNGto1BitBWRotated(
+            imgContents,
+            dither
+        );
         const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
         this.driver.display(blackBuffer, emptyBuffer);
     },
@@ -185,23 +197,10 @@ const waveshare2in13bcVertical = {
     height: 212,
     width: 104,
     driver: waveshare2in13bcDriver,
-    displayPNG: async function (imgContents) {
-        const blackBuffer = await image.convertPNGto1BitBW(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const blackBuffer = await image.convertPNGto1BitBW(imgContents, dither);
         const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
         this.driver.display(blackBuffer, emptyBuffer);
-    },
-    init: function () {
-        this.driver.init();
-    },
-};
-
-const waveshare2in7v2Vertical = {
-    height: 176,
-    width: 264,
-    driver: waveshare2in7v2Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBW2in13V2(imgContents);
-        this.driver.display(buffer);
     },
     init: function () {
         this.driver.init();
@@ -212,8 +211,11 @@ const waveshare2in7Horizontal = {
     height: 176,
     width: 264,
     driver: waveshare2in7Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBWRotated(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBWRotated(
+            imgContents,
+            dither
+        );
         this.driver.display(buffer);
     },
     init: function () {
@@ -224,8 +226,8 @@ const waveshare2in7Vertical = {
     height: 264,
     width: 176,
     driver: waveshare2in7Driver,
-    displayPNG: async function (imgContents) {
-        const buffer = await image.convertPNGto1BitBW(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBW(imgContents, dither);
         this.driver.display(buffer);
     },
     init: function () {
@@ -237,10 +239,23 @@ const waveshare2in7v2Horizontal = {
     height: 264,
     width: 176,
     driver: waveshare2in7v2Driver,
-    displayPNG: async function (imgContents) {
+    displayPNG: async function (imgContents, dither) {
         const buffer = await image.convertPNGto1BitBW2in13V2Rotated(
             imgContents
         );
+        this.driver.display(buffer);
+    },
+    init: function () {
+        this.driver.init();
+    },
+};
+
+const waveshare2in7v2Vertical = {
+    height: 176,
+    width: 264,
+    driver: waveshare2in7v2Driver,
+    displayPNG: async function (imgContents, dither) {
+        const buffer = await image.convertPNGto1BitBW2in13V2(imgContents);
         this.driver.display(buffer);
     },
     init: function () {
@@ -252,8 +267,11 @@ const waveshare2in7bHorizontal = {
     height: 264,
     width: 176,
     driver: waveshare2in7bDriver,
-    displayPNG: async function (imgContents) {
-        const blackBuffer = await image.convertPNGto1BitBWRotated(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const blackBuffer = await image.convertPNGto1BitBWRotated(
+            imgContents,
+            dither
+        );
         const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
         this.driver.display(blackBuffer, emptyBuffer);
     },
@@ -266,8 +284,8 @@ const waveshare2in7bVertical = {
     height: 176,
     width: 264,
     driver: waveshare2in7bDriver,
-    displayPNG: async function (imgContents) {
-        const blackBuffer = await image.convertPNGto1BitBW(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const blackBuffer = await image.convertPNGto1BitBW(imgContents, dither);
         const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
         this.driver.display(blackBuffer, emptyBuffer);
     },
@@ -279,8 +297,11 @@ const waveshare2in7V2bHorizontal = {
     height: 264,
     width: 176,
     driver: waveshare2in7v2bDriver,
-    displayPNG: async function (imgContents) {
-        const blackBuffer = await image.convertPNGto1BitBWRotated(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const blackBuffer = await image.convertPNGto1BitBWRotated(
+            imgContents,
+            dither
+        );
         const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
         this.driver.display(blackBuffer, emptyBuffer);
     },
@@ -293,8 +314,8 @@ const waveshare2in7V2bVertical = {
     height: 176,
     width: 264,
     driver: waveshare2in7v2bDriver,
-    displayPNG: async function (imgContents) {
-        const blackBuffer = await image.convertPNGto1BitBW(imgContents);
+    displayPNG: async function (imgContents, dither) {
+        const blackBuffer = await image.convertPNGto1BitBW(imgContents, dither);
         const emptyBuffer = Buffer.alloc(blackBuffer.length, 0xff);
         this.driver.display(blackBuffer, emptyBuffer);
     },
@@ -313,7 +334,8 @@ const devices = {
     // default waveshare7in5v2 kept for backwards compatibility with releaes 1.1.0
     waveshare7in5v2: waveshare7in5v2Horizontal,
     waveshare7in5v2Horizontal,
-    waveshare7in2v2Vertical,
+    waveshare7in5v2Vertical,
+    waveshare7in2v2Vertical: waveshare7in5v2Vertical, // backwards compat typo
     // default
     waveshare3in7: waveshare3in7HorizontalGray,
     waveshare3in7Horizontal,

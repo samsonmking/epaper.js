@@ -1,8 +1,15 @@
 const { init, devices } = require('epaperjs');
 
-const device = devices.waveshare7in5v2Horizontal;
+const [isPortrait] = process.argv.slice(2);
 
-init(device);
+const device = isPortrait
+    ? devices.waveshare7in5v2Vertical
+    : devices.waveshare7in5v2Horizontal;
+const config = {
+    enableDithering: true,
+};
+
+init(device, config);
 
 setTimeout(() => {
     device.driver.sleep();
