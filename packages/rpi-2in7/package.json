@@ -10,11 +10,10 @@
     },
     "license": "MIT",
     "main": "lib/rpi2In7.js",
-    "directories": {
-        "src": "lib"
-    },
     "files": [
-        "lib"
+        "lib",
+        "src/c",
+        "binding.gyp"
     ],
     "repository": {
         "type": "git",
