@@ -6,7 +6,7 @@ const device = isPortrait
     ? devices.waveshare7in5v2Vertical
     : devices.waveshare7in5v2Horizontal;
 const config = {
-    enableDithering: true,
+    enableDithering: false,
 };
 
 init(device, config);

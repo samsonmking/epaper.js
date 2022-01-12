@@ -1,6 +1,6 @@
 {
     "name": "epaperjs",
-    "version": "1.7.2",
+    "version": "1.8.0",
     "description": "Simple e-Paper display on a Raspberry Pi using Javascript and HTML",
     "main": "index.js",
     "scripts": {
@@ -22,6 +22,10 @@
         {
             "name": "Sven Schoeni",
             "url": "https://github.com/schoes"
+        },
+        {
+            "name": "Jack Cannon",
+            "url": "https://github.com/jackcannon"
         }
     ],
     "repository": {
