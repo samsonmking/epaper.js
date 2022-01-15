@@ -15,9 +15,6 @@ export class RefreshCommand implements Command<RefreshArgs> {
         const { deviceType, orientation, colorMode, url, time } = refreshArgs;
 
         this.displayDevice = await getDevice(deviceType, orientation, colorMode);
-        if (!this.displayDevice) {
-            throw new Error(`device type ${deviceType} not recognized`);
-        }
         this.displayDevice.connect();
 
         this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);

@@ -17,9 +17,6 @@ export class DisplayCommand implements Command<DisplayArgs> {
         const { deviceType, orientation, colorMode, url } = displayArgs;
 
         this.displayDevice = await getDevice(deviceType, orientation, colorMode);
-        if (!this.displayDevice) {
-            throw new Error(`device type ${deviceType} not recognized`);
-        }
         this.displayDevice.connect();
 
         this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);

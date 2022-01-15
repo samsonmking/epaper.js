@@ -8,9 +8,6 @@ export class ClearCommand implements Command<BaseArgs> {
     public async execute(clearArgs: BaseArgs) {
         const { deviceType } = clearArgs;
         this.displayDevice = await getDevice(deviceType);
-        if (!this.displayDevice) {
-            throw new Error(`device type ${deviceType} not recognized`);
-        }
         this.displayDevice.connect();
         this.displayDevice.clear();
     }
