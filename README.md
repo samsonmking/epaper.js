@@ -60,6 +60,7 @@ init(devices.waveshare4in2, {
     staticDirectory: 'static', // Directory to serve frontend from
     skipWebServer: false, // If set to true will not create a local web server
     url: `http://localhost:3000/index.html`, // Initial URL to load
+    enableDithering: true, // If set to true, a dithering algorithm will be applied to approximate mid-tones
 });
 ```
 
@@ -98,6 +99,8 @@ See the examples directory
 
 -   weather-station: This creates and example weather station display
 -   ereader: An ereader that reads epub files and uses the left and right keypresses to change pages
+-   4gray: A demonstration of the 4gray capabilities
+-   dithering: A demonstration of the dithering feature
 
 ## Installation
 
@@ -119,10 +122,6 @@ curl -sL install-node.now.sh/lts | sudo bash
 sudo apt-get update
 
 # Install wiringpi
-sudo apt-get install -y wiringpi
-
-# For Pi 4, you need to update wiringpi (skip otherwise)：
-cd /tmp
 wget https://project-downloads.drogon.net/wiringpi-latest.deb
 sudo dpkg -i wiringpi-latest.deb
 #You will get 2.52 information if you've installed it correctly
@@ -141,14 +140,14 @@ npm install -S epaperjs
 
 ## Supported Hardware
 
-| Device                                                                          | Supprted Display Modes |
-| ------------------------------------------------------------------------------- | ---------------------- |
-| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)                 | Black / White, 4 Gray  |
-| [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm)              | Black / White          |
-| [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm)         | Black / White, 4 Gray  |
-| [Waveshare 2.13" hat v2](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT)   | Black / White          |
-| [Waveshare 2.13" bc](<https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT_(B)>) | Black / White          |
-| [Waveshare 2.7"](https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT)            | Black / White          |
+| Device                                                                          | Black / White | 4 Gray | Dithering |
+| ------------------------------------------------------------------------------- | ------------- | ------ | --------- |
+| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)                 | ✅            | ✅     | B/W only  |
+| [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm)              | ✅            |        | ✅        |
+| [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm)         | ✅            | ✅     | B/W only  |
+| [Waveshare 2.13" hat v2](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT)   | ✅            |        |           |
+| [Waveshare 2.13" bc](<https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT_(B)>) | ✅            |        | ✅        |
+| [Waveshare 2.7"](https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT)            | ✅            |        | Partial   |
 
 ### Adding Support For Additional Displays
 

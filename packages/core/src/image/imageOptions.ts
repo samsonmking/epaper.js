@@ -5,6 +5,8 @@ export interface ImageOptions {
     blackThreshold?: number;
     redLowerThreshold?: HSVA;
     redUpperThreshold?: HSVA;
+    dither?: boolean;
+    ditherThreshold?: number;
 }
 
 export const defaultOptions: Required<ImageOptions> = {
@@ -12,4 +14,6 @@ export const defaultOptions: Required<ImageOptions> = {
     blackThreshold: 90,
     redLowerThreshold: [340, 0.5, 0.5, 0.75],
     redUpperThreshold: [20, 1, 1, 1],
+    dither: false,
+    ditherThreshold: 127,
 };

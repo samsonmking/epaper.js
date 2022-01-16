@@ -1,6 +1,6 @@
 import { defaultOptions, ImageOptions } from './imageOptions';
 import { PngReader, RGBAPixel } from './pngReader';
-import { blackThreshold, hsvThreshold } from './threshold';
+import { blackThreshold, Dither, hsvThreshold } from './threshold';
 
 export class MonochromeLR {
     private readonly pngReader;
@@ -9,24 +9,30 @@ export class MonochromeLR {
         this.pngReader = new PngReader(pngInput);
     }
 
-    public toBlack(options: ImageOptions = {}): Promise<Buffer> {
+    public async toBlack(options: ImageOptions = {}): Promise<Buffer> {
         const fullOpts: Required<ImageOptions> = { ...defaultOptions, ...options };
-        return this.toThreshold(fullOpts, (pixel) => blackThreshold(pixel, fullOpts.blackThreshold));
+        await this.pngReader.parse();
+        if (fullOpts.dither) {
+            const dither = new Dither(this.pngReader, 127);
+            return await this.toThreshold(fullOpts, (pixel, x, y) => dither.threshold(pixel, x, y));
+        } else {
+            return await this.toThreshold(fullOpts, (pixel) => blackThreshold(pixel, fullOpts.blackThreshold));
+        }
     }
 
-    public toRed(options: ImageOptions = {}): Promise<Buffer> {
+    public async toRed(options: ImageOptions = {}): Promise<Buffer> {
         const fullOpts: Required<ImageOptions> = { ...defaultOptions, ...options };
-        return this.toThreshold(fullOpts, (pixel) =>
+        await this.pngReader.parse();
+        return await this.toThreshold(fullOpts, (pixel) =>
             hsvThreshold(pixel, fullOpts.redLowerThreshold, fullOpts.redUpperThreshold)
         );
     }
 
     private async toThreshold(
         options: Required<ImageOptions>,
-        threshold: (pixel: RGBAPixel) => boolean
+        threshold: (pixel: RGBAPixel, x: number, y: number) => boolean
     ): Promise<Buffer> {
-        const input = await this.pngReader.parse();
-        const { height, width } = input;
+        const { height, width } = this.pngReader;
         if (options.rotate90Degrees) {
             const devHeight = width;
             const devWidth = height;
@@ -35,8 +41,8 @@ export class MonochromeLR {
                 for (let x = 0; x < width; x++) {
                     const outX = y;
                     const outY = devHeight - x - 1;
-                    const pixel = input.getPixel(x, y);
-                    if (threshold(pixel)) {
+                    const pixel = this.pngReader.getPixel(x, y);
+                    if (threshold(pixel, x, y)) {
                         const out_index = Math.floor((outX + outY * devWidth) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(y % 8));
                     }
@@ -47,8 +53,8 @@ export class MonochromeLR {
             const outBuffer = allocBuffer_8(width, height);
             for (let y = 0; y < height; y++) {
                 for (let x = 0; x < width; x++) {
-                    const pixel = input.getPixel(x, y);
-                    if (threshold(pixel)) {
+                    const pixel = this.pngReader.getPixel(x, y);
+                    if (threshold(pixel, x, y)) {
                         const out_index = Math.floor((x + y * width) / 8);
                         outBuffer[out_index] &= ~(0x80 >> Math.floor(x % 8));
                     }
