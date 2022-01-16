@@ -4,4 +4,5 @@ export interface Driver {
     display(buffer: Uint8Array): void;
     clear(): void;
     sleep(): void;
+    dev_exit(): void;
 }

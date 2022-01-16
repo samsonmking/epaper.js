@@ -60,6 +60,12 @@ Napi::Value Sleep(const Napi::CallbackInfo& info) {
     return env.Undefined();
 }
 
+Napi::Value DEV_Exit(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+    DEV_Module_Exit();
+    return env.Undefined();
+}
+
 Napi::Object SetupNapi(Napi::Env env, Napi::Object exports) {
     exports.Set(Napi::String::New(env, "dev_init"),
                 Napi::Function::New(env, DEV_Init));
@@ -77,6 +83,8 @@ Napi::Object SetupNapi(Napi::Env env, Napi::Object exports) {
                 Napi::Function::New(env, Clear));
     exports.Set(Napi::String::New(env, "sleep"),
                 Napi::Function::New(env, Sleep));
+    exports.Set(Napi::String::New(env, "dev_exit"),
+                Napi::Function::New(env, DEV_Exit));
 
     return exports;
 }

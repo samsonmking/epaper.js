@@ -14,13 +14,15 @@ export class Rpi2In7 implements DisplayDevice {
         this.width = this.orientation === Orientation.Horizontal ? 264 : 176;
         this.height = this.orientation === Orientation.Horizontal ? 176 : 264;
     }
-    disconnect(): void {
-        throw new Error('Method not implemented.');
-    }
 
     public connect(): void {
         this.driver.dev_init();
         this.wake();
+    }
+
+    public disconnect(): void {
+        this.sleep();
+        this.driver.dev_exit();
     }
 
     public wake(): void {

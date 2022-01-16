@@ -6,4 +6,5 @@ export interface Driver {
     display_4Gray(buffer: Buffer): void;
     clear(): void;
     sleep(): void;
+    dev_exit(): void;
 }

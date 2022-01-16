@@ -4,4 +4,5 @@ export interface Driver {
     display(buffer: Buffer): void;
     clear(): void;
     sleep(): void;
+    dev_exit(): void;
 }

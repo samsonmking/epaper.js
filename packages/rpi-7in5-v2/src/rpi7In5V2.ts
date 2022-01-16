@@ -15,13 +15,15 @@ export class Rpi7In5V2 implements DisplayDevice {
         this.width = this.orientation === Orientation.Horizontal ? 800 : 480;
         this.height = this.orientation === Orientation.Horizontal ? 480 : 800;
     }
-    disconnect(): void {
-        throw new Error('Method not implemented.');
-    }
 
     public connect(): void {
         this.driver.dev_init();
         this.wake();
+    }
+
+    public disconnect(): void {
+        this.sleep();
+        this.driver.dev_exit();
     }
 
     public wake(): void {
