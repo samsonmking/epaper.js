@@ -19,4 +19,5 @@ export interface DisplayDevice {
     clear(): void;
     sleep(): void;
     displayPng(img: Buffer): Promise<void>;
+    disconnect(): void;
 }

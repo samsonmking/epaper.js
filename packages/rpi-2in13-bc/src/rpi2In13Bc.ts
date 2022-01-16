@@ -22,6 +22,11 @@ export class Rpi2In13BC implements DisplayDevice {
         this.wake();
     }
 
+    public disconnect() {
+        this.driver.sleep();
+        this.driver.dev_exit();
+    }
+
     public wake() {
         this.driver.init();
     }

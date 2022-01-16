@@ -18,6 +18,9 @@ export class Rpi2In13V2 implements DisplayDevice {
         this.height = orientation === Orientation.Horizontal ? 122 : 250;
         this.width = orientation === Orientation.Horizontal ? 250 : 122;
     }
+    disconnect(): void {
+        throw new Error('Method not implemented.');
+    }
 
     public connect() {
         this.driver.dev_init();

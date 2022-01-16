@@ -4,4 +4,5 @@ export interface Driver {
     display(blackBuffer: Buffer, colorBuffer: Buffer): void;
     clear(): void;
     sleep(): void;
+    dev_exit(): void;
 }

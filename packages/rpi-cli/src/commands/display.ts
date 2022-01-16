@@ -25,7 +25,7 @@ export class DisplayCommand implements Command<DisplayArgs> {
     }
 
     public async dispose() {
-        this.displayDevice?.sleep();
+        this.displayDevice?.disconnect();
         await this.browserPage?.close();
     }
 }

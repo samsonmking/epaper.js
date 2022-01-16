@@ -29,7 +29,7 @@ export class RefreshCommand implements Command<RefreshArgs> {
     }
 
     public async dispose() {
-        this.displayDevice?.sleep();
+        this.displayDevice?.disconnect();
         await this.browserPage?.close();
     }
 

@@ -13,6 +13,6 @@ export class ClearCommand implements Command<BaseArgs> {
     }
 
     public async dispose() {
-        this.displayDevice?.sleep();
+        this.displayDevice?.disconnect();
     }
 }
