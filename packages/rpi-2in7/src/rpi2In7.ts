@@ -1,4 +1,5 @@
 import { ColorMode, DisplayDevice, MonochromeLR, Orientation } from '@epaperjs/core';
+import { ImageOptions } from '@epaperjs/core/src/image/imageOptions';
 import bindings from 'bindings';
 import { Driver } from './driver';
 
@@ -37,9 +38,12 @@ export class Rpi2In7 implements DisplayDevice {
         this.driver.sleep();
     }
 
-    public async displayPng(img: Buffer): Promise<void> {
+    public async displayPng(img: Buffer, options?: ImageOptions): Promise<void> {
         const converter = new MonochromeLR(img);
-        const blackBuffer = await converter.toBlack({ rotate90Degrees: this.orientation === Orientation.Horizontal });
+        const blackBuffer = await converter.toBlack({
+            ...options,
+            rotate90Degrees: this.orientation === Orientation.Horizontal,
+        });
         this.driver.display(blackBuffer);
     }
 }

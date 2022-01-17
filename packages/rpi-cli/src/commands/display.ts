@@ -7,6 +7,7 @@ export interface DisplayArgs extends BaseArgs {
     orientation?: Orientation;
     colorMode?: ColorMode;
     screenshotDelay?: number;
+    dither?: boolean;
 }
 
 export class DisplayCommand implements Command<DisplayArgs> {
@@ -14,14 +15,14 @@ export class DisplayCommand implements Command<DisplayArgs> {
     private browserPage?: BrowserPage;
 
     public async execute(displayArgs: DisplayArgs) {
-        const { deviceType, orientation, colorMode, url } = displayArgs;
+        const { deviceType, orientation, colorMode, url, dither } = displayArgs;
 
         this.displayDevice = await getDevice(deviceType, orientation, colorMode);
         this.displayDevice.connect();
 
         this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);
         const imgOfUrl = await this.browserPage.screenshot(url, { delay: displayArgs.screenshotDelay });
-        await this.displayDevice.displayPng(imgOfUrl);
+        await this.displayDevice.displayPng(imgOfUrl, { dither });
     }
 
     public async dispose() {

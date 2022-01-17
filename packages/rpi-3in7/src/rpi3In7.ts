@@ -1,4 +1,5 @@
 import { ColorMode, DisplayDevice, GrayLR, MonochromeLR, Orientation } from '@epaperjs/core';
+import { ImageOptions } from '@epaperjs/core/src/image/imageOptions';
 import bindings from 'bindings';
 import { Driver } from './driver';
 
@@ -43,23 +44,29 @@ export class Rpi3In7 implements DisplayDevice {
         this.driver.sleep();
     }
 
-    public async displayPng(img: Buffer): Promise<void> {
+    public async displayPng(img: Buffer, options?: ImageOptions): Promise<void> {
         if (this.colorMode === ColorMode.Gray4) {
-            await this.displayPngGray4(img);
+            await this.displayPngGray4(img, options);
         } else {
-            await this.displayPngBW(img);
+            await this.displayPngBW(img, options);
         }
     }
 
-    private async displayPngBW(img: Buffer) {
+    private async displayPngBW(img: Buffer, options?: ImageOptions) {
         const converter = new MonochromeLR(img);
-        const blackBuffer = await converter.toBlack({ rotate90Degrees: this.orientation === Orientation.Horizontal });
+        const blackBuffer = await converter.toBlack({
+            ...options,
+            rotate90Degrees: this.orientation === Orientation.Horizontal,
+        });
         this.driver.display(blackBuffer);
     }
 
-    private async displayPngGray4(img: Buffer) {
+    private async displayPngGray4(img: Buffer, options?: ImageOptions) {
         const converter = new GrayLR(img);
-        const grayBuffer = await converter.to4Gray({ rotate90Degrees: this.orientation === Orientation.Horizontal });
+        const grayBuffer = await converter.to4Gray({
+            ...options,
+            rotate90Degrees: this.orientation === Orientation.Horizontal,
+        });
         this.driver.display_4Gray(grayBuffer);
     }
 }

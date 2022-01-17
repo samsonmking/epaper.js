@@ -44,6 +44,11 @@ const screenshotDelayArgs: Options = {
     describe: 'optional delay after loading url before taking screenshot (milliseconds)',
 };
 
+const ditherArgs: Options = {
+    boolean: true,
+    describe: 'A dithering algorithm will be applied to approximate mid-tones',
+};
+
 export function cli(processArgs: string[]) {
     yargs(processArgs)
         .usage('Usage $0 <command> [options]')
@@ -56,6 +61,7 @@ export function cli(processArgs: string[]) {
                     .option('colorMode', colorArgs)
                     .option('debug', debugArgs)
                     .option('screenshotDelay', screenshotDelayArgs)
+                    .option('dither', ditherArgs)
                     .positional('deviceType', deviceTypeArgs)
                     .positional('url', urlArgs);
             },

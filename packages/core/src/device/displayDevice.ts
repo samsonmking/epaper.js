@@ -1,3 +1,5 @@
+import { ImageOptions } from '../image/imageOptions';
+
 export enum ColorMode {
     Black = 'black',
     Gray4 = 'gray',
@@ -18,6 +20,6 @@ export interface DisplayDevice {
     wake(): void;
     clear(): void;
     sleep(): void;
-    displayPng(img: Buffer): Promise<void>;
+    displayPng(img: Buffer, options?: ImageOptions): Promise<void>;
     disconnect(): void;
 }
