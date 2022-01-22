@@ -80,6 +80,7 @@ export function cli(processArgs: string[]) {
                     .option('colorMode', colorArgs)
                     .option('debug', debugArgs)
                     .option('screenshotDelay', screenshotDelayArgs)
+                    .option('dither', ditherArgs)
                     .positional('deviceType', deviceTypeArgs)
                     .positional('url', urlArgs);
             },

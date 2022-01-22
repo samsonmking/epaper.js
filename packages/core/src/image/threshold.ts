@@ -49,7 +49,6 @@ export function hsvThreshold(pixel: RGBAPixel, lowerBound: HSVA, upperBound: HSV
 }
 
 export function gray4Threshold(pixel: RGBAPixel): number {
-    const [r, g, b, a] = pixel;
     // r, g, and b will all have the same values if greyscale
     let grey = toGreyscale(pixel);
 
@@ -65,8 +64,6 @@ function toGreyscale(pixel: RGBAPixel): number {
     const [r, g, b, a] = pixel;
     const { r: grey } = tinycolor({ r, g, b, a }).greyscale().toRgb();
     return grey;
-    // https://www.w3.org/TR/AERT/#color-contrast
-    // return r * 0.299 + g * 0.587 + b * 0.114;
 }
 
 function inRangeAnd(value: number, lower: number, upper: number) {

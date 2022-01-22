@@ -12,7 +12,7 @@ export class RefreshCommand implements Command<RefreshArgs> {
     private browserPage?: BrowserPage;
 
     public async execute(refreshArgs: RefreshArgs) {
-        const { deviceType, orientation, colorMode, url, time } = refreshArgs;
+        const { deviceType, orientation, colorMode, url, time, dither } = refreshArgs;
 
         this.displayDevice = await getDevice(deviceType, orientation, colorMode);
         this.displayDevice.connect();
@@ -22,7 +22,7 @@ export class RefreshCommand implements Command<RefreshArgs> {
         while (true) {
             const imgOfUrl = await this.browserPage.screenshot(url, { delay: refreshArgs.screenshotDelay });
             this.displayDevice.wake();
-            await this.displayDevice.displayPng(imgOfUrl);
+            await this.displayDevice.displayPng(imgOfUrl, { dither });
             this.displayDevice.sleep();
             await this.sleep(time);
         }
