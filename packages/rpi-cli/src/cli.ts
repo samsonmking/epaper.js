@@ -20,7 +20,7 @@ const colorArgs: Options = {
 const intervalArgs: Options = {
     alias: 'i',
     number: true,
-    describe: 'amount of time in seconds between refreshes',
+    describe: 'amount of time in seconds between refreshes (defaults to 10 min)',
 };
 
 const deviceTypeArgs: PositionalOptions = {
@@ -34,7 +34,6 @@ const urlArgs: PositionalOptions = {
 };
 
 const debugArgs: Options = {
-    alias: 'd',
     boolean: true,
     describe: 'log stacktraces and browser errors to console',
 };

@@ -42,7 +42,7 @@ export class RefreshCommand implements Command<RefreshArgs> {
         await this.browserPage?.close();
     }
 
-    private sleep(seconds: number = 15) {
+    private sleep(seconds: number = 600) {
         if (seconds > 60) {
             const min = Math.floor(seconds / 60);
             const remainingSec = (seconds % 60).toString().padStart(2, '0');
