@@ -1,18 +1,24 @@
 export interface Logger {
+    debug(message?: any, ...optionalParams: any[]): void;
     log(message?: any, ...optionalParams: any[]): void;
     error(error: Error | string): void;
 }
 
 export class ConsoleLogger implements Logger {
-    constructor(private readonly debug: boolean = false) {}
-    log(message?: any, ...optionalParams: any[]): void {
-        if (this.debug) {
-            console.log(message, ...optionalParams);
+    constructor(private readonly debugEnabled: boolean = false) {}
+    debug(message?: any, ...optionalParams: any[]) {
+        if (this.debugEnabled) {
+            console.log(`[DEBUG] ${message}`, ...optionalParams);
         }
     }
+
+    log(message?: any, ...optionalParams: any[]): void {
+        console.log(message, ...optionalParams);
+    }
+
     error(error: Error | string): void {
-        if (error instanceof Error && !this.debug) {
-            console.error(`ERROR: ${error.message}`);
+        if (error instanceof Error && !this.debugEnabled) {
+            console.error(`[ERROR] ${error.message}`);
         } else {
             console.error(error);
         }

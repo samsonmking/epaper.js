@@ -3,7 +3,7 @@ import yargs, { Options, PositionalOptions } from 'yargs';
 import { DisplayArgs, DisplayCommand, RefreshArgs, RefreshCommand } from './commands';
 import { ClearCommand } from './commands/clear';
 import { Command } from './commands/command';
-import { ConsoleLogger } from './logger';
+import { ConsoleLogger, Logger } from './logger';
 
 const orientationArgs: Options = {
     alias: 'o',
@@ -66,8 +66,9 @@ export function cli(processArgs: string[]) {
                     .positional('url', urlArgs);
             },
             async (args) => {
-                const displayCommand = new DisplayCommand();
-                executeCommand(displayCommand, args);
+                const logger = new ConsoleLogger(args.debug);
+                const displayCommand = new DisplayCommand(logger);
+                executeCommand(displayCommand, args, logger);
             }
         )
         .command<RefreshArgs>(
@@ -85,8 +86,9 @@ export function cli(processArgs: string[]) {
                     .positional('url', urlArgs);
             },
             async (args) => {
-                const refreshCommand = new RefreshCommand();
-                executeCommand(refreshCommand, args);
+                const logger = new ConsoleLogger(args.debug);
+                const refreshCommand = new RefreshCommand(logger);
+                executeCommand(refreshCommand, args, logger);
             }
         )
         .command<BaseArgs>(
@@ -96,8 +98,9 @@ export function cli(processArgs: string[]) {
                 yargs.option('debug', debugArgs).positional('deviceType', deviceTypeArgs);
             },
             async (args) => {
-                const clearCommand = new ClearCommand();
-                executeCommand(clearCommand, args);
+                const logger = new ConsoleLogger(args.debug);
+                const clearCommand = new ClearCommand(logger);
+                executeCommand(clearCommand, args, logger);
             }
         )
         .demandCommand(1, 'No command specified - you must specify a command')
@@ -105,14 +108,13 @@ export function cli(processArgs: string[]) {
         .help().argv;
 }
 
-async function executeCommand<T extends BaseArgs>(command: Command<T>, args: T) {
+async function executeCommand<T extends BaseArgs>(command: Command<T>, args: T, logger: Logger) {
     process.on('SIGINT', () => command.dispose());
     process.on('SIGTERM', () => command.dispose());
     try {
         await command.execute(args);
         await command.dispose();
     } catch (e) {
-        const logger = new ConsoleLogger(args.debug);
         const definedError = e instanceof Error ? e : 'Unknown error occurred';
         logger.error(definedError);
         await command.dispose();
