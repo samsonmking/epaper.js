@@ -2,6 +2,7 @@ import { HSVA } from './threshold';
 
 export interface ImageOptions {
     rotate90Degrees?: boolean;
+    rightToLeft?: boolean;
     blackThreshold?: number;
     redLowerThreshold?: HSVA;
     redUpperThreshold?: HSVA;
@@ -11,6 +12,7 @@ export interface ImageOptions {
 
 export const defaultOptions: Required<ImageOptions> = {
     rotate90Degrees: false,
+    rightToLeft: false,
     blackThreshold: 90,
     redLowerThreshold: [340, 0.5, 0.5, 0.75],
     redUpperThreshold: [20, 1, 1, 1],
