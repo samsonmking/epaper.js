@@ -1,14 +1,13 @@
 {
-    "name": "@epaperjs/rpi-cli",
-    "version": "2.0.0-next.2",
+    "name": "@epaperjs/cli",
+    "version": "2.0.0-next.3",
     "private": false,
-    "description": "> TODO: description",
+    "description": "CLI for rendering URL onto ePaper display on Raspberry Pi",
     "author": "samsonmking <samson@samsonmking.com>",
     "homepage": "https://github.com/samsonmking/epaper.js#readme",
     "license": "MIT",
-    "main": "lib/rpi-cli.js",
     "bin": {
-        "ejs": "bin/rpi-cli"
+        "ejs": "bin/ejs-cli"
     },
     "directories": {
         "dist": "dist"
@@ -20,10 +19,6 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/samsonmking/epaper.js.git"
-    },
-    "scripts": {
-        "compile": "tsc --build",
-        "test": "echo \"Error: run tests from root\" && exit 1"
     },
     "dependencies": {
         "@epaperjs/core": "workspace:^",

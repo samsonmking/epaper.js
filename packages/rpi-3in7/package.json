@@ -1,8 +1,8 @@
 {
     "name": "@epaperjs/rpi-3in7",
-    "version": "2.0.0-next.2",
+    "version": "2.0.0-next.3",
     "private": false,
-    "description": "> TODO: description",
+    "description": "ePaper.js support for Waveshare 3.7\" display",
     "author": "samsonmking <samson@samsonmking.com>",
     "homepage": "https://github.com/samsonmking/epaper.js#readme",
     "bugs": {

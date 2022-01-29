@@ -1,6 +1,6 @@
 {
     "name": "@epaperjs/core",
-    "version": "2.0.0-next.2",
+    "version": "2.0.0-next.3",
     "private": false,
     "description": "Core module providing image processing capability and API definitions for epaper.js",
     "author": "samsonmking <samson@samsonmking.com>",
