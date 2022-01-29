@@ -2,7 +2,7 @@ import { ImageOptions } from '../image/imageOptions';
 
 export enum ColorMode {
     Black = 'black',
-    Gray4 = 'gray',
+    Gray4 = '4gray',
     Red = 'red',
 }
 

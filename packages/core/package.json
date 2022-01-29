@@ -2,14 +2,13 @@
     "name": "@epaperjs/core",
     "version": "2.0.0-next.2",
     "private": false,
-    "description": "> TODO: description",
+    "description": "Core module providing image processing capability and API definitions for epaper.js",
     "author": "samsonmking <samson@samsonmking.com>",
     "homepage": "https://github.com/samsonmking/epaper.js#readme",
     "license": "MIT",
     "main": "lib/index.js",
     "directories": {
-        "lib": "lib",
-        "test": "__tests__"
+        "lib": "lib"
     },
     "files": [
         "lib"
@@ -17,9 +16,6 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/samsonmking/epaper.js.git"
-    },
-    "scripts": {
-        "compile": "tsc"
     },
     "bugs": {
         "url": "https://github.com/samsonmking/epaper.js/issues"

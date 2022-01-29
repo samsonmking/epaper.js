@@ -1,11 +1,17 @@
-# `rpi-2in13-v2`
+# @epaperjs/rpi-2in13-v2
 
-> TODO: description
+Node bindings for [Waveshare 2.13" v2 display](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT)
 
-## Usage
+## Supported Color Modes
+
+`Black / White`
+
+## Installation
 
 ```
-const rpi2in13V2 = require('rpi-2in13-v2');
-
-// TODO: DEMONSTRATE API
+npm i -g @epaperjs/rpi-2in13-v2
 ```
+
+## License
+
+MIT

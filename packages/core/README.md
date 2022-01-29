@@ -1,11 +1,13 @@
-# `core`
+# @epaperjs/core
 
-> TODO: description
+Core module of epaper.js that provides image processing, browser rendering, and API entrypoints.
 
-## Usage
+## Installation
 
 ```
-const core = require('core');
-
-// TODO: DEMONSTRATE API
+npm i @epaperjs/core
 ```
+
+## License
+
+MIT

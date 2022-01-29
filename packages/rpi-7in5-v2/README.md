@@ -1,11 +1,17 @@
-# `rpi-7in5-v2`
+# @epaperjs/rpi-7in5-v2
 
-> TODO: description
+Node bindings for [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm)
 
-## Usage
+## Supported Color Modes
+
+`Black / White`
+
+## Installation
 
 ```
-const rpi7in5V2 = require('rpi-7in5-v2');
-
-// TODO: DEMONSTRATE API
+npm i -g @epaperjs/rpi-7in5-v2
 ```
+
+## License
+
+MIT

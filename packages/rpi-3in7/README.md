@@ -1,11 +1,18 @@
-# `rpi-3in7`
+# @epaperjs/rpi-3in7
 
-> TODO: description
+Node bindings for [Waveshare 3.7"](https://www.waveshare.com/3.7inch-e-paper-hat.htm)
 
-## Usage
+## Supported Color Modes
+
+`Black / White` \
+`4 Gray`
+
+## Installation
 
 ```
-const rpi3in7 = require('rpi-3in7');
-
-// TODO: DEMONSTRATE API
+npm i -g @epaperjs/rpi-3in7
 ```
+
+## License
+
+MIT

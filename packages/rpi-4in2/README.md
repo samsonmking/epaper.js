@@ -1,11 +1,18 @@
-# `rpi-4in2`
+# @epaperjs/rpi-4in2
 
-> TODO: description
+Node bindings for [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)
 
-## Usage
+## Supported Color Modes
+
+`Black / White` \
+`4 Gray`
+
+## Installation
 
 ```
-const rpi4in2 = require('rpi-4in2');
-
-// TODO: DEMONSTRATE API
+npm i -g @epaperjs/rpi-4in2
 ```
+
+## License
+
+MIT
