@@ -2,24 +2,31 @@ name: Publish
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - 'images/**'
       - 'examples/**'
+env:
+  CI: true
+  PNPM_CACHE_FOLDER: .pnpm-store
 jobs:
-  publish:
-    name: Publish
+  verify:
+    name: Build and Verify
     runs-on: ubuntu-20.04
     steps:
-      - name: Setup Docker QEMU (To target RPi ARM)
-        uses: docker/setup-qemu-action@v1.0.1
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: setup node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 16
+      - name: install pnpm
+        run: npm i pnpm@latest -g
+      - name: Setup npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      - name: setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+      - name: Install Dependencies
+        run: pnpm install
       - name: Publish to npm
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
+        run: pnpm ci:publish

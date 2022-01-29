@@ -1,0 +1,30 @@
+{
+    "extends": "./tsconfig.base.json",
+    "files": [],
+    "references": [
+        {
+            "path": "./packages/core"
+        },
+        {
+            "path": "./packages/cli"
+        },
+        {
+            "path": "packages/rpi-2in13-v2"
+        },
+        {
+            "path": "packages/rpi-2in13-bc"
+        },
+        {
+            "path": "packages/rpi-4in2"
+        },
+        {
+            "path": "packages/rpi-7in5-v2"
+        },
+        {
+            "path": "packages/rpi-2in7"
+        },
+        {
+            "path": "packages/rpi-3in7"
+        }
+    ]
+}

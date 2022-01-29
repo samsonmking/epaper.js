@@ -1,111 +1,116 @@
-![ePaper.js](images/logo.svg) \
-[![Discord](https://img.shields.io/discord/888893320309379122?label=chat&logo=discord&style=flat-square)](https://discord.gg/cGJJ6CFSxM)
+![ePaper.js](images/logo.svg)
 
 Node.js library for easily creating an ePaper display on a Raspberry Pi using HTML and Javascript.
 
--   Render HTML DOM onto ePaper display
--   Simple and extensible Javascript and WebSocket API
--   [Supports multiple Waveshare ePaper Displays](#supported-hardware)
+ePaper.js can be used as:
+
+-   A command line application for **single step rendering of a URL onto an ePaper display**
+-   A library that can **interface ePaper displays with custom Node.js applications**
+
+Features include:
+
+-   [Supports multiple ePaper Displays](#supported-hardware)
 -   High performance, native c++ hardware access
+-   Multiple color modes: black / white, grayscale, black / white / red
+-   Dithering for black / white images
 
 ![Example weather station](images/weather.jpg)
 ![Example ereader gif](images/ereader.gif)
 
-## Working with the API
+## Usage
 
-###
-
-Create `static/index.html`. The contents of this webpage will be rendered onto the ePaper display.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-    ...
-    <body>
-        <h1>Hello from ePaper.js</h1>
-        <script>
-            // connect to the WebSocket API
-            const ws = new WebSocket('ws://localhost:8080');
-            ws.addEventListener('open', () => {
-                // draw contents of DOM onto ePaper display
-                ws.send('render');
-            });
-        </script>
-    </body>
-</html>
+```
+ejs <command> [options] <deviceType>
 ```
 
-From Node.js initialize ePaper.js. This does the following:
+For example, the following command will update the Waveshare 7.5" v2 screen with the contents of `http://localhost:8080` every 10 minutes.
 
--   Creates a webserver that serves `index.html` from the `static` directory, or serves a page from an external web server
--   Loads index.html in a headless instance of Chromium, using [Puppeteer](https://github.com/puppeteer/puppeteer)
--   Creates a WebSocket API that the frontend can use to trigger a display refresh, or perform custom actions
--   Renders the contents of the browser DOM onto the ePaper display
-
-```js
-const { init } = require('epaperjs');
-
-init();
+```
+ejs refresh rpi-7in5-v2 "http://localhost:8080"
 ```
 
-### Additional Configuration
+For available devices types, see [supported hardware](#supported-hardware). The different [commands](#commands) and suggested [workflows](#workflows) are described below.
 
-**Additional Configuration Options**
+### Commands
 
-```js
-const { devices, init } = require('epaperjs');
-init(devices.waveshare4in2, {
-    webPort: 3000, // WebServer Port
-    websocketPort: 8080, // WebSocket API Port
-    staticDirectory: 'static', // Directory to serve frontend from
-    skipWebServer: false, // If set to true will not create a local web server
-    url: `http://localhost:3000/index.html`, // Initial URL to load
-    enableDithering: true, // If set to true, a dithering algorithm will be applied to approximate mid-tones
-});
+**Display**: display a single rendition of a URL
+
+```
+rpi-cli display [options] <deviceType> <url>
 ```
 
-**Extend the server side WebSocket API**
+| Option               | Description                                                                                            | Allowed Values        |
+| -------------------- | ------------------------------------------------------------------------------------------------------ | --------------------- |
+| `-o / --orientation` | Use (h)orizontal or (v)ertical orientation                                                             | `[h, v]`              |
+| `-c / --colorMode`   | Desired color mode                                                                                     | `[black, 4gray, red]` |
+| `--screenshotDelay`  | Wait an additional amount of time after loading the URL before displaying. Useful for client side apps | Time in milliseconds  |
+| `--dither`           | Use a dithering algorithm to approximate grayscale / mid-tones on black and white displays             |                       |
+| `--debug`            | Print additional log info and stacktraces                                                              |                       |
+| `--version`          | Show version number                                                                                    |                       |
+| `--help`             | Show help                                                                                              |                       |
 
-```js
-const { devices, init } = require('epaperjs');
+**Refresh**: continuously update and display the URL
 
-const render = (page, ws) => {
-    // Forward frontend console output to Node.js console
-    page.onConsoleLog(console.log);
-
-    // When recieving 'render' from frontend, update display
-    ws.on('message', async (message) => {
-        if (message === 'render') {
-            await page.display();
-        }
-    });
-
-    // forward keypresses to the frontend over WebSocket
-    process.stdin.addListener('keypress', (key, data) => {
-        if (data.name === 'left') {
-            ws.send('left');
-        }
-        if (data.name === 'right') {
-            ws.send('right');
-        }
-    });
-};
-
-init(devices.waveshare4in2, {}, render);
+```
+rpi-cli refresh [options] <deviceType> <url>
 ```
 
-**Examples**\
+| Option               | Description                                                                                            | Allowed Values                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------- |
+| `-i / --interval`    | Amount of time between refreshes                                                                       | Time in seconds (default 10 min) |
+| `-o / --orientation` | Use (h)orizontal or (v)ertical orientation                                                             | `[h, v]`                         |
+| `-c / --colorMode`   | Desired color mode                                                                                     | `[black, 4gray, red]`            |
+| `--screenshotDelay`  | Wait an additional amount of time after loading the URL before displaying. Useful for client side apps | Time in milliseconds             |
+| `--dither`           | Use a dithering algorithm to approximate grayscale / mid-tones on black and white displays             |                                  |
+| `--debug`            | Print additional log info and stacktraces                                                              |                                  |
+| `--version`          | Show version number                                                                                    |                                  |
+| `--help`             | Show help                                                                                              |                                  |
+
+**Clear**: clear the display
+
+```
+rpi-cli clear [options] <deviceType>
+```
+
+| Option      | Description                               | Allowed Values |
+| ----------- | ----------------------------------------- | -------------- |
+| `--debug`   | Print additional log info and stacktraces |                |
+| `--version` | Show version number                       |                |
+| `--help`    | Show help                                 |                |
+
+### Workflows
+
+**Self-Hosting**
+
+-   Create a web app and store it on your Raspberry Pi
+-   Host the web app with [http-server](https://www.npmjs.com/package/http-server)
+-   Run ePaper.js with `ejs refresh <deviceType> "http://localhost:8080" (or whatever port you configure http-server to run on)`
+
+**Cloud Hosting**
+
+-   Create a web app and host it on a service like [GitHub Pages](https://pages.github.com/) or [Netlify](https://www.netlify.com/)
+-   Run ePaper.js with `ejs refresh <deviceType> "<URL of your app>"`
+
+**Running As a Daemon** \
+There are several methods of automatically launching ePaper.js on startup and restarting in case of failures
+
+-   Run with [pm2](https://pm2.keymetrics.io/)
+-   Create a [systemd service](https://blog.r0b.io/post/running-node-js-as-a-systemd-service/)
+
+### Example Applications
+
 See the examples directory
 
--   weather-station: This creates and example weather station display
--   ereader: An ereader that reads epub files and uses the left and right keypresses to change pages
+-   weather-station: This creates an example weather station display
+-   color-test: Used to test the various color modes
 -   4gray: A demonstration of the 4gray capabilities
 -   dithering: A demonstration of the dithering feature
 
 ## Installation
 
-**Raspberry PI**\
-Enable SPI
+### Raspberry PI
+
+**Enable SPI**
 
 ```bash
 sudo raspi-config
@@ -113,53 +118,54 @@ sudo raspi-config
 sudo reboot
 ```
 
-Install Dependencies
+**Install Node**
+The official recommendation by Node.js is to install Node with a package manager. This helps ensure you'll have the latest LTS version and the proper permissions to install global packages. ePaper.js recommends using [nvm](https://github.com/nvm-sh/nvm)
+
+Raspberry Pi 2, 3, 4 Zero 2:
 
 ```bash
-# Install latest Node.js LTS
-curl -sL install-node.now.sh/lts | sudo bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+nvm install 16
+```
 
+Raspberry Pi 1, Zero:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+NVM_NODEJS_ORG_MIRROR=https://unofficial-builds.nodejs.org/download/release
+nvm install 16
+```
+
+**Install Dependencies**
+
+```bash
 sudo apt-get update
-
-# Install wiringpi
-wget https://project-downloads.drogon.net/wiringpi-latest.deb
-sudo dpkg -i wiringpi-latest.deb
-#You will get 2.52 information if you've installed it correctly
-gpio -v
-
-# Remaining dependencies
 sudo apt-get install -y build-essential chromium-browser
 ```
 
-**Node.js**\
-Install ePaper.js
+**Install ePaper.js** \
+Globally install the `@epaperjs/cli` command line app and the appropriate package for your screen (See [supported hardware](#supported-hardware)).
+For example, to install ePaper.js for the Waveshare 7.5" V2 Screen:
 
 ```bash
-npm install -S epaperjs
+npm install --global @epaperjs/cli @epaperjs/rpi-7in5-v2
 ```
 
 ## Supported Hardware
 
-| Device                                                                          | Black / White | 4 Gray | Dithering |
-| ------------------------------------------------------------------------------- | ------------- | ------ | --------- |
-| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)                 | ✅            | ✅     | B/W only  |
-| [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm)              | ✅            |        | ✅        |
-| [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm)         | ✅            | ✅     | B/W only  |
-| [Waveshare 2.13" hat v2](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT)   | ✅            |        |           |
-| [Waveshare 2.13" bc](<https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT_(B)>) | ✅            |        | ✅        |
-| [Waveshare 2.7"](https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT)            | ✅            |        | Partial   |
+| Device                                                                          | Device Type    | npm Package              | Color Modes  |
+| ------------------------------------------------------------------------------- | -------------- | ------------------------ | ------------ |
+| [Waveshare 4.2"](https://www.waveshare.com/4.2inch-e-Paper.htm)                 | `rpi-4in2`     | `@epaperjs/rpi-4in2`     | black 4gray  |
+| [Waveshare 7.5" v2](https://www.waveshare.com/7.5inch-e-Paper.htm)              | `rpi-7in5-v2`  | `@epaperjs/rpi-7in5-v2`  | black        |
+| [Waveshare 3.7" hat](https://www.waveshare.com/3.7inch-e-paper-hat.htm)         | `rpi-3in7`     | `@epaperjs/rpi-3in7`     | black, 4gray |
+| [Waveshare 2.13" hat v2](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT)   | `rpi-2in13-v2` | `@epaperjs/rpi-2in13-v2` | black, red   |
+| [Waveshare 2.13" bc](<https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT_(B)>) | `rpi-2in13-bc` | `@epaperjs/rpi-2in13-bc` | black        |
+| [Waveshare 2.7"](https://www.waveshare.com/wiki/2.7inch_e-Paper_HAT)            | `rpi-2in7`     | `@epaperjs/rpi-2in7`     | black        |
 
 ### Adding Support For Additional Displays
 
 It's easy to extend ePaper.js to support additional Waveshare devices. Displays from other manufacturers should be possible to support as well, as long as there is a C / C++ driver available.
 
 If you would like to request support for another display, please open an issue with the title 'Add support for <Device Make \ Model>'. If you're a developer and have extended support yourself, put up a pull request!
-
-## Feature Backlog
-
--   [x] Add support for portrait or landscape display (rotate 90 deg)
--   [ ] Add support for remaining Waveshare SPI ePaper displays
--   [x] Implement 4 Color Grayscale
--   [ ] Implement Red / White / Black Color Mode
--   [ ] Implement Yellow / White / Black Color Mode
--   [ ] Implement Partial Refresh

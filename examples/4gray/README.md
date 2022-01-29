@@ -1,17 +1,9 @@
-# Example 4 Color Gray for ePaper.js
+# 4 Gray Test
 
-![Example ereader gif](../../images/4gray.jpg)
+Used to develop and test the 4 gray color mode
 
-## Colors
+## Usage
 
-| Color          | HEX Code  |
-| -------------- | --------- |
-| Gray 0 (White) | `#FFFFFF` |
-| Gray 1         | `#C0C0C0` |
-| Gray 2         | `#808080` |
-| Gray 3 (Black) | `#000000` |
-
-## Setup
-
-1. `npm install`
-2. `npm run start`
+1. Install [http-server](https://www.npmjs.com/package/http-server)
+2. In this directory execute: `http-server`
+3. Open `http://localhost:8080`

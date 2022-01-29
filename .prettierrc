@@ -2,11 +2,18 @@
     "trailingComma": "es5",
     "tabWidth": 4,
     "singleQuote": true,
+    "printWidth": 120,
     "overrides": [
         {
             "files": "*.yml",
             "options": {
                 "tabWidth": 2
+            }
+        },
+        {
+            "files": "binding.gyp",
+            "options": {
+                "parser": "json"
             }
         }
     ]

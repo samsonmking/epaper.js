@@ -1,13 +1,14 @@
 {
-    "name": "epaperjs",
-    "version": "1.8.0",
+    "private": true,
     "description": "Simple e-Paper display on a Raspberry Pi using Javascript and HTML",
-    "main": "index.js",
     "scripts": {
-        "build": "node-gyp rebuild",
-        "clean": "node-gyp clean",
+        "preinstall": "npx only-allow pnpm",
+        "clean": "tsc --build --clean",
+        "build": "tsc --build",
+        "build:clean": "pnpm clean && pnpm build",
         "format:write": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "ci:publish": "changeset publish"
     },
     "author": {
         "name": "Samson King",
@@ -26,6 +27,18 @@
         {
             "name": "Jack Cannon",
             "url": "https://github.com/jackcannon"
+        },
+        {
+            "name": "Patrick D Miller",
+            "url": "https://github.com/patrickdmiller"
+        },
+        {
+            "name": "Remi Shergold",
+            "url": "https://github.com/RShergold"
+        },
+        {
+            "name": "Philipp Wegener",
+            "url": "https://github.com/webphax"
         }
     ],
     "repository": {
@@ -34,17 +47,9 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "node-gyp": "^7.1.2",
-        "prettier": "2.1.2"
-    },
-    "gypfile": true,
-    "dependencies": {
-        "bindings": "^1.5.0",
-        "express": "^4.17.1",
-        "node-addon-api": "^3.2.1",
-        "png.js": "^0.2.1",
-        "puppeteer-core": "^4.0.1",
-        "sharp": "^0.26.3",
-        "ws": "^7.5.5"
+        "@changesets/cli": "^2.19.0",
+        "@types/node": "^17.0.0",
+        "prettier": "2.5.1",
+        "typescript": "^4.5.4"
     }
 }

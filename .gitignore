@@ -1,5 +1,13 @@
-node_modules/
-build/
+# editor
 *.o
 *.swp
 .idea
+
+# build
+node_modules/
+build/
+dist/
+lib/
+tsconfig.tsbuildinfo
+.pnpm-store/
+.pnpm-debug.log

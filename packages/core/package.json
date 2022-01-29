@@ -1,0 +1,34 @@
+{
+    "name": "@epaperjs/core",
+    "version": "2.0.0-next.3",
+    "private": false,
+    "description": "Core module providing image processing capability and API definitions for epaper.js",
+    "author": "samsonmking <samson@samsonmking.com>",
+    "homepage": "https://github.com/samsonmking/epaper.js#readme",
+    "license": "MIT",
+    "main": "lib/index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/samsonmking/epaper.js.git"
+    },
+    "bugs": {
+        "url": "https://github.com/samsonmking/epaper.js/issues"
+    },
+    "devDependencies": {
+        "@types/node": "14.18.1",
+        "@types/pngjs": "^6.0.1",
+        "@types/tinycolor2": "^1.4.3",
+        "typescript": "^4.5.4"
+    },
+    "dependencies": {
+        "pngjs": "^6.0.0",
+        "puppeteer-core": "11.0.0",
+        "tinycolor2": "^1.4.2"
+    }
+}

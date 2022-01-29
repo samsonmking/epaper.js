@@ -1,0 +1,33 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "sourceMap": false,
+        "declarationMap": false
+    },
+    "include": ["src/**/*.ts", "src/**/*.js"],
+    "references": [
+        {
+            "path": "../core"
+        },
+        {
+            "path": "../rpi-2in13-v2"
+        },
+        {
+            "path": "../rpi-2in13-bc"
+        },
+        {
+            "path": "../rpi-4in2"
+        },
+        {
+            "path": "../rpi-7in5-v2"
+        },
+        {
+            "path": "../rpi-2in7"
+        },
+        {
+            "path": "../rpi-3in7"
+        }
+    ]
+}
