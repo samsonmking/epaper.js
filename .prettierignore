@@ -12,3 +12,6 @@ pnpm-lock.yaml
 tsconfig.tsbuildinfo
 .pnpm-store/
 .pnpm-debug.log
+
+# changeset
+.changeset/

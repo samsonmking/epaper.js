@@ -91,14 +91,12 @@
         <section class="picture"><img src="./towerbridge.jpg" /></section>
         <section class="gradient-bw"></section>
         <script>
-            document
-                .querySelector('.picture img')
-                .addEventListener('load', () => {
-                    const ws = new WebSocket('ws://localhost:8080');
-                    ws.addEventListener('open', () => {
-                        ws.send('render');
-                    });
+            document.querySelector('.picture img').addEventListener('load', () => {
+                const ws = new WebSocket('ws://localhost:8080');
+                ws.addEventListener('open', () => {
+                    ws.send('render');
                 });
+            });
         </script>
     </body>
 </html>
