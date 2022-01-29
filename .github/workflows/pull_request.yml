@@ -26,4 +26,4 @@ jobs:
       - name: Check Formatting
         run: pnpm format:check
       - name: Build
-        run: pnpm build:clean
+        run: pnpm -r build:clean
