@@ -3,27 +3,27 @@ on:
   pull_request:
     paths-ignore:
       - 'images/**'
+env:
+  CI: true
+  PNPM_CACHE_FOLDER: .pnpm-store
 jobs:
   verify:
     name: Build and Verify
     runs-on: ubuntu-20.04
     steps:
-      - name: Setup Docker QEMU (To target RPi ARM)
-        uses: docker/setup-qemu-action@v1.0.1
       - name: Checkout
         uses: actions/checkout@v2
+      - name: setup node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: install pnpm
+        run: npm i pnpm@latest -g
+      - name: setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
       - name: Install Dependencies
-        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
-        with:
-          entrypoint: pnpm
-          args: install
-      - name: Build
-        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
-        with:
-          entrypoint: pnpm
-          args: -r build
+        run: pnpm install
       - name: Check Formatting
-        uses: docker://ghcr.io/samsonmking/epaperjs-docker:v2.0.0
-        with:
-          entrypoint: pnpm
-          args: format:check
+        run: pnpm format:check
+      - name: Build
+        run: pnpm build:clean
