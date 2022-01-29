@@ -1,5 +1,13 @@
 # @epaperjs/rpi-3in7
 
+## 2.0.1
+
+### Patch Changes
+
+-   Fix broken release that was missing js files
+-   Updated dependencies
+    -   @epaperjs/core@2.0.1
+
 ## 2.0.0
 
 ### Patch Changes

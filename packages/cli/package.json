@@ -1,6 +1,6 @@
 {
     "name": "@epaperjs/cli",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "private": false,
     "description": "CLI for rendering URL onto ePaper display on Raspberry Pi",
     "author": "samsonmking <samson@samsonmking.com>",

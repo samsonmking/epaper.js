@@ -28,5 +28,9 @@ jobs:
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
       - name: Install Dependencies
         run: pnpm install
+      - name: Check Formatting
+        run: pnpm format:check
+      - name: Build
+        run: pnpm -r build:clean
       - name: Publish to npm
         run: pnpm ci:publish

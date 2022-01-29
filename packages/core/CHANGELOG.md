@@ -1,5 +1,11 @@
 # @epaperjs/core
 
+## 2.0.1
+
+### Patch Changes
+
+-   Fix broken release that was missing js files
+
 ## 2.0.0
 
 ### Patch Changes
