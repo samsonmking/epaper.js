@@ -11,7 +11,7 @@ env:
   PNPM_CACHE_FOLDER: .pnpm-store
 jobs:
   verify:
-    name: Build and Verify
+    name: Publish
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
