@@ -84,12 +84,12 @@ rpi-cli clear [options] <deviceType>
 
 -   Create a web app and store it on your Raspberry Pi
 -   Host the web app with [http-server](https://www.npmjs.com/package/http-server)
--   Run ePaper.js with `ejs refresh <deviceType> http://localhost:8080 (or whatever port you configure http-server to run on)`
+-   Run ePaper.js with `ejs refresh <deviceType> "http://localhost:8080" (or whatever port you configure http-server to run on)`
 
 **Cloud Hosting**
 
 -   Create a web app and host it on a service like [GitHub Pages](https://pages.github.com/) or [Netlify](https://www.netlify.com/)
--   Run ePaper.js with `ejs refresh <deviceType> <URL of your app>`
+-   Run ePaper.js with `ejs refresh <deviceType> "<URL of your app>"`
 
 **Running As a Daemon** \
 There are several methods of automatically launching ePaper.js on startup and restarting in case of failures
