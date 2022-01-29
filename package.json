@@ -7,7 +7,8 @@
         "build": "tsc --build",
         "build:clean": "pnpm clean && pnpm build",
         "format:write": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "ci:publish": "changeset publish"
     },
     "author": {
         "name": "Samson King",
