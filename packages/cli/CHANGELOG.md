@@ -1,5 +1,11 @@
 # @epaperjs/rpi-cli
 
+## 2.0.2
+
+### Patch Changes
+
+-   13af09d: Update README
+
 ## 2.0.1
 
 ### Patch Changes
