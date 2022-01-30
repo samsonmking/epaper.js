@@ -8,7 +8,9 @@
         "build:clean": "pnpm clean && pnpm build",
         "format:write": "prettier --write .",
         "format:check": "prettier --check .",
-        "ci:publish": "changeset publish"
+        "changeset:add": "changeset",
+        "ci:publish": "changeset publish",
+        "ci:version": "changeset version"
     },
     "author": {
         "name": "Samson King",
