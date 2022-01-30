@@ -11,3 +11,6 @@ lib/
 tsconfig.tsbuildinfo
 .pnpm-store/
 .pnpm-debug.log
+
+# npm
+.npmrc
