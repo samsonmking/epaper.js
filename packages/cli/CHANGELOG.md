@@ -1,5 +1,11 @@
 # @epaperjs/rpi-cli
 
+## 2.0.3
+
+### Patch Changes
+
+-   5c3b5f8: fix: ensure page is fully loaded before displaying - wait until networkidle0
+
 ## 2.0.2
 
 ### Patch Changes
