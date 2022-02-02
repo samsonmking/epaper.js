@@ -11,7 +11,7 @@ export class BrowserPage {
 
     async screenshot(url: string, options: ScreenshotOptions = {}): Promise<Buffer> {
         const responce = await this.browserPage.goto(url, {
-            waitUntil: 'networkidle2',
+            waitUntil: 'networkidle0',
         });
         if (!responce?.ok() && responce?.status() !== this.HTTP_NOT_MODIFIED) {
             throw new Error(`Error occured navigating to ${url}: ${responce?.statusText()}`);
