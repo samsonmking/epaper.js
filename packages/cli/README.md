@@ -30,6 +30,8 @@ rpi-cli display [options] <deviceType> <url>
 | `-c / --colorMode`   | Desired color mode                                                                                     | `[black, 4gray, red]` |
 | `--screenshotDelay`  | Wait an additional amount of time after loading the URL before displaying. Useful for client side apps | Time in milliseconds  |
 | `--dither`           | Use a dithering algorithm to approximate grayscale / mid-tones on black and white displays             |                       |
+| `--username`         | Username for basic authentication                                                                      | username as string    |
+| `--password`         | Password for basic authentication                                                                      | password as string    |
 | `--debug`            | Print additional log info and stacktraces                                                              |                       |
 | `--version`          | Show version number                                                                                    |                       |
 | `--help`             | Show help                                                                                              |                       |
@@ -47,6 +49,8 @@ rpi-cli refresh [options] <deviceType> <url>
 | `-c / --colorMode`   | Desired color mode                                                                                     | `[black, 4gray, red]`            |
 | `--screenshotDelay`  | Wait an additional amount of time after loading the URL before displaying. Useful for client side apps | Time in milliseconds             |
 | `--dither`           | Use a dithering algorithm to approximate grayscale / mid-tones on black and white displays             |                                  |
+| `--username`         | Username for basic authentication                                                                      | username as string               |
+| `--password`         | Password for basic authentication                                                                      | password as string               |
 | `--debug`            | Print additional log info and stacktraces                                                              |                                  |
 | `--version`          | Show version number                                                                                    |                                  |
 | `--help`             | Show help                                                                                              |                                  |

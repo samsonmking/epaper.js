@@ -2,6 +2,8 @@ import puppeteer from 'puppeteer-core';
 
 export interface ScreenshotOptions {
     delay?: number;
+    username?: string;
+    password?: string;
 }
 
 export class BrowserPage {
@@ -10,11 +12,14 @@ export class BrowserPage {
     constructor(private readonly browser: puppeteer.Browser, private readonly browserPage: puppeteer.Page) {}
 
     async screenshot(url: string, options: ScreenshotOptions = {}): Promise<Buffer> {
-        const responce = await this.browserPage.goto(url, {
+        if (options.username && options.password) {
+            await this.browserPage.authenticate({ username: options.username, password: options.password });
+        }
+        const response = await this.browserPage.goto(url, {
             waitUntil: 'networkidle0',
         });
-        if (!responce?.ok() && responce?.status() !== this.HTTP_NOT_MODIFIED) {
-            throw new Error(`Error occured navigating to ${url}: ${responce?.statusText()}`);
+        if (!response?.ok() && response?.status() !== this.HTTP_NOT_MODIFIED) {
+            throw new Error(`Error occurred navigating to ${url}: ${response?.statusText()}`);
         }
         if (options.delay) {
             await this.browserPage.waitForTimeout(options.delay);

@@ -25,7 +25,11 @@ export class RefreshCommand implements Command<RefreshArgs> {
         this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);
 
         while (true) {
-            const imgOfUrl = await this.browserPage.screenshot(url, { delay: refreshArgs.screenshotDelay });
+            const imgOfUrl = await this.browserPage.screenshot(url, {
+                delay: refreshArgs.screenshotDelay,
+                username: refreshArgs.username,
+                password: refreshArgs.password,
+            });
             this.logger.log('Waking up display');
             this.displayDevice.wake();
             this.logger.log(`Displaying ${url}`);

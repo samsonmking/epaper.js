@@ -48,6 +48,16 @@ const ditherArgs: Options = {
     describe: 'A dithering algorithm will be applied to approximate mid-tones',
 };
 
+const usernameArgs: Options = {
+    string: true,
+    describe: 'username for basic authentication',
+};
+
+const passwordArgs: Options = {
+    string: true,
+    describe: 'password for basic authentication',
+};
+
 export function cli(processArgs: string[]) {
     yargs(processArgs)
         .usage('Usage $0 <command> [options]')
@@ -61,6 +71,8 @@ export function cli(processArgs: string[]) {
                     .option('debug', debugArgs)
                     .option('screenshotDelay', screenshotDelayArgs)
                     .option('dither', ditherArgs)
+                    .option('username', usernameArgs)
+                    .option('password', passwordArgs)
                     .positional('deviceType', deviceTypeArgs)
                     .positional('url', urlArgs);
             },
@@ -81,6 +93,8 @@ export function cli(processArgs: string[]) {
                     .option('debug', debugArgs)
                     .option('screenshotDelay', screenshotDelayArgs)
                     .option('dither', ditherArgs)
+                    .option('username', usernameArgs)
+                    .option('password', passwordArgs)
                     .positional('deviceType', deviceTypeArgs)
                     .positional('url', urlArgs);
             },
