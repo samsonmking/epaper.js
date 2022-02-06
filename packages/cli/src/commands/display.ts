@@ -9,6 +9,8 @@ export interface DisplayArgs extends BaseArgs {
     colorMode?: ColorMode;
     screenshotDelay?: number;
     dither?: boolean;
+    username?: string;
+    password?: string;
 }
 
 export class DisplayCommand implements Command<DisplayArgs> {
@@ -27,7 +29,11 @@ export class DisplayCommand implements Command<DisplayArgs> {
 
         this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);
         this.logger.log(`Displaying ${url}`);
-        const imgOfUrl = await this.browserPage.screenshot(url, { delay: displayArgs.screenshotDelay });
+        const imgOfUrl = await this.browserPage.screenshot(url, {
+            delay: displayArgs.screenshotDelay,
+            username: displayArgs.username,
+            password: displayArgs.password,
+        });
         await this.displayDevice.displayPng(imgOfUrl, { dither });
     }
 
