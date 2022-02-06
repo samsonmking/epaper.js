@@ -1,5 +1,11 @@
 # @epaperjs/core
 
+## 2.1.0
+
+### Minor Changes
+
+-   3a3afb0: Add support for basic authentication
+
 ## 2.0.1
 
 ### Patch Changes
