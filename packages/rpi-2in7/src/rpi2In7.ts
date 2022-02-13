@@ -16,25 +16,25 @@ export class Rpi2In7 implements DisplayDevice {
         this.height = this.orientation === Orientation.Horizontal ? 176 : 264;
     }
 
-    public connect(): void {
+    public async connect() {
         this.driver.dev_init();
         this.wake();
     }
 
-    public disconnect(): void {
+    public async disconnect() {
         this.sleep();
         this.driver.dev_exit();
     }
 
-    public wake(): void {
+    public async wake() {
         this.driver.init();
     }
 
-    public clear(): void {
+    public async clear() {
         this.driver.clear();
     }
 
-    public sleep(): void {
+    public async sleep() {
         this.driver.sleep();
     }
 

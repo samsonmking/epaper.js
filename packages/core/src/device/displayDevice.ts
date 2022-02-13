@@ -16,10 +16,10 @@ export interface DisplayDevice {
     readonly height: number;
     readonly width: number;
     colorMode: ColorMode;
-    connect(): void;
-    wake(): void;
-    clear(): void;
-    sleep(): void;
+    connect(): Promise<void>;
+    wake(): Promise<void>;
+    clear(): Promise<void>;
+    sleep(): Promise<void>;
     displayPng(img: Buffer, options?: ImageOptions): Promise<void>;
-    disconnect(): void;
+    disconnect(): Promise<void>;
 }
