@@ -17,6 +17,7 @@ importers:
   packages/cli:
     specifiers:
       '@epaperjs/core': workspace:^
+      '@epaperjs/rpi-13in3': workspace:^
       '@epaperjs/rpi-2in13-bc': workspace:^
       '@epaperjs/rpi-2in13-v2': workspace:^
       '@epaperjs/rpi-2in7': workspace:^
@@ -29,6 +30,7 @@ importers:
       '@epaperjs/core': link:../core
       yargs: 17.3.0
     devDependencies:
+      '@epaperjs/rpi-13in3': link:../rpi-13in3
       '@epaperjs/rpi-2in13-bc': link:../rpi-2in13-bc
       '@epaperjs/rpi-2in13-v2': link:../rpi-2in13-v2
       '@epaperjs/rpi-2in7': link:../rpi-2in7
@@ -55,6 +57,21 @@ importers:
       '@types/pngjs': 6.0.1
       '@types/tinycolor2': 1.4.3
       typescript: 4.5.4
+
+  packages/rpi-13in3:
+    specifiers:
+      '@epaperjs/core': workspace:^
+      '@types/bindings': ^1.5.1
+      bindings: ^1.5.0
+      node-addon-api: ^4.2.0
+      node-gyp: ^8.4.1
+    dependencies:
+      '@epaperjs/core': link:../core
+      bindings: 1.5.0
+      node-addon-api: 4.2.0
+      node-gyp: 8.4.1
+    devDependencies:
+      '@types/bindings': 1.5.1
 
   packages/rpi-2in13-bc:
     specifiers:
@@ -395,6 +412,7 @@ packages:
   /@npmcli/fs/1.1.0:
     resolution: {integrity: sha512-VhP1qZLXcrXRIaPoqb4YA55JQxLNF3jNR4T55IdOJa3+IFJKNYHtPvtXx8slmeMavj37vCzCfrqQM1vWLsYKLA==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16}
+    deprecated: this version had an improper engines field added, update to 1.1.1
     dependencies:
       '@gar/promisify': 1.1.2
       semver: 7.3.5

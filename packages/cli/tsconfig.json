@@ -6,7 +6,10 @@
         "sourceMap": false,
         "declarationMap": false
     },
-    "include": ["src/**/*.ts", "src/**/*.js"],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.js"
+    ],
     "references": [
         {
             "path": "../core"
@@ -28,6 +31,9 @@
         },
         {
             "path": "../rpi-3in7"
+        },
+        {
+            "path": "../rpi-13in3"
         }
     ]
 }
