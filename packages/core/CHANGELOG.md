@@ -1,5 +1,11 @@
 # @epaperjs/core
 
+## 2.2.0
+
+### Minor Changes
+
+-   5d165e9: Add additional debug logging to Page
+
 ## 2.1.0
 
 ### Minor Changes

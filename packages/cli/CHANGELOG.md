@@ -1,5 +1,19 @@
 # @epaperjs/rpi-cli
 
+## 2.1.1
+
+### Patch Changes
+
+-   5d165e9: Add additional debug logging to Page
+-   Updated dependencies [5d165e9]
+    -   @epaperjs/core@2.2.0
+    -   @epaperjs/rpi-2in13-bc@2.0.3
+    -   @epaperjs/rpi-2in13-v2@2.0.3
+    -   @epaperjs/rpi-2in7@2.0.3
+    -   @epaperjs/rpi-3in7@2.0.3
+    -   @epaperjs/rpi-4in2@2.0.3
+    -   @epaperjs/rpi-7in5-v2@2.0.3
+
 ## 2.1.0
 
 ### Minor Changes
