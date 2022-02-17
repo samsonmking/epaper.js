@@ -36,7 +36,7 @@ For available devices types, see [supported hardware](#supported-hardware). The 
 **Display**: display a single rendition of a URL
 
 ```
-rpi-cli display [options] <deviceType> <url>
+ejs display [options] <deviceType> <url>
 ```
 
 | Option               | Description                                                                                            | Allowed Values        |
@@ -54,7 +54,7 @@ rpi-cli display [options] <deviceType> <url>
 **Refresh**: continuously update and display the URL
 
 ```
-rpi-cli refresh [options] <deviceType> <url>
+ejs refresh [options] <deviceType> <url>
 ```
 
 | Option               | Description                                                                                            | Allowed Values                   |
@@ -73,7 +73,7 @@ rpi-cli refresh [options] <deviceType> <url>
 **Clear**: clear the display
 
 ```
-rpi-cli clear [options] <deviceType>
+ejs clear [options] <deviceType>
 ```
 
 | Option      | Description                               | Allowed Values |

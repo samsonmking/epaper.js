@@ -1,4 +1,4 @@
-# @epaperjs/rpi-cli
+# @epaperjs/cli
 
 ## 2.1.1
 
