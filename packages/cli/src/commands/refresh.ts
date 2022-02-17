@@ -1,6 +1,5 @@
-import { DisplayDevice, getPageRpi, BrowserPage } from '@epaperjs/core';
+import { DisplayDevice, getPageRpi, BrowserPage, Logger } from '@epaperjs/core';
 import { getDevice } from '../deviceFactory';
-import { Logger } from '../logger';
 import { Command } from './command';
 import { DisplayArgs } from './display';
 
@@ -22,7 +21,7 @@ export class RefreshCommand implements Command<RefreshArgs> {
         this.displayDevice.connect();
         this.logger.log(`Connected`);
 
-        this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height);
+        this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height, this.logger);
 
         while (true) {
             const imgOfUrl = await this.browserPage.screenshot(url, {

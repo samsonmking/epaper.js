@@ -1,9 +1,9 @@
-import { ColorMode, Orientation } from '@epaperjs/core';
+import { ColorMode, Orientation, Logger } from '@epaperjs/core';
 import yargs, { Options, PositionalOptions } from 'yargs';
 import { DisplayArgs, DisplayCommand, RefreshArgs, RefreshCommand } from './commands';
 import { ClearCommand } from './commands/clear';
 import { Command } from './commands/command';
-import { ConsoleLogger, Logger } from './logger';
+import { ConsoleLogger } from './consoleLogger';
 
 const orientationArgs: Options = {
     alias: 'o',
