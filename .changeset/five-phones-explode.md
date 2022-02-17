@@ -1,6 +1,6 @@
 ---
 '@epaperjs/cli': patch
-'@epaperjs/core': patch
+'@epaperjs/core': minor
 ---
 
 Add additional debug logging to Page
