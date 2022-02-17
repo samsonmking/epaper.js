@@ -1,7 +1,8 @@
 import puppeteer from 'puppeteer-core';
+import { Logger } from '../logger';
 import { BrowserPage } from './page';
 
-export async function getPageRpi(width: number, height: number) {
+export async function getPageRpi(width: number, height: number, logger?: Logger) {
     const browser = await puppeteer.launch({
         executablePath: 'chromium-browser',
         args: ['--font-render-hinting=slight'],
@@ -13,5 +14,5 @@ export async function getPageRpi(width: number, height: number) {
         height,
         deviceScaleFactor: 1,
     });
-    return new BrowserPage(browser, browserPage);
+    return new BrowserPage(browser, browserPage, logger);
 }

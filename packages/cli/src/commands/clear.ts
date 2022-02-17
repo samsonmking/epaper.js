@@ -1,6 +1,5 @@
-import { DisplayDevice } from '@epaperjs/core';
+import { DisplayDevice, Logger } from '@epaperjs/core';
 import { getDevice } from '../deviceFactory';
-import { Logger } from '../logger';
 import { Command } from './command';
 
 export class ClearCommand implements Command<BaseArgs> {

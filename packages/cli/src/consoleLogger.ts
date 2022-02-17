@@ -1,8 +1,4 @@
-export interface Logger {
-    debug(message?: any, ...optionalParams: any[]): void;
-    log(message?: any, ...optionalParams: any[]): void;
-    error(error: Error | string): void;
-}
+import { Logger } from '@epaperjs/core';
 
 export class ConsoleLogger implements Logger {
     constructor(private readonly debugEnabled: boolean = false) {}
