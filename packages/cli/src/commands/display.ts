@@ -23,7 +23,7 @@ export class DisplayCommand implements Command<DisplayArgs> {
 
         this.logger.log(`Connecting to ${deviceType} screen`);
         this.displayDevice = await getDevice(deviceType, orientation, colorMode);
-        this.displayDevice.connect();
+        await this.displayDevice.connect();
         this.logger.log(`Connected`);
 
         this.browserPage = await getPageRpi(this.displayDevice.width, this.displayDevice.height, this.logger);
@@ -38,7 +38,7 @@ export class DisplayCommand implements Command<DisplayArgs> {
 
     public async dispose() {
         this.logger.log('Powering off display and exiting...');
-        this.displayDevice?.disconnect();
+        await this.displayDevice?.disconnect();
         await this.browserPage?.close();
     }
 }

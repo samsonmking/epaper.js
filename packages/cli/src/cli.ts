@@ -122,8 +122,14 @@ export function cli(processArgs: string[]) {
 }
 
 async function executeCommand<T extends BaseArgs>(command: Command<T>, args: T, logger: Logger) {
-    process.on('SIGINT', () => command.dispose());
-    process.on('SIGTERM', () => command.dispose());
+    process.on('SIGINT', () => {
+        command.dispose();
+        process.abort();
+    });
+    process.on('SIGTERM', () => {
+        command.dispose();
+        process.abort();
+    });
     try {
         await command.execute(args);
         await command.dispose();

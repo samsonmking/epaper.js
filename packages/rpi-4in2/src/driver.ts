@@ -1,10 +1,10 @@
 export interface Driver {
-    dev_init(): void;
-    init(): void;
-    init_4Gray(): void;
-    display(buffer: Buffer): void;
-    display_4GrayDisplay(buffer: Buffer): void;
-    clear(): void;
-    sleep(): void;
-    dev_exit(): void;
+    dev_init(): Promise<void>;
+    init(): Promise<void>;
+    init_4Gray(): Promise<void>;
+    display(buffer: Buffer): Promise<void>;
+    display_4GrayDisplay(buffer: Buffer): Promise<void>;
+    clear(): Promise<void>;
+    sleep(): Promise<void>;
+    dev_exit(): Promise<void>;
 }

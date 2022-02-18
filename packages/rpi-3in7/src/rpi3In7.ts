@@ -18,17 +18,17 @@ export class Rpi3In7 implements DisplayDevice {
         this.width = this.orientation === Orientation.Horizontal ? 480 : 280;
     }
 
-    public connect(): void {
+    public async connect() {
         this.driver.dev_init();
         this.wake();
     }
 
-    public disconnect(): void {
+    public async disconnect() {
         this.sleep();
         this.driver.dev_exit();
     }
 
-    public wake(): void {
+    public async wake() {
         if (this.colorMode === ColorMode.Gray4) {
             this.driver.init_4Gray();
         } else {
@@ -36,11 +36,11 @@ export class Rpi3In7 implements DisplayDevice {
         }
     }
 
-    public clear(): void {
+    public async clear() {
         this.driver.clear();
     }
 
-    public sleep(): void {
+    public async sleep() {
         this.driver.sleep();
     }
 

@@ -21,30 +21,31 @@ export class Rpi4In2 implements DisplayDevice {
         this.width = this.orientation === Orientation.Horizontal ? 400 : 300;
     }
 
-    public connect() {
-        this.driver.dev_init();
-        this.wake();
+    public async connect() {
+        await this.driver.dev_init();
+        await this.wake();
     }
 
-    public disconnect(): void {
-        this.sleep();
-        this.driver.dev_exit();
+    public async disconnect() {
+        console.log('in disconnect');
+        await this.sleep();
+        await this.driver.dev_exit();
     }
 
-    public wake() {
+    public async wake() {
         if (this.colorMode === ColorMode.Gray4) {
-            this.driver.init_4Gray();
+            await this.driver.init_4Gray();
         } else {
-            this.driver.init();
+            await this.driver.init();
         }
     }
 
-    public clear() {
-        this.driver.clear();
+    public async clear() {
+        await this.driver.clear();
     }
 
-    public sleep() {
-        this.driver.sleep();
+    public async sleep() {
+        await this.driver.sleep();
     }
 
     public async displayPng(img: Buffer, options?: ImageOptions) {
@@ -61,7 +62,7 @@ export class Rpi4In2 implements DisplayDevice {
             ...options,
             rotate90Degrees: this.orientation === Orientation.Vertical,
         });
-        this.driver.display(blackBuffer);
+        await this.driver.display(blackBuffer);
     }
 
     private async displayPngGray4(img: Buffer, options?: ImageOptions) {
@@ -70,6 +71,6 @@ export class Rpi4In2 implements DisplayDevice {
             ...options,
             rotate90Degrees: this.orientation === Orientation.Vertical,
         });
-        this.driver.display_4GrayDisplay(grayBuffer);
+        await this.driver.display_4GrayDisplay(grayBuffer);
     }
 }
