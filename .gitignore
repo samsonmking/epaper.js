@@ -2,6 +2,7 @@
 *.o
 *.swp
 .idea
+.vscode
 
 # build
 node_modules/

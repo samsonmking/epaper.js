@@ -34,7 +34,8 @@
         "@epaperjs/rpi-4in2": "workspace:^",
         "@epaperjs/rpi-7in5-v2": "workspace:^",
         "@epaperjs/rpi-2in7": "workspace:^",
-        "@epaperjs/rpi-3in7": "workspace:^"
+        "@epaperjs/rpi-3in7": "workspace:^",
+        "@epaperjs/rpi-12in48-b": "workspace:^"
     },
     "peerDependencies": {
         "@epaperjs/rpi-2in13-bc": "workspace:^",
@@ -42,7 +43,8 @@
         "@epaperjs/rpi-4in2": "workspace:^",
         "@epaperjs/rpi-7in5-v2": "workspace:^",
         "@epaperjs/rpi-2in7": "workspace:^",
-        "@epaperjs/rpi-3in7": "workspace:^"
+        "@epaperjs/rpi-3in7": "workspace:^",
+        "@epaperjs/rpi-12in48-b": "workspace:^"
     },
     "peerDependenciesMeta": {
         "@epaperjs/rpi-2in13-bc": {
@@ -61,6 +63,9 @@
             "optional": true
         },
         "@epaperjs/rpi-3in7": {
+            "optional": true
+        },
+        "@epaperjs/rpi-12in48-b": {
             "optional": true
         }
     }
