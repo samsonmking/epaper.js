@@ -33,7 +33,7 @@
 
 #include <stdbool.h>
 
-#include "../Config/DEV_Config.h"
+#include "DEV_Config.h"
 
 // INIT mode, for every init or some time after A2 mode refresh
 extern UBYTE INIT_Mode;
