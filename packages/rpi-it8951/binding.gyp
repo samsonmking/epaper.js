@@ -21,7 +21,10 @@
                 "<!@(node -p \"require('node-addon-api').include\")"
             ],
             "libraries": [
-                "-lm"
+                "-lm",
+                "-lrt",
+                "-lpthread",
+                "-lbcm2835"
             ]
         }
     ]

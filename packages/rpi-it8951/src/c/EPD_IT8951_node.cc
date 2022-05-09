@@ -64,7 +64,6 @@ Napi::Value Init(const Napi::CallbackInfo &info)
 Napi::Value Init_4Gray(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
-    EPD_4IN2_Init_4Gray();
     return env.Undefined();
 }
 
