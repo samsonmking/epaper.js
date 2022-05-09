@@ -117,7 +117,7 @@ int DEV_SPI_ReadBytes(uint8_t *buf, uint32_t len)
 #elif USE_WIRINGPI_LIB
 	Debug("not support");
 #elif USE_DEV_LIB
-	int r = DEV_HARDWARE_SPI_Transfer(buf, 1);
+	int r = DEV_HARDWARE_SPI_Read(buf, 1);
 	return r;
 #endif
 #endif

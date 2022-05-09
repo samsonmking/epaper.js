@@ -389,3 +389,9 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
 
     return 1;
 }
+
+int DEV_HARDWARE_SPI_Read(uint8_t *rxbuf, uint32_t len)
+{
+    int status = read(hardware_SPI.fd, rxbuf, len);
+    return status;
+}

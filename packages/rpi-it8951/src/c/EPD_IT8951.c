@@ -186,7 +186,7 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
 {
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
-    uint8_t rbuf[2];
+    uint8_t rxbuf[2]; // uint8_t rxbuf[SPIDEV_MAXPATH];
 
     EPD_IT8951_ReadBusy();
 
@@ -198,8 +198,8 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     EPD_IT8951_ReadBusy();
 
     // dummy
-    memset(&rbuf, 0, 2);
-    DEV_SPI_ReadBytes(&rbuf, 2);
+    memset(rxbuf, 0, sizeof(rxbuf));
+    DEV_SPI_ReadBytes(rbuf, 2);
     Read_Dummy = rbuf[0] << 8;
     Read_Dummy |= rbuf[1];
 
@@ -208,7 +208,7 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     for (UDOUBLE i = 0; i < Length; i++)
     {
         memset(&rbuf, 0, 2);
-        DEV_SPI_ReadBytes(&rbuf, 2);
+        DEV_SPI_ReadBytes(rbuf, 2);
         Data_Buf[i] = rbuf[0] << 8;
         Data_Buf[i] |= rbuf[1];
     }
