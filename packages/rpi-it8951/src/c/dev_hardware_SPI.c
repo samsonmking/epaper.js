@@ -388,3 +388,24 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
 
     return 1;
 }
+
+/******************************************************************************
+function: The SPI port reads a byte
+parameter:
+Info: Return read data
+******************************************************************************/
+int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
+{
+    tr.len = len;
+    tr.tx_buf = NULL;
+    tr.rx_buf = (unsigned long)buf;
+
+    // ioctl Operation, transmission of data
+    if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
+    {
+        DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
+        return -1;
+    }
+
+    return 1;
+}

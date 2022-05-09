@@ -107,12 +107,12 @@ int DEV_HARDWARE_SPI_setSpeed(uint32_t speed);
 
 uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf);
 int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len);
+int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
 
-void DEV_HARDWARE_SPI_SetDataInterval(uint16_t us);
+    void DEV_HARDWARE_SPI_SetDataInterval(uint16_t us);
 int DEV_HARDWARE_SPI_SetBusMode(BusMode mode);
 int DEV_HARDWARE_SPI_SetBitOrder(SPIBitOrder Order);
 int DEV_HARDWARE_SPI_ChipSelect(SPIChipSelect CS_Mode);
 int DEV_HARDWARE_SPI_CSEN(SPICSEN EN);
 int DEV_HARDWARE_SPI_Mode(SPIMode mode);
-
 #endif
