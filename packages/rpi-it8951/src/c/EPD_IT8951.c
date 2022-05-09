@@ -150,7 +150,7 @@ static UWORD EPD_IT8951_ReadData()
     UWORD ReadData;
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
-    uint8_t rxbuf[2]; // uint8_t rxbuf[SPIDEV_MAXPATH];
+    uint8_t rxbuf[1]; // uint8_t rxbuf[SPIDEV_MAXPATH];
 
     EPD_IT8951_ReadBusy();
 
@@ -163,15 +163,19 @@ static UWORD EPD_IT8951_ReadData()
 
     // dummy
     memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 2);
+    DEV_SPI_ReadBytes(rxbuf, 1);
     Read_Dummy = rxbuf[0] << 8;
-    Read_Dummy |= rxbuf[1];
+    memset(rxbuf, 0, sizeof(rxbuf));
+    DEV_SPI_ReadBytes(rxbuf, 1);
+    Read_Dummy |= rxbuf[0];
 
     EPD_IT8951_ReadBusy();
     memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 2);
+    DEV_SPI_ReadBytes(rxbuf, 1);
     ReadData = rxbuf[0] << 8;
-    ReadData |= rxbuf[1];
+    memset(rxbuf, 0, sizeof(rxbuf));
+    DEV_SPI_ReadBytes(rxbuf, 1);
+    ReadData |= rxbuf[0];
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 
@@ -186,7 +190,7 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
 {
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
-    uint8_t rxbuf[2]; // uint8_t rxbuf[SPIDEV_MAXPATH];
+    uint8_t rxbuf[1]; // uint8_t rxbuf[SPIDEV_MAXPATH];
 
     EPD_IT8951_ReadBusy();
 
@@ -199,18 +203,22 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
 
     // dummy
     memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 2);
+    DEV_SPI_ReadBytes(rxbuf, 1);
     Read_Dummy = rxbuf[0] << 8;
-    Read_Dummy |= rxbuf[1];
+    memset(rxbuf, 0, sizeof(rxbuf));
+    DEV_SPI_ReadBytes(rxbuf, 1);
+    Read_Dummy |= rxbuf[0];
 
     EPD_IT8951_ReadBusy();
 
     for (UDOUBLE i = 0; i < Length; i++)
     {
         memset(rxbuf, 0, sizeof(rxbuf));
-        DEV_SPI_ReadBytes(rxbuf, 2);
+        DEV_SPI_ReadBytes(rxbuf, 1);
         Data_Buf[i] = rxbuf[0] << 8;
-        Data_Buf[i] |= rxbuf[1];
+        memset(rxbuf, 0, sizeof(rxbuf));
+        DEV_SPI_ReadBytes(rxbuf, 1);
+        Data_Buf[i] |= rxbuf[0];
     }
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
