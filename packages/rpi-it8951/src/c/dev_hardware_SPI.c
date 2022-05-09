@@ -55,6 +55,7 @@ static uint8_t bits = 8;
 #define SPI_READY 0x80     // Slave pull low to stop data transmission
 
 struct spi_ioc_transfer tr;
+struct spi_ioc_transfer tr_rx;
 
 /******************************************************************************
 function:   SPI port initialization
@@ -359,7 +360,7 @@ uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
     uint8_t rbuf[1];
     tr.len = 1;
     tr.tx_buf = (unsigned long)&buf;
-    tr.rx_buf = (unsigned long)rbuf;
+    tr.rx_buf = NULL;
 
     // ioctl Operation, transmission of data
     if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
@@ -377,8 +378,8 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
     uint8_t tbuf[0];
     tr.len = 0;
     tr.len = len;
-    tr.tx_buf = (uintptr_t)&tbuf;
-    tr.rx_buf = (uintptr_t)buf;
+    tr.tx_buf = (unsigned long)&tbuf;
+    tr.rx_buf = (unsigned long)buf;
 
     // ioctl Operation, transmission of data
     if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
@@ -392,6 +393,13 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
 
 int DEV_HARDWARE_SPI_Read(uint8_t *rxbuf, uint32_t len)
 {
-    int status = read(hardware_SPI.fd, rxbuf, len);
-    return status;
+    tr_rx.len = len;
+    tr_rx.tx_buf = NULL;
+    tr_rx.rx_buf = (uintptr_t)rxbuf;
+    if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr_rx) < 1)
+    {
+        DEV_HARDWARE_SPI_Debug("can't receive spi data\r\n");
+        return -1;
+    }
+    return 1;
 }
