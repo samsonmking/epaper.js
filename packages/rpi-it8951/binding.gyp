@@ -10,21 +10,18 @@
             "sources": [ 
                 "./src/c/EPD_IT8951_node.cc",
                 "./src/c/DEV_Config.c",
-                "./src/c/EPD_IT8951.c" 
+                "./src/c/EPD_IT8951.c", 
+                "./src/c/dev_hardware_SPI.c" 
             ],
             "defines": [
                 "RPI",
-                "USE_DEV_LIB",
-                "NAPI_DISABLE_CPP_EXCEPTIONS"
+                "USE_DEV_LIB"
             ],
             "include_dirs": [
                 "<!@(node -p \"require('node-addon-api').include\")"
             ],
             "libraries": [
-                "-lm",
-                "-lrt",
-                "-lpthread",
-                "-lbcm2835"
+                "-lm"
             ]
         }
     ]
