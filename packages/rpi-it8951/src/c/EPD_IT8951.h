@@ -137,6 +137,8 @@ IT8951 Registers defines
 #define LUTAFSR (DISPLAY_REG_BASE + 0x224)   // LUT Status Reg (status of All LUT Engines)
 #define BGVR (DISPLAY_REG_BASE + 0x250)      // Bitmap (1bpp) image color table
 
+#define MY_WORD_SWAP(x) (((x & 0xff00) >> 8) | ((x & 0x00ff) << 8))
+
 // System Registers
 #define SYS_REG_BASE 0x0000
 

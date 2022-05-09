@@ -205,16 +205,22 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     memset(rxbuf, 0, sizeof(rxbuf));
     DEV_SPI_ReadBytes(rxbuf, 2);
 
-    for (UDOUBLE i = 0; i < Length; i++)
+    /*for (UDOUBLE i = 0; i < Length; i++)
     {
-        EPD_IT8951_ReadBusy();
-        memset(rxbuf, 0, sizeof(rxbuf));
         DEV_SPI_ReadBytes(rxbuf, 2);
         Data_Buf[i] = ((UWORD)rxbuf[0]) << 8;
         Data_Buf[i] |= (UWORD)rxbuf[1];
-    }
+    }*/
+    memset(rxbuf, 0, sizeof(rxbuf));
 
+    EPD_IT8951_ReadBusy();
+    DEV_SPI_ReadBytes((uint8_t *)Data_Buf, Length * 2);
     DEV_Digital_Write(EPD_CS_PIN, 1);
+
+    for (UDOUBLE i = 0; i < Length; i++)
+    {
+        Data_Buf[i] = MY_WORD_SWAP(Data_Buf[i]);
+    }
 }
 
 /******************************************************************************
