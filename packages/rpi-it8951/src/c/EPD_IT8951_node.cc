@@ -5,8 +5,11 @@ extern "C"
 #include "EPD_IT8951.h"
 }
 
-UWORD Display_Area_Width;
-UWORD Display_Area_Height;
+IT8951_Dev_Info Dev_Info;
+UWORD Panel_Width;
+UWORD Panel_Height;
+UDOUBLE Init_Target_Memory_Addr;
+bool Four_Byte_Align = false;
 
 Napi::Number DEV_Init(const Napi::CallbackInfo &info)
 {
@@ -19,7 +22,7 @@ Napi::Value Init(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
     UWORD VCOM = 2000;
-    IT8951_Dev_Info Dev_Info = EPD_IT8951_Init(VCOM);
+    Dev_Info = EPD_IT8951_Init(VCOM);
     char *LUT_Version = (char *)Dev_Info.LUT_Version;
     if (strcmp(LUT_Version, "M641") == 0)
     {
@@ -53,8 +56,8 @@ Napi::Value Init(const Napi::CallbackInfo &info)
         // default set to 6 as A2 Mode
         A2_Mode = 6;
     }
-    Display_Area_Width = Dev_Info.Panel_W;
-    Display_Area_Height = Dev_Info.Panel_H;
+    Panel_Width = Dev_Info.Panel_W;
+    Panel_Height = Dev_Info.Panel_H;
     return env.Undefined();
 }
 
@@ -69,7 +72,7 @@ Napi::Value Display(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
-    EPD_IT8951_1bp_Refresh(reinterpret_cast<uint8_t *>(jsBuffer.Data()), 0, 0, Display_Area_Width, Display_Area_Height, false, Init_Target_Memory_Addr, false);
+    EPD_IT8951_1bp_Refresh(reinterpret_cast<uint8_t *>(jsBuffer.Data()), 0, 0, Panel_Width, Panel_Height, false, Init_Target_Memory_Addr, false);
     return env.Undefined();
 }
 
@@ -77,14 +80,14 @@ Napi::Value Display_4GrayDisplay(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
-    EPD_IT8951_2bp_Refresh(reinterpret_cast<uint8_t *>(jsBuffer.Data()), 0, 0, Display_Area_Width, Display_Area_Height, false, Init_Target_Memory_Addr, false);
+    EPD_IT8951_2bp_Refresh(reinterpret_cast<uint8_t *>(jsBuffer.Data()), 0, 0, Panel_Width, Panel_Height, false, Init_Target_Memory_Addr, false);
     return env.Undefined();
 }
 
 Napi::Value Clear(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
-    EPD_IT8951_Clear_Refresh();
+    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
     return env.Undefined();
 }
 
