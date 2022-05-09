@@ -6,7 +6,7 @@
 *----------------
 * |	This version:   V3.0
 * | Date        :   2019-07-31
-* | Info        :   
+* | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -32,7 +32,7 @@
 
 /**
  * GPIO
-**/
+ **/
 int EPD_RST_PIN;
 int EPD_DC_PIN;
 int EPD_CS_PIN;
@@ -40,7 +40,7 @@ int EPD_BUSY_PIN;
 
 /**
  * GPIO read and write
-**/
+ **/
 void DEV_Digital_Write(UWORD Pin, UBYTE Value)
 {
 #ifdef RPI
@@ -87,14 +87,14 @@ UBYTE DEV_Digital_Read(UWORD Pin)
 
 /**
  * SPI
-**/
+ **/
 void DEV_SPI_WriteByte(uint8_t Value)
 {
 #ifdef RPI
 #ifdef USE_BCM2835_LIB
 	bcm2835_spi_transfer(Value);
 #elif USE_WIRINGPI_LIB
-	wiringPiSPIDataRW(0,&Value,1);
+	wiringPiSPIDataRW(0, &Value, 1);
 #elif USE_DEV_LIB
 	DEV_HARDWARE_SPI_TransferByte(Value);
 #endif
@@ -109,12 +109,26 @@ void DEV_SPI_WriteByte(uint8_t Value)
 #endif
 }
 
+int DEV_SPI_ReadBytes(uint8_t *buf, uint32_t len)
+{
+#ifdef RPI
+#ifdef USE_BCM2835_LIB
+	Debug("not support");
+#elif USE_WIRINGPI_LIB
+	Debug("not support");
+#elif USE_DEV_LIB
+	int r = DEV_HARDWARE_SPI_Transfer(rbuf, 1);
+	return r;
+#endif
+#endif
+}
+
 void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 {
 #ifdef RPI
 #ifdef USE_BCM2835_LIB
 	char rData[Len];
-	bcm2835_spi_transfernb(pData,rData,Len);
+	bcm2835_spi_transfernb(pData, rData, Len);
 #elif USE_WIRINGPI_LIB
 	wiringPiSPIDataRW(0, pData, Len);
 #elif USE_DEV_LIB
@@ -124,7 +138,7 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 
 #ifdef JETSON
 #ifdef USE_DEV_LIB
-	//JETSON nano waits for hardware SPI
+	// JETSON nano waits for hardware SPI
 	Debug("not support");
 #elif USE_HARDWARE_LIB
 	Debug("not support");
@@ -134,30 +148,39 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 
 /**
  * GPIO Mode
-**/
+ **/
 void DEV_GPIO_Mode(UWORD Pin, UWORD Mode)
 {
 #ifdef RPI
 #ifdef USE_BCM2835_LIB
-	if(Mode == 0 || Mode == BCM2835_GPIO_FSEL_INPT) {
+	if (Mode == 0 || Mode == BCM2835_GPIO_FSEL_INPT)
+	{
 		bcm2835_gpio_fsel(Pin, BCM2835_GPIO_FSEL_INPT);
-	} else {
+	}
+	else
+	{
 		bcm2835_gpio_fsel(Pin, BCM2835_GPIO_FSEL_OUTP);
 	}
 #elif USE_WIRINGPI_LIB
-	if(Mode == 0 || Mode == INPUT) {
+	if (Mode == 0 || Mode == INPUT)
+	{
 		pinMode(Pin, INPUT);
 		pullUpDnControl(Pin, PUD_UP);
-	} else {
+	}
+	else
+	{
 		pinMode(Pin, OUTPUT);
 		// Debug (" %d OUT \r\n",Pin);
 	}
 #elif USE_DEV_LIB
 	SYSFS_GPIO_Export(Pin);
-	if(Mode == 0 || Mode == SYSFS_GPIO_IN) {
+	if (Mode == 0 || Mode == SYSFS_GPIO_IN)
+	{
 		SYSFS_GPIO_Direction(Pin, SYSFS_GPIO_IN);
 		// Debug("IN Pin = %d\r\n",Pin);
-	} else {
+	}
+	else
+	{
 		SYSFS_GPIO_Direction(Pin, SYSFS_GPIO_OUT);
 		// Debug("OUT Pin = %d\r\n",Pin);
 	}
@@ -176,7 +199,7 @@ void DEV_GPIO_Mode(UWORD Pin, UWORD Mode)
 
 /**
  * delay x ms
-**/
+ **/
 void DEV_Delay_ms(UDOUBLE xms)
 {
 #ifdef RPI
@@ -186,7 +209,8 @@ void DEV_Delay_ms(UDOUBLE xms)
 	delay(xms);
 #elif USE_DEV_LIB
 	UDOUBLE i;
-	for(i=0; i < xms; i++) {
+	for (i = 0; i < xms; i++)
+	{
 		usleep(1000);
 	}
 #endif
@@ -194,7 +218,8 @@ void DEV_Delay_ms(UDOUBLE xms)
 
 #ifdef JETSON
 	UDOUBLE i;
-	for(i=0; i < xms; i++) {
+	for (i = 0; i < xms; i++)
+	{
 		usleep(1000);
 	}
 #endif
@@ -206,32 +231,42 @@ static int DEV_Equipment_Testing(void)
 	int fd;
 	char value_str[20];
 	fd = open("/etc/issue", O_RDONLY);
-    printf("Current environment: ");
-	while(1) {
-		if (fd < 0) {
-			Debug( "Read failed Pin\n");
+	printf("Current environment: ");
+	while (1)
+	{
+		if (fd < 0)
+		{
+			Debug("Read failed Pin\n");
 			return -1;
 		}
-		for(i=0;; i++) {
-			if (read(fd, &value_str[i], 1) < 0) {
-				Debug( "failed to read value!\n");
+		for (i = 0;; i++)
+		{
+			if (read(fd, &value_str[i], 1) < 0)
+			{
+				Debug("failed to read value!\n");
 				return -1;
 			}
-			if(value_str[i] ==32) {
+			if (value_str[i] == 32)
+			{
 				printf("\r\n");
 				break;
 			}
-			printf("%c",value_str[i]);
+			printf("%c", value_str[i]);
 		}
 		break;
 	}
 #ifdef RPI
-	if(i<5) {
+	if (i < 5)
+	{
 		printf("Unrecognizable\r\n");
-	} else {
-		char RPI_System[10]   = {"Raspbian"};
-		for(i=0; i<6; i++) {
-			if(RPI_System[i]!= value_str[i]) {
+	}
+	else
+	{
+		char RPI_System[10] = {"Raspbian"};
+		for (i = 0; i < 6; i++)
+		{
+			if (RPI_System[i] != value_str[i])
+			{
 				printf("Please make JETSON !!!!!!!!!!\r\n");
 				return -1;
 			}
@@ -239,12 +274,17 @@ static int DEV_Equipment_Testing(void)
 	}
 #endif
 #ifdef JETSON
-	if(i<5) {
+	if (i < 5)
+	{
 		Debug("Unrecognizable\r\n");
-	} else {
-		char JETSON_System[10]= {"Ubuntu"};
-		for(i=0; i<6; i++) {
-			if(JETSON_System[i]!= value_str[i] ) {
+	}
+	else
+	{
+		char JETSON_System[10] = {"Ubuntu"};
+		for (i = 0; i < 6; i++)
+		{
+			if (JETSON_System[i] != value_str[i])
+			{
 				printf("Please make RPI !!!!!!!!!!\r\n");
 				return -1;
 			}
@@ -254,20 +294,18 @@ static int DEV_Equipment_Testing(void)
 	return 0;
 }
 
-
-
 void DEV_GPIO_Init(void)
 {
 #ifdef RPI
-	EPD_RST_PIN     = 17;
-	EPD_DC_PIN      = 25;
-	EPD_CS_PIN      = 8;
-	EPD_BUSY_PIN    = 24;
+	EPD_RST_PIN = 17;
+	EPD_DC_PIN = 25;
+	EPD_CS_PIN = 8;
+	EPD_BUSY_PIN = 24;
 #elif JETSON
-	EPD_RST_PIN     = GPIO17;
-	EPD_DC_PIN      = GPIO25;
-	EPD_CS_PIN      = SPI0_CS0;
-	EPD_BUSY_PIN    = GPIO24;
+	EPD_RST_PIN = GPIO17;
+	EPD_DC_PIN = GPIO25;
+	EPD_CS_PIN = SPI0_CS0;
+	EPD_BUSY_PIN = GPIO24;
 #endif
 
 	DEV_GPIO_Mode(EPD_RST_PIN, 1);
@@ -284,47 +322,54 @@ Info:
 ******************************************************************************/
 UBYTE DEV_Module_Init(void)
 {
-    printf("/***********************************/ \r\n");
-	if(DEV_Equipment_Testing() < 0) {
+	printf("/***********************************/ \r\n");
+	if (DEV_Equipment_Testing() < 0)
+	{
 		return 1;
 	}
 #ifdef RPI
 #ifdef USE_BCM2835_LIB
-	if(!bcm2835_init()) {
+	if (!bcm2835_init())
+	{
 		printf("bcm2835 init failed  !!! \r\n");
 		return 1;
-	} else {
+	}
+	else
+	{
 		printf("bcm2835 init success !!! \r\n");
 	}
 
 	// GPIO Config
 	DEV_GPIO_Init();
 
-	bcm2835_spi_begin();                                         //Start spi interface, set spi pin for the reuse function
-	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);     //High first transmission
-	bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);                  //spi mode 0
-	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_128);  //Frequency
-	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);                     //set CE0
-	bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);     //enable cs0
+	bcm2835_spi_begin();										// Start spi interface, set spi pin for the reuse function
+	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);	// High first transmission
+	bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);					// spi mode 0
+	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_128); // Frequency
+	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);					// set CE0
+	bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);	// enable cs0
 
 #elif USE_WIRINGPI_LIB
-	//if(wiringPiSetup() < 0)//use wiringpi Pin number table
-	if(wiringPiSetupGpio() < 0) { //use BCM2835 Pin number table
+	// if(wiringPiSetup() < 0)//use wiringpi Pin number table
+	if (wiringPiSetupGpio() < 0)
+	{ // use BCM2835 Pin number table
 		printf("set wiringPi lib failed	!!! \r\n");
 		return 1;
-	} else {
+	}
+	else
+	{
 		printf("set wiringPi lib success !!! \r\n");
 	}
 
 	// GPIO Config
 	DEV_GPIO_Init();
-	wiringPiSPISetup(0,10000000);
+	wiringPiSPISetup(0, 10000000);
 	// wiringPiSPISetupMode(0, 32000000, 0);
 #elif USE_DEV_LIB
 	printf("Write and read /dev/spidev0.0 \r\n");
 	DEV_GPIO_Init();
 	DEV_HARDWARE_SPI_begin("/dev/spidev0.0");
-    DEV_HARDWARE_SPI_setSpeed(10000000);
+	DEV_HARDWARE_SPI_setSpeed(10000000);
 #endif
 
 #elif JETSON
@@ -342,7 +387,7 @@ UBYTE DEV_Module_Init(void)
 #endif
 
 #endif
-    printf("/***********************************/ \r\n");
+	printf("/***********************************/ \r\n");
 	return 0;
 }
 
