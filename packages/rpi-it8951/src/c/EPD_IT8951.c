@@ -43,11 +43,11 @@ parameter:
 ******************************************************************************/
 static void EPD_IT8951_Reset(void)
 {
-    DEV_Digital_Write(EPD_RST_PIN, HIGH);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
-    DEV_Digital_Write(EPD_RST_PIN, LOW);
+    DEV_Digital_Write(EPD_RST_PIN, 0);
     DEV_Delay_ms(10);
-    DEV_Digital_Write(EPD_RST_PIN, HIGH);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
 }
 
@@ -78,7 +78,7 @@ static void EPD_IT8951_WriteCommand(UWORD Command)
 
     EPD_IT8951_ReadBusy();
 
-    DEV_Digital_Write(EPD_CS_PIN, LOW);
+    DEV_Digital_Write(EPD_CS_PIN, 0);
 
     DEV_SPI_WriteByte(Write_Preamble >> 8);
     DEV_SPI_WriteByte(Write_Preamble);
@@ -88,7 +88,7 @@ static void EPD_IT8951_WriteCommand(UWORD Command)
     DEV_SPI_WriteByte(Command >> 8);
     DEV_SPI_WriteByte(Command);
 
-    DEV_Digital_Write(EPD_CS_PIN, HIGH);
+    DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
 /******************************************************************************
@@ -102,7 +102,7 @@ static void EPD_IT8951_WriteData(UWORD Data)
 
     EPD_IT8951_ReadBusy();
 
-    DEV_Digital_Write(EPD_CS_PIN, LOW);
+    DEV_Digital_Write(EPD_CS_PIN, 0);
 
     DEV_SPI_WriteByte(Write_Preamble >> 8);
     DEV_SPI_WriteByte(Write_Preamble);
@@ -112,7 +112,7 @@ static void EPD_IT8951_WriteData(UWORD Data)
     DEV_SPI_WriteByte(Data >> 8);
     DEV_SPI_WriteByte(Data);
 
-    DEV_Digital_Write(EPD_CS_PIN, HIGH);
+    DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
 /******************************************************************************
@@ -126,7 +126,7 @@ static void EPD_IT8951_WriteMuitiData(UWORD *Data_Buf, UDOUBLE Length)
 
     EPD_IT8951_ReadBusy();
 
-    DEV_Digital_Write(EPD_CS_PIN, LOW);
+    DEV_Digital_Write(EPD_CS_PIN, 0);
 
     DEV_SPI_WriteByte(Write_Preamble >> 8);
     DEV_SPI_WriteByte(Write_Preamble);
@@ -138,7 +138,7 @@ static void EPD_IT8951_WriteMuitiData(UWORD *Data_Buf, UDOUBLE Length)
         DEV_SPI_WriteByte(Data_Buf[i] >> 8);
         DEV_SPI_WriteByte(Data_Buf[i]);
     }
-    DEV_Digital_Write(EPD_CS_PIN, HIGH);
+    DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
 /******************************************************************************
@@ -153,7 +153,7 @@ static UWORD EPD_IT8951_ReadData()
 
     EPD_IT8951_ReadBusy();
 
-    DEV_Digital_Write(EPD_CS_PIN, LOW);
+    DEV_Digital_Write(EPD_CS_PIN, 0);
 
     DEV_SPI_WriteByte(Write_Preamble >> 8);
     DEV_SPI_WriteByte(Write_Preamble);
@@ -169,7 +169,7 @@ static UWORD EPD_IT8951_ReadData()
     ReadData = DEV_SPI_ReadByte() << 8;
     ReadData |= DEV_SPI_ReadByte();
 
-    DEV_Digital_Write(EPD_CS_PIN, HIGH);
+    DEV_Digital_Write(EPD_CS_PIN, 1);
 
     return ReadData;
 }
@@ -185,7 +185,7 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
 
     EPD_IT8951_ReadBusy();
 
-    DEV_Digital_Write(EPD_CS_PIN, LOW);
+    DEV_Digital_Write(EPD_CS_PIN, 0);
 
     DEV_SPI_WriteByte(Write_Preamble >> 8);
     DEV_SPI_WriteByte(Write_Preamble);
@@ -204,7 +204,7 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
         Data_Buf[i] |= DEV_SPI_ReadByte();
     }
 
-    DEV_Digital_Write(EPD_CS_PIN, HIGH);
+    DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
 /******************************************************************************
