@@ -101,7 +101,7 @@ int DEV_SPI_ReadBytes(uint8_t *buf, uint32_t len);
 void DEV_SPI_WriteByte(UBYTE Value);
 void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len);
 void DEV_Delay_ms(UDOUBLE xms);
-
+void DEV_Delay_us(UDOUBLE xus);
 UBYTE DEV_Module_Init(void);
 void DEV_Module_Exit(void);
 
