@@ -11,7 +11,8 @@
                 "./src/c/EPD_IT8951_node.cc",
                 "./src/c/DEV_Config.c",
                 "./src/c/EPD_IT8951.c", 
-                "./src/c/dev_hardware_SPI.c" 
+                "./src/c/dev_hardware_SPI.c",
+                "./src/c/RPI_sysfs_gpio.c"
             ],
             "defines": [
                 "RPI",
