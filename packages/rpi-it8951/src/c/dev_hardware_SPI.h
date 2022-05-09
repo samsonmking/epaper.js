@@ -107,7 +107,6 @@ int DEV_HARDWARE_SPI_setSpeed(uint32_t speed);
 
 uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf);
 int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len);
-int DEV_HARDWARE_SPI_Read(uint8_t *rxbuf, uint32_t len);
 
 void DEV_HARDWARE_SPI_SetDataInterval(uint16_t us);
 int DEV_HARDWARE_SPI_SetBusMode(BusMode mode);

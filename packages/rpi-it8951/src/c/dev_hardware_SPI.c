@@ -360,7 +360,7 @@ uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
     uint8_t rbuf[1];
     tr.len = 1;
     tr.tx_buf = (unsigned long)&buf;
-    tr.rx_buf = NULL;
+    tr.rx_buf = (unsigned long)rbuf;
 
     // ioctl Operation, transmission of data
     if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
@@ -375,11 +375,10 @@ Info: Return read data
 ******************************************************************************/
 int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
 {
-    uint8_t tbuf[0];
-    tr.len = 0;
+    uint8_t rbuf[len];
     tr.len = len;
-    tr.tx_buf = (unsigned long)&tbuf;
-    tr.rx_buf = (unsigned long)buf;
+    tr.tx_buf = (unsigned long)buf;
+    tr.rx_buf = (unsigned long)rbuf;
 
     // ioctl Operation, transmission of data
     if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
@@ -388,18 +387,6 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
         return -1;
     }
 
-    return 1;
-}
-
-int DEV_HARDWARE_SPI_Read(uint8_t *rxbuf, uint32_t len)
-{
-    tr_rx.len = len;
-    tr_rx.tx_buf = NULL;
-    tr_rx.rx_buf = (uintptr_t)rxbuf;
-    if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr_rx) < 1)
-    {
-        DEV_HARDWARE_SPI_Debug("can't receive spi data\r\n");
-        return -1;
-    }
+    memcpy(buf, rbuf, len);
     return 1;
 }
