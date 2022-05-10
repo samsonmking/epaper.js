@@ -166,7 +166,7 @@ static UWORD EPD_IT8951_ReadData()
     EPD_IT8951_ReadBusy();
 
     memset(rxbuf, 0, sizeof rxbuf);
-    DEV_SPI_Read_nByte((uint8_t *)&rxbuf[0], 2);
+    DEV_SPI_Read_nByte((uint8_t *)rxbuf, 2);
     ReadData = rxbuf[0] << 8;
     ReadData |= rxbuf[1];
 
@@ -205,9 +205,9 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
         Data_Buf[i] |= rxbuf[1];
     }*/
     memset(rxbuf, 0, sizeof rxbuf);
-    DEV_SPI_Read_nByte((uint8_t *)&rxbuf[0], Length * 2);
+    DEV_SPI_Read_nByte((uint8_t *)rxbuf, Length * 2);
 
-    memcpy(Data_Buf, &rxbuf[0], Length * 2);
+    memcpy(Data_Buf, rxbuf, Length * 2);
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 }
