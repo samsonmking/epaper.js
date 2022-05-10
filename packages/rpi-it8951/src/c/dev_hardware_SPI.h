@@ -33,7 +33,7 @@
 
 #include <stdint.h>
 
-#define DEV_HARDWARE_SPI_DEBUG 0
+#define DEV_HARDWARE_SPI_DEBUG 1
 #if DEV_HARDWARE_SPI_DEBUG
 #define DEV_HARDWARE_SPI_Debug(__info, ...) printf("Debug: " __info, ##__VA_ARGS__)
 #else
