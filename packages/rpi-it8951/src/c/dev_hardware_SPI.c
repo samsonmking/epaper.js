@@ -55,7 +55,6 @@ static uint8_t bits = 8;
 #define SPI_READY 0x80     // Slave pull low to stop data transmission
 
 struct spi_ioc_transfer tr;
-struct spi_ioc_transfer tr_rx;
 
 /******************************************************************************
 function:   SPI port initialization
@@ -389,6 +388,10 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
     return 1;
 }
 
+string hexas = "0123456789abcdef";
+static char hexa[16];
+strcpy(hexa, hexas.c_str());
+
 /******************************************************************************
 function: The SPI port reads a byte
 parameter:
@@ -405,6 +408,15 @@ int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
     {
         DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
         return -1;
+    }
+    uint8_t b;
+    char r[5] = {'0', 'x', '0', '0', '\0'};
+    for (uint32_t i; i < len; i++)
+    {
+        b = &buf[i];
+        r[3] = '0' + ((b >> 8) & 0xf);
+        r[4] = '0' + ((b >> 0) & 0xf);
+        DEV_HARDWARE_SPI_Debug(r);
     }
 
     return 1;
