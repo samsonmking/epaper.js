@@ -37,7 +37,6 @@
 
 #include <stdio.h>
 
-#define DEBUG
 #if DEBUG
 #define Debug(fmt, ...) printf("%s[%d]:" fmt, __FILE__, __LINE__, ##__VA_ARGS__)
 #else
