@@ -413,7 +413,7 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
         DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
         return -1;
     }
-    print_hex(buf, len, 1);
+    // print_hex(buf, len, 1);
 
     return 1;
 }
@@ -439,7 +439,7 @@ int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
     memset(rxbuf, 0, sizeof rxbuf);
 
     int status = read(hardware_SPI.fd, &rxbuf[0], len);
-    print_hex(rxbuf, len, 0);
+    // print_hex(rxbuf, len, 0);
     if (status < 0)
     {
         DEV_HARDWARE_SPI_Debug("can't receive message\r\n");
