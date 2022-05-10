@@ -359,7 +359,7 @@ uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
     uint8_t rbuf[1];
     tr.len = 1;
     tr.tx_buf = (unsigned long)&buf;
-    tr.rx_buf = (unsigned long)rbuf;
+    tr.rx_buf = NULL;
 
     // ioctl Operation, transmission of data
     if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
