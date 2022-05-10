@@ -150,7 +150,6 @@ static UWORD EPD_IT8951_ReadData()
     UWORD ReadData;
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
-    uint8_t rxbuf[4]; // uint8_t rxbuf[SPIDEV_MAXPATH];
 
     EPD_IT8951_ReadBusy();
 
@@ -162,19 +161,13 @@ static UWORD EPD_IT8951_ReadData()
     EPD_IT8951_ReadBusy();
 
     // dummy
-    /*memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 2);
-    Read_Dummy = rxbuf[0] << 8;
-    Read_Dummy |= rxbuf[1];*/
+    Read_Dummy = DEV_SPI_WriteByte(0) << 8;
+    Read_Dummy |= DEV_SPI_WriteByte(0);
 
-    // DEV_SPI_WriteByte(0);
-    // DEV_SPI_WriteByte(0);
+    EPD_IT8951_ReadBusy();
 
-    // EPD_IT8951_ReadBusy();
-    memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 2);
-    ReadData = rxbuf[0] << 8;
-    ReadData |= rxbuf[1];
+    ReadData = DEV_SPI_WriteByte(0) << 8;
+    ReadData |= DEV_SPI_WriteByte(0);
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 
@@ -189,7 +182,6 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
 {
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
-    uint8_t rxbuf[4]; // uint8_t rxbuf[SPIDEV_MAXPATH];
 
     EPD_IT8951_ReadBusy();
 
@@ -201,29 +193,18 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     EPD_IT8951_ReadBusy();
 
     // dummy
-    /*memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 2);*/
+    Read_Dummy = DEV_SPI_WriteByte(0) << 8;
+    Read_Dummy |= DEV_SPI_WriteByte(0);
 
-    // DEV_SPI_WriteByte(0);
-    // DEV_SPI_WriteByte(0);
+    EPD_IT8951_ReadBusy();
 
-    // EPD_IT8951_ReadBusy();
-
-    memset(Data_Buf, 0, sizeof(Length * 2));
     for (UDOUBLE i = 0; i < Length; i++)
     {
-        DEV_SPI_ReadBytes((uint8_t *)&Data_Buf[i], 2);
-        // Data_Buf[i] = ((UWORD)rxbuf[0]) << 8;
-        // Data_Buf[i] |= (UWORD)rxbuf[1];
+        Data_Buf[i] = DEV_SPI_WriteByte(0) << 8;
+        Data_Buf[i] |= DEV_SPI_WriteByte(0);
     }
 
-    // DEV_SPI_ReadBytes((uint8_t *)Data_Buf, Length * 2);
     DEV_Digital_Write(EPD_CS_PIN, 1);
-
-    /*for (UDOUBLE i = 0; i < Length; i++)
-    {
-        Data_Buf[i] = MY_WORD_SWAP(Data_Buf[i]);
-    }*/
 }
 
 /******************************************************************************

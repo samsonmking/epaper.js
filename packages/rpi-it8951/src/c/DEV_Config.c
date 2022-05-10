@@ -88,7 +88,7 @@ UBYTE DEV_Digital_Read(UWORD Pin)
 /**
  * SPI
  **/
-void DEV_SPI_WriteByte(uint8_t Value)
+uint8_t DEV_SPI_WriteByte(uint8_t Value)
 {
 #ifdef RPI
 #ifdef USE_BCM2835_LIB
@@ -96,7 +96,7 @@ void DEV_SPI_WriteByte(uint8_t Value)
 #elif USE_WIRINGPI_LIB
 	wiringPiSPIDataRW(0, &Value, 1);
 #elif USE_DEV_LIB
-	DEV_HARDWARE_SPI_TransferByte(Value);
+	return DEV_HARDWARE_SPI_TransferByte(Value);
 #endif
 #endif
 
@@ -106,6 +106,7 @@ void DEV_SPI_WriteByte(uint8_t Value)
 #elif USE_HARDWARE_LIB
 	Debug("not support");
 #endif
+	Debug("not support");
 #endif
 }
 
