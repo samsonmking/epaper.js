@@ -296,13 +296,13 @@ int DEV_HARDWARE_SPI_SetBitOrder(SPIBitOrder Order)
     }
 
     // DEV_HARDWARE_SPI_Debug("hardware_SPI.mode = 0x%02x\r\n", hardware_SPI.mode);
-    int fd = ioctl(hardware_SPI.fd, SPI_IOC_WR_MODE, &hardware_SPI.mode);
+    /*int fd = ioctl(hardware_SPI.fd, SPI_IOC_WR_MODE, &hardware_SPI.mode);
     DEV_HARDWARE_SPI_Debug("fd = %d\r\n", fd);
     if (fd == -1)
     {
         DEV_HARDWARE_SPI_Debug("can't set spi SPI_LSB_FIRST\r\n");
         return -1;
-    }
+    }*/
     return 1;
 }
 
