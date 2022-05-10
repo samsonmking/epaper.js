@@ -397,7 +397,7 @@ Info: Return read data
 int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
 {
     tr.len = len;
-    tr.tx_buf = NULL;
+    tr.tx_buf = (unsigned long)buf;
     tr.rx_buf = (unsigned long)buf;
 
     // ioctl Operation, transmission of data
