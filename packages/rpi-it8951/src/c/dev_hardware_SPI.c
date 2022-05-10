@@ -426,11 +426,19 @@ void print_hex(const char *string, uint32_t len, uint32_t lf)
 int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
 {
     uint8_t rxbuf[96];
+    memset(rxbuf, 0, sizeof rxbuf);
 
     int status = read(hardware_SPI.fd, &rxbuf[0], len);
+    print_hex(rxbuf, len, 0);
     if (status < 0)
     {
         DEV_HARDWARE_SPI_Debug("can't receive message\r\n");
+        return -1;
+    }
+    if (status != len)
+    {
+        DEV_HARDWARE_SPI_Debug("short read\r\n");
+        return -1;
     }
 
     memcpy(buf, &rxbuf[0], len);

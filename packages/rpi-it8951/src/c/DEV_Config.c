@@ -132,6 +132,28 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 #endif
 }
 
+int DEV_SPI_Read_nByte(uint8_t *pData, uint32_t Len)
+{
+#ifdef RPI
+#ifdef USE_BCM2835_LIB
+	Debug("not support");
+#elif USE_WIRINGPI_LIB
+	Debug("not support");
+#elif USE_DEV_LIB
+	return DEV_HARDWARE_SPI_ReadTransfer(pData, Len);
+#endif
+#endif
+
+#ifdef JETSON
+#ifdef USE_DEV_LIB
+	// JETSON nano waits for hardware SPI
+	Debug("not support");
+#elif USE_HARDWARE_LIB
+	Debug("not support");
+#endif
+#endif
+}
+
 /**
  * GPIO Mode
  **/
