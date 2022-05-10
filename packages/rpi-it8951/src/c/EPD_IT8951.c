@@ -43,32 +43,26 @@ parameter:
 ******************************************************************************/
 static void EPD_IT8951_Reset(void)
 {
-    DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(500);
-
-    DEV_Digital_Write(EPD_CS_PIN, 1);
-    DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(500);
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(500);
+    DEV_Delay_ms(200);
+    DEV_Digital_Write(EPD_RST_PIN, 0);
+    DEV_Delay_ms(10);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
+    DEV_Delay_ms(200);
 }
 
 /******************************************************************************
-function :	Wait until the busy_pin goes HIGH
+function :	Wait until the busy_pin goes 1
 parameter:
 ******************************************************************************/
 static void EPD_IT8951_ReadBusy(void)
 {
-    // Debug("Busy ------\r\n");
     UBYTE Busy_State = DEV_Digital_Read(EPD_BUSY_PIN);
     // 0: busy, 1: idle
     while (Busy_State == 0)
     {
-        // sleep(100);
-        // usleep(1000);
         Busy_State = DEV_Digital_Read(EPD_BUSY_PIN);
     }
-    // Debug("Busy Release ------\r\n");
 }
 
 /******************************************************************************
@@ -151,7 +145,6 @@ parameter:  data
 ******************************************************************************/
 static UWORD EPD_IT8951_ReadData()
 {
-    uint8_t buf[2];
     UWORD ReadData;
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
@@ -166,18 +159,13 @@ static UWORD EPD_IT8951_ReadData()
     EPD_IT8951_ReadBusy();
 
     // dummy
-
-    DEV_SPI_WriteByte(0);
-    DEV_SPI_WriteByte(0);
-    DEV_SPI_ReadBytes(&Read_Dummy, 1);
-    DEV_SPI_ReadBytes(&Read_Dummy, 1);
+    Read_Dummy = DEV_SPI_ReadByte() << 8;
+    Read_Dummy |= DEV_SPI_ReadByte();
 
     EPD_IT8951_ReadBusy();
 
-    DEV_SPI_ReadBytes(&buf[0], 2);
-
-    ReadData = (UWORD)buf[0] << 8;
-    ReadData |= (UWORD)buf[1];
+    ReadData = DEV_SPI_ReadByte() << 8;
+    ReadData |= DEV_SPI_ReadByte();
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 
@@ -190,7 +178,6 @@ parameter:  data
 ******************************************************************************/
 static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
 {
-    uint8_t buf[2];
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
 
@@ -204,20 +191,15 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     EPD_IT8951_ReadBusy();
 
     // dummy
-    DEV_SPI_WriteByte(0);
-    DEV_SPI_WriteByte(0);
-    DEV_SPI_ReadBytes(&Read_Dummy, 1);
-    DEV_SPI_ReadBytes(&Read_Dummy, 1);
+    Read_Dummy = DEV_SPI_ReadByte() << 8;
+    Read_Dummy |= DEV_SPI_ReadByte();
 
     EPD_IT8951_ReadBusy();
 
-    // DEV_SPI_ReadBytes((uint8_t *)Data_Buf, Length * 2);
     for (UDOUBLE i = 0; i < Length; i++)
     {
-        memset(buf, 0, 2);
-        DEV_SPI_ReadBytes(&buf[0], 2);
-        Data_Buf[i] = (UWORD)buf[0] << 8;
-        Data_Buf[i] |= (UWORD)buf[1];
+        Data_Buf[i] = DEV_SPI_ReadByte() << 8;
+        Data_Buf[i] |= DEV_SPI_ReadByte();
     }
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
@@ -626,7 +608,7 @@ IT8951_Dev_Info EPD_IT8951_Init(UWORD VCOM)
 
     EPD_IT8951_Reset();
 
-    // EPD_IT8951_SystemRun();
+    EPD_IT8951_SystemRun();
 
     EPD_IT8951_GetSystemInfo(&Dev_Info);
 
@@ -643,12 +625,11 @@ IT8951_Dev_Info EPD_IT8951_Init(UWORD VCOM)
 }
 
 /******************************************************************************
-function :	EPD_IT8951_Clear_Refresh
+function :	EPD_IT8951_Init_Fresh
 parameter:
 ******************************************************************************/
-void EPD_IT8951_Clear_Refresh(IT8951_Dev_Info Dev_Info, UDOUBLE Target_Memory_Addr, UWORD Mode)
+void EPD_IT8951_Init_Refresh(IT8951_Dev_Info Dev_Info, UDOUBLE Target_Memory_Addr)
 {
-
     UDOUBLE ImageSize = ((Dev_Info.Panel_W * 4 % 8 == 0) ? (Dev_Info.Panel_W * 4 / 8) : (Dev_Info.Panel_W * 4 / 8 + 1)) * Dev_Info.Panel_H;
     UBYTE *Frame_Buf = malloc(ImageSize);
     memset(Frame_Buf, 0xFF, ImageSize);
@@ -671,7 +652,7 @@ void EPD_IT8951_Clear_Refresh(IT8951_Dev_Info Dev_Info, UDOUBLE Target_Memory_Ad
 
     EPD_IT8951_HostAreaPackedPixelWrite_4bp(&Load_Img_Info, &Area_Img_Info, false);
 
-    EPD_IT8951_Display_Area(0, 0, Dev_Info.Panel_W, Dev_Info.Panel_H, Mode);
+    EPD_IT8951_Display_Area(0, 0, Dev_Info.Panel_W, Dev_Info.Panel_H, INIT_Mode);
 
     free(Frame_Buf);
     Frame_Buf = NULL;
@@ -700,24 +681,24 @@ void EPD_IT8951_1bp_Refresh(UBYTE *Frame_Buf, UWORD X, UWORD Y, UWORD W, UWORD H
     Area_Img_Info.Area_W = W / 8;
     Area_Img_Info.Area_H = H;
 
-    clock_t start, finish;
-    double duration;
+    // clock_t start, finish;
+    // double duration;
 
-    start = clock();
+    // start = clock();
 
     EPD_IT8951_HostAreaPackedPixelWrite_1bp(&Load_Img_Info, &Area_Img_Info, Packed_Write);
 
-    finish = clock();
-    duration = (double)(finish - start) / CLOCKS_PER_SEC;
-    Debug("Write occupy %f second\n", duration);
+    // finish = clock();
+    // duration = (double)(finish - start) / CLOCKS_PER_SEC;
+    // Debug( "Write occupy %f second\n", duration );
 
-    start = clock();
+    // start = clock();
 
     EPD_IT8951_Display_1bp(X, Y, W, H, Mode, Target_Memory_Addr, 0xF0, 0x00);
 
-    finish = clock();
-    duration = (double)(finish - start) / CLOCKS_PER_SEC;
-    Debug("Show occupy %f second\n", duration);
+    // finish = clock();
+    // duration = (double)(finish - start) / CLOCKS_PER_SEC;
+    // Debug( "Show occupy %f second\n", duration );
 }
 
 /******************************************************************************

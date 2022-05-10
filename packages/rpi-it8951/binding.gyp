@@ -16,12 +16,13 @@
             ],
             "defines": [
                 "RPI",
-                "USE_DEV_LIB"
+                "USE_BCM2835_LIB"
             ],
             "include_dirs": [
                 "<!@(node -p \"require('node-addon-api').include\")"
             ],
             "libraries": [
+                "-lbcm2835",
                 "-lm"
             ]
         }

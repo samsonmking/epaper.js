@@ -33,7 +33,7 @@
 
 #include <stdbool.h>
 
-#include "DEV_Config.h"
+#include "../Config/DEV_Config.h"
 
 // INIT mode, for every init or some time after A2 mode refresh
 extern UBYTE INIT_Mode;
@@ -137,8 +137,6 @@ IT8951 Registers defines
 #define LUTAFSR (DISPLAY_REG_BASE + 0x224)   // LUT Status Reg (status of All LUT Engines)
 #define BGVR (DISPLAY_REG_BASE + 0x250)      // Bitmap (1bpp) image color table
 
-#define MY_WORD_SWAP(x) (((x & 0xff00) >> 8) | ((x & 0x00ff) << 8))
-
 // System Registers
 #define SYS_REG_BASE 0x0000
 
@@ -191,7 +189,7 @@ void EPD_IT8951_Sleep(void);
 
 IT8951_Dev_Info EPD_IT8951_Init(UWORD VCOM);
 
-void EPD_IT8951_Clear_Refresh(IT8951_Dev_Info Dev_Info, UDOUBLE Target_Memory_Addr, UWORD Mode);
+void EPD_IT8951_Init_Refresh(IT8951_Dev_Info Dev_Info, UDOUBLE Target_Memory_Addr);
 
 void EPD_IT8951_1bp_Refresh(UBYTE *Frame_Buf, UWORD X, UWORD Y, UWORD W, UWORD H, UBYTE Mode, UDOUBLE Target_Memory_Addr, bool Packed_Write);
 void EPD_IT8951_1bp_Multi_Frame_Write(UBYTE *Frame_Buf, UWORD X, UWORD Y, UWORD W, UWORD H, UDOUBLE Target_Memory_Addr, bool Packed_Write);
