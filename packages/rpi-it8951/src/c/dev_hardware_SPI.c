@@ -388,9 +388,23 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
     return 1;
 }
 
-string hexas = "0123456789abcdef";
-static char hexa[16];
-strcpy(hexa, hexas.c_str());
+static char hexa[16] = {
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f'};
 
 /******************************************************************************
 function: The SPI port reads a byte
