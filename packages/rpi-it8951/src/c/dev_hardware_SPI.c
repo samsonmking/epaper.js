@@ -451,12 +451,7 @@ int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
         return -1;
     }
 
-    // memcpy(buf, &rxbuf[0], len);
-    for (int ii = 0; ii < len - 1; ii += 2)
-    {
-        rxbuf[ii] = buf[ii + 1];
-        rxbuf[ii + 1] = buf[ii];
-    }
+    memcpy(buf, &rxbuf[0], len);
 
     return 1;
 }
