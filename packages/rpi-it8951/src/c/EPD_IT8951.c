@@ -44,11 +44,11 @@ parameter:
 static void EPD_IT8951_Reset(void)
 {
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(200);
+    DEV_Delay_ms(500);
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(10);
+    DEV_Delay_ms(500);
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(200);
+    DEV_Delay_ms(500);
 }
 
 /******************************************************************************
@@ -205,9 +205,9 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
         Data_Buf[i] |= rxbuf[1];
     }*/
     memset(rxbuf, 0, sizeof rxbuf);
-    DEV_SPI_Read_nByte((uint8_t *)&rxbuf[0], Length);
+    DEV_SPI_Read_nByte((uint8_t *)&rxbuf[0], Length * 2);
 
-    memcpy(Data_Buf, &rxbuf[0], Length);
+    memcpy(Data_Buf, &rxbuf[0], Length * 2);
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 }
