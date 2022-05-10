@@ -151,7 +151,7 @@ static UWORD EPD_IT8951_ReadData()
     UWORD ReadData;
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
-    uint8_t rxbuf[1]; // uint8_t rxbuf[SPIDEV_MAXPATH];
+    uint8_t rxbuf[4]; // uint8_t rxbuf[SPIDEV_MAXPATH];
 
     EPD_IT8951_ReadBusy();
 
