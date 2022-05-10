@@ -702,23 +702,23 @@ void EPD_IT8951_1bp_Refresh(UBYTE *Frame_Buf, UWORD X, UWORD Y, UWORD W, UWORD H
     Area_Img_Info.Area_W = W / 8;
     Area_Img_Info.Area_H = H;
 
-    // clock_t start, finish;
-    // double duration;
+    clock_t start, finish;
+    double duration;
 
-    // start = clock();
+    start = clock();
 
     EPD_IT8951_HostAreaPackedPixelWrite_1bp(&Load_Img_Info, &Area_Img_Info, Packed_Write);
 
-    // finish = clock();
-    // duration = (double)(finish - start) / CLOCKS_PER_SEC;
+    finish = clock();
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;
     Debug("Write occupy %f second\n", duration);
 
-    // start = clock();
+    start = clock();
 
     EPD_IT8951_Display_1bp(X, Y, W, H, Mode, Target_Memory_Addr, 0xF0, 0x00);
 
-    // finish = clock();
-    // duration = (double)(finish - start) / CLOCKS_PER_SEC;
+    finish = clock();
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;
     Debug("Show occupy %f second\n", duration);
 }
 
