@@ -425,7 +425,7 @@ void print_hex(const char *string, uint32_t len, uint32_t lf)
 
 int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
 {
-    uint8_t rxbuf[96];
+    uint8_t rxbuf[4096];
     memset(rxbuf, 0, sizeof rxbuf);
 
     int status = read(hardware_SPI.fd, &rxbuf[0], len);
