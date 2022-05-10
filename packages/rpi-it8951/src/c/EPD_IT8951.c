@@ -163,10 +163,13 @@ static UWORD EPD_IT8951_ReadData()
     EPD_IT8951_ReadBusy();
 
     // dummy
-    memset(rxbuf, 0, sizeof(rxbuf));
+    /*memset(rxbuf, 0, sizeof(rxbuf));
     DEV_SPI_ReadBytes(rxbuf, 2);
     Read_Dummy = rxbuf[0] << 8;
-    Read_Dummy |= rxbuf[1];
+    Read_Dummy |= rxbuf[1];*/
+
+    DEV_SPI_WriteByte(0);
+    DEV_SPI_WriteByte(0);
 
     EPD_IT8951_ReadBusy();
     memset(rxbuf, 0, sizeof(rxbuf));
@@ -199,8 +202,11 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     EPD_IT8951_ReadBusy();
 
     // dummy
-    memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 2);
+    /*memset(rxbuf, 0, sizeof(rxbuf));
+    DEV_SPI_ReadBytes(rxbuf, 2);*/
+
+    DEV_SPI_WriteByte(0);
+    DEV_SPI_WriteByte(0);
 
     EPD_IT8951_ReadBusy();
 
