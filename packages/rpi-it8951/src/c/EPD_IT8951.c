@@ -613,7 +613,7 @@ IT8951_Dev_Info EPD_IT8951_Init(UWORD VCOM)
 
     EPD_IT8951_Reset();
 
-    // EPD_IT8951_SystemRun();
+    EPD_IT8951_SystemRun();
 
     EPD_IT8951_GetSystemInfo(&Dev_Info);
 
