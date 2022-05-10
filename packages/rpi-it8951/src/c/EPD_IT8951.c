@@ -164,19 +164,15 @@ static UWORD EPD_IT8951_ReadData()
 
     // dummy
     memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 1);
+    DEV_SPI_ReadBytes(rxbuf, 2);
     Read_Dummy = rxbuf[0] << 8;
-    memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 1);
-    Read_Dummy |= rxbuf[0];
+    Read_Dummy |= rxbuf[1];
 
     EPD_IT8951_ReadBusy();
     memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 1);
+    DEV_SPI_ReadBytes(rxbuf, 2);
     ReadData = rxbuf[0] << 8;
-    memset(rxbuf, 0, sizeof(rxbuf));
-    DEV_SPI_ReadBytes(rxbuf, 1);
-    ReadData |= rxbuf[0];
+    ReadData |= rxbuf[1];
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 
