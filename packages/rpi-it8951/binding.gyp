@@ -22,7 +22,6 @@
                 "<!@(node -p \"require('node-addon-api').include\")"
             ],
             "libraries": [
-                "-lbcm2835",
                 "-lm"
             ]
         }

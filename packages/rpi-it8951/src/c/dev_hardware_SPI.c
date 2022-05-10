@@ -110,6 +110,7 @@ void DEV_HARDWARE_SPI_begin(char *SPI_device)
 void DEV_HARDWARE_SPI_beginSet(char *SPI_device, SPIMode mode, uint32_t speed)
 {
     // device
+    uint8_t tmp8;
     int ret = 0;
     hardware_SPI.mode = 0;
     if ((hardware_SPI.fd = open(SPI_device, O_RDWR)) < 0)
@@ -121,6 +122,14 @@ void DEV_HARDWARE_SPI_beginSet(char *SPI_device, SPIMode mode, uint32_t speed)
     {
         DEV_HARDWARE_SPI_Debug("open : %s\r\n", SPI_device);
     }
+
+    if (ioctl(hardware_SPI.fd, SPI_IOC_RD_MODE, &tmp8) == -1)
+    {
+        perror("Failed to get SPI RD mode");
+        DEV_HARDWARE_SPI_Debug("Failed to get SPI RD mode\r\n");
+        exit(1);
+    }
+    hardware_SPI.mode = tmp8;
 
     ret = ioctl(hardware_SPI.fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
     if (ret == -1)
