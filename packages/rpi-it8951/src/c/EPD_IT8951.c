@@ -164,6 +164,9 @@ static UWORD EPD_IT8951_ReadData()
     EPD_IT8951_ReadBusy();
 
     // dummy
+
+    DEV_SPI_WriteByte(0);
+    DEV_SPI_WriteByte(0);
     DEV_SPI_ReadBytes(&Read_Dummy, 1);
     DEV_SPI_ReadBytes(&Read_Dummy, 1);
 
@@ -198,6 +201,8 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     EPD_IT8951_ReadBusy();
 
     // dummy
+    DEV_SPI_WriteByte(0);
+    DEV_SPI_WriteByte(0);
     DEV_SPI_ReadBytes(&Read_Dummy, 1);
     DEV_SPI_ReadBytes(&Read_Dummy, 1);
 
