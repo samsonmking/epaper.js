@@ -43,8 +43,6 @@ parameter:
 ******************************************************************************/
 static void EPD_IT8951_Reset(void)
 {
-    DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(500);
     DEV_Digital_Write(EPD_RST_PIN, 0);
     DEV_Delay_ms(500);
     DEV_Digital_Write(EPD_RST_PIN, 1);
@@ -616,7 +614,7 @@ IT8951_Dev_Info EPD_IT8951_Init(UWORD VCOM)
 
     EPD_IT8951_Reset();
 
-    EPD_IT8951_SystemRun();
+    // EPD_IT8951_SystemRun();
 
     EPD_IT8951_GetSystemInfo(&Dev_Info);
 

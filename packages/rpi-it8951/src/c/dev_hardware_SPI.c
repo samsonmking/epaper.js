@@ -85,7 +85,7 @@ void DEV_HARDWARE_SPI_begin(char *SPI_device)
         DEV_HARDWARE_SPI_Debug("Failed to get SPI RD mode\r\n");
         exit(1);
     }
-    hardware_SPI.mode = tmp8;
+    hardware_SPI.mode = 0;
 
     ret = ioctl(hardware_SPI.fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
     if (ret == -1)
