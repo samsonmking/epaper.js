@@ -103,7 +103,7 @@ void DEV_HARDWARE_SPI_begin(char *SPI_device)
     DEV_HARDWARE_SPI_Mode(SPI_MODE_0);
     DEV_HARDWARE_SPI_ChipSelect(SPI_CS_Mode_LOW);
     DEV_HARDWARE_SPI_SetBitOrder(SPI_BIT_ORDER_LSBFIRST);
-    DEV_HARDWARE_SPI_setSpeed(20000000);
+    DEV_HARDWARE_SPI_setSpeed(2000000);
     DEV_HARDWARE_SPI_SetDataInterval(0);
 }
 
