@@ -418,7 +418,7 @@ int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
 {
     uint8_t rxbuf[96];
 
-    int status = read(hardware_SPI.fd, &buf[0], len);
+    int status = read(hardware_SPI.fd, &rxbuf[0], len);
     if (status < 0)
     {
         DEV_HARDWARE_SPI_Debug("can't receive message\r\n");
