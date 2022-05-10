@@ -205,7 +205,7 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
         Data_Buf[i] |= rxbuf[1];
     }*/
     memset(rxbuf, 0, sizeof rxbuf);
-    DEV_SPI_Read_nByte((uint8_t *)rxbuf, Length * 2);
+    DEV_SPI_Read_nByte((uint8_t *)&rxbuf[0], Length * 2);
 
     memcpy(Data_Buf, rxbuf, Length * 2);
 

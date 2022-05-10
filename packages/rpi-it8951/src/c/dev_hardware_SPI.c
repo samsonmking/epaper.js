@@ -372,7 +372,7 @@ Info:
 ******************************************************************************/
 uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
 {
-    uint8_t rbuf[1];
+    /*uint8_t rbuf[1];
     tr.len = 1;
     tr.tx_buf = (unsigned long)&buf;
     tr.rx_buf = (unsigned long)rbuf;
@@ -383,7 +383,17 @@ uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
 
     print_hex(rbuf, 1, 0);
 
-    return rbuf[0];
+    return rbuf[0];*/
+
+    status = write(hardware_SPI.fd, &buf, 1);
+    if (status < 0)
+    {
+        DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
+    }
+    if (status != 1)
+    {
+        DEV_HARDWARE_SPI_Debug("short write\r\n");
+    }
 }
 
 /******************************************************************************
