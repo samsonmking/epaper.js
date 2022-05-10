@@ -62,7 +62,7 @@ static void EPD_IT8951_ReadBusy(void)
     // 0: busy, 1: idle
     while (Busy_State == 0)
     {
-        sleep(100);
+        // sleep(100);
         // usleep(1000);
         Busy_State = DEV_Digital_Read(EPD_BUSY_PIN);
     }
@@ -149,6 +149,7 @@ parameter:  data
 ******************************************************************************/
 static UWORD EPD_IT8951_ReadData()
 {
+    uint8_t buf[2];
     UWORD ReadData;
     UWORD Write_Preamble = 0x1000;
     UWORD Read_Dummy;
@@ -163,13 +164,15 @@ static UWORD EPD_IT8951_ReadData()
     EPD_IT8951_ReadBusy();
 
     // dummy
-    Read_Dummy = DEV_SPI_WriteByte(0) << 8;
-    Read_Dummy |= DEV_SPI_WriteByte(0);
+    DEV_SPI_ReadBytes(&Read_Dummy, 1);
+    DEV_SPI_ReadBytes(&Read_Dummy, 1);
 
     EPD_IT8951_ReadBusy();
 
-    ReadData = DEV_SPI_WriteByte(0) << 8;
-    ReadData |= DEV_SPI_WriteByte(0);
+    DEV_SPI_ReadBytes(&buf[0], 2);
+
+    ReadData = (UWORD)buf[0] << 8;
+    ReadData |= (UWORD)buf[1];
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 
@@ -195,16 +198,17 @@ static void EPD_IT8951_ReadMultiData(UWORD *Data_Buf, UDOUBLE Length)
     EPD_IT8951_ReadBusy();
 
     // dummy
-    Read_Dummy = DEV_SPI_WriteByte(0) << 8;
-    Read_Dummy |= DEV_SPI_WriteByte(0);
+    DEV_SPI_ReadBytes(&Read_Dummy, 1);
+    DEV_SPI_ReadBytes(&Read_Dummy, 1);
 
     EPD_IT8951_ReadBusy();
 
-    for (UDOUBLE i = 0; i < Length; i++)
+    DEV_SPI_ReadBytes((uint8_t *)Data_Buf, Length * 2);
+    /*for (UDOUBLE i = 0; i < Length; i++)
     {
-        Data_Buf[i] = DEV_SPI_WriteByte(0) << 8;
+        Data_Buf[i] = DEV_SPI_ReadByte(0) << 8;
         Data_Buf[i] |= DEV_SPI_WriteByte(0);
-    }
+    }*/
 
     DEV_Digital_Write(EPD_CS_PIN, 1);
 }

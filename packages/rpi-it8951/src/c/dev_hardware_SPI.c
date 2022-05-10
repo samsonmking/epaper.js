@@ -406,3 +406,18 @@ void print_hex(const char *string, uint32_t len, uint32_t lf)
     if (lf == 1)
         printf("\n\n");
 }
+
+int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
+{
+    uint8_t rxbuf[96];
+
+    int status = read(hardware_SPI.fd, &buf[0], len);
+    if (status < 0)
+    {
+        DEV_HARDWARE_SPI_Debug("can't receive message\r\n");
+    }
+
+    memcpy(buf, &rxbuf[0], len);
+
+    return 1;
+}
