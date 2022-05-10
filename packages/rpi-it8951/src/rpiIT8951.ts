@@ -10,7 +10,7 @@ export class RpiIT8951 implements DisplayDevice {
 
     constructor(
         public readonly orientation: Orientation = Orientation.Horizontal,
-        public readonly colorMode: ColorMode = ColorMode.Gray4
+        public readonly colorMode: ColorMode = ColorMode.Black
     ) {
         const supportedColorModes = [ColorMode.Black, ColorMode.Gray4];
         if (!supportedColorModes.includes(colorMode)) {
