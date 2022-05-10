@@ -365,7 +365,7 @@ uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
     if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
         DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
 
-    print_hex(rbuf, 1, true);
+    print_hex(rbuf, 1, 0);
 
     return rbuf[0];
 }
@@ -387,12 +387,12 @@ int DEV_HARDWARE_SPI_Transfer(uint8_t *buf, uint32_t len)
         DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
         return -1;
     }
-    print_hex(buf, len, true);
+    print_hex(buf, len, 1);
 
     return 1;
 }
 
-void print_hex(const char *string, uint32_t len, bool lf)
+void print_hex(const char *string, uint32_t len, uint32_t lf)
 {
     unsigned char *p = (unsigned char *)string;
 
@@ -403,7 +403,7 @@ void print_hex(const char *string, uint32_t len, bool lf)
 
         printf("0x%02x ", p[i]);
     }
-    if (lf)
+    if (lf == 1)
         printf("\n\n");
 }
 
@@ -424,7 +424,7 @@ int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
         DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
         return -1;
     }
-    print_hex(buf, len, true);
+    print_hex(buf, len, 1);
     // uint8_t b;
     // char r[5] = {'0', 'x', '0', '0', '\0'};
     // for (uint32_t i; i < len; i++)
