@@ -385,7 +385,7 @@ uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
 
     return rbuf[0];*/
 
-    status = write(hardware_SPI.fd, &buf, 1);
+    int status = write(hardware_SPI.fd, &buf, 1);
     if (status < 0)
     {
         DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
