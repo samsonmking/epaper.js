@@ -86,7 +86,7 @@ Napi::Value Display_4GrayDisplay(const Napi::CallbackInfo &info)
 Napi::Value Clear(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
-    EPD_IT8951_Clear_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
+    EPD_IT8951_Init_Refresh(Dev_Info, Init_Target_Memory_Addr, A2_Mode);
     return env.Undefined();
 }
 
