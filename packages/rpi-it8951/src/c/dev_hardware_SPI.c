@@ -69,7 +69,7 @@ void DEV_HARDWARE_SPI_begin(char *SPI_device)
     // device
     uint8_t tmp8;
     int ret = 0;
-    if ((hardware_SPI.fd = open(SPI_device, O_RDWR)) < 0)
+    if ((hardware_SPI.fd = open(SPI_device, O_RDWR, 0)) < 0)
     {
         perror("Failed to open SPI device.\n");
         DEV_HARDWARE_SPI_Debug("Failed to open SPI device\r\n");

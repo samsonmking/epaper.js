@@ -61,6 +61,7 @@ static void EPD_IT8951_ReadBusy(void)
     // 0: busy, 1: idle
     while (Busy_State == 0)
     {
+        DEV_Delay_ms(100);
         Busy_State = DEV_Digital_Read(EPD_BUSY_PIN);
     }
 }
