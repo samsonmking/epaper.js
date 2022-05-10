@@ -17,8 +17,8 @@ export class RpiIT8951 implements DisplayDevice {
             throw new Error(`Only color modes: [${supportedColorModes}] are supported`);
         }
         this.driver = bindings('waveshareIT8951.node');
-        this.height = this.orientation === Orientation.Horizontal ? 300 : 400;
-        this.width = this.orientation === Orientation.Horizontal ? 400 : 300;
+        this.height = this.orientation === Orientation.Horizontal ? 825 : 1200;
+        this.width = this.orientation === Orientation.Horizontal ? 1200 : 825;
     }
 
     public connect() {
