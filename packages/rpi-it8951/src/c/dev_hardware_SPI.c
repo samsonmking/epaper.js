@@ -359,7 +359,7 @@ uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
     uint8_t rbuf[1];
     tr.len = 1;
     tr.tx_buf = (unsigned long)&buf;
-    tr.rx_buf = (unsigned long)&rbuf[0];
+    tr.rx_buf = (unsigned long)rbuf;
 
     // ioctl Operation, transmission of data
     if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
@@ -405,35 +405,4 @@ void print_hex(const char *string, uint32_t len, uint32_t lf)
     }
     if (lf == 1)
         printf("\n\n");
-}
-
-/******************************************************************************
-function: The SPI port reads a byte
-parameter:
-Info: Return read data
-******************************************************************************/
-int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
-{
-    tr.len = len;
-    tr.tx_buf = (unsigned long)buf;
-    tr.rx_buf = (unsigned long)buf;
-
-    // ioctl Operation, transmission of data
-    if (ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1)
-    {
-        DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
-        return -1;
-    }
-    print_hex(buf, len, 1);
-    // uint8_t b;
-    // char r[5] = {'0', 'x', '0', '0', '\0'};
-    // for (uint32_t i; i < len; i++)
-    // {
-    //     b = &buf[i];
-    //     r[3] = '0' + ((b >> 8) & 0xf);
-    //     r[4] = '0' + ((b >> 0) & 0xf);
-    //     DEV_HARDWARE_SPI_Debug(r);
-    // }
-
-    return 1;
 }

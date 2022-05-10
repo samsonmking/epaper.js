@@ -370,7 +370,7 @@ UBYTE DEV_Module_Init(void)
 	printf("Write and read /dev/spidev0.0 \r\n");
 	DEV_GPIO_Init();
 	DEV_HARDWARE_SPI_begin("/dev/spidev0.0");
-	DEV_HARDWARE_SPI_setSpeed(10000000);
+	DEV_HARDWARE_SPI_setSpeed(2000000);
 #endif
 
 #elif JETSON
