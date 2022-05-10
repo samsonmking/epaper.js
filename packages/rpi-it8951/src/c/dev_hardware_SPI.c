@@ -423,15 +423,15 @@ int DEV_HARDWARE_SPI_ReadTransfer(uint8_t *buf, uint32_t len)
         DEV_HARDWARE_SPI_Debug("can't send spi message\r\n");
         return -1;
     }
-    uint8_t b;
-    char r[5] = {'0', 'x', '0', '0', '\0'};
-    for (uint32_t i; i < len; i++)
-    {
-        b = &buf[i];
-        r[3] = '0' + ((b >> 8) & 0xf);
-        r[4] = '0' + ((b >> 0) & 0xf);
-        DEV_HARDWARE_SPI_Debug(r);
-    }
+    // uint8_t b;
+    // char r[5] = {'0', 'x', '0', '0', '\0'};
+    // for (uint32_t i; i < len; i++)
+    // {
+    //     b = &buf[i];
+    //     r[3] = '0' + ((b >> 8) & 0xf);
+    //     r[4] = '0' + ((b >> 0) & 0xf);
+    //     DEV_HARDWARE_SPI_Debug(r);
+    // }
 
     return 1;
 }
