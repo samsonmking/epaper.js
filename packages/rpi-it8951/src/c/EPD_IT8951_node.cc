@@ -71,7 +71,7 @@ Napi::Value Display(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
-    EPD_IT8951_1bp_Refresh(reinterpret_cast<uint8_t *>(jsBuffer.Data()), 0, 0, Panel_Width, Panel_Height, false, Init_Target_Memory_Addr, false);
+    EPD_IT8951_1bp_Refresh(reinterpret_cast<uint8_t *>(jsBuffer.Data()), 0, 0, Panel_Width, Panel_Height, A2_Mode, Init_Target_Memory_Addr, false);
     return env.Undefined();
 }
 
