@@ -372,7 +372,9 @@ static void EPD_IT8951_HostAreaPackedPixelWrite_1bp(IT8951_Load_Img_Info *Load_I
     UWORD Source_Buffer_Length;
 
     UWORD *Source_Buffer = (UWORD *)Load_Img_Info->Source_Buffer_Addr;
+    Debug("set target");
     EPD_IT8951_SetTargetMemoryAddr(Load_Img_Info->Target_Memory_Addr);
+    Debug("image area start");
     EPD_IT8951_LoadImgAreaStart(Load_Img_Info, Area_Img_Info);
 
     // from byte to word
@@ -396,6 +398,7 @@ static void EPD_IT8951_HostAreaPackedPixelWrite_1bp(IT8951_Load_Img_Info *Load_I
             }
         }
     }
+    Debug("load img end");
 
     EPD_IT8951_LoadImgEnd();
 }
@@ -669,9 +672,11 @@ parameter:
 ******************************************************************************/
 void EPD_IT8951_1bp_Refresh(UBYTE *Frame_Buf, UWORD X, UWORD Y, UWORD W, UWORD H, UBYTE Mode, UDOUBLE Target_Memory_Addr, bool Packed_Write)
 {
+    Debug("1bp refresh");
     IT8951_Load_Img_Info Load_Img_Info;
     IT8951_Area_Img_Info Area_Img_Info;
 
+    Debug("wait ready");
     EPD_IT8951_WaitForDisplayReady();
 
     Load_Img_Info.Source_Buffer_Addr = (UDOUBLE)Frame_Buf;
@@ -690,6 +695,7 @@ void EPD_IT8951_1bp_Refresh(UBYTE *Frame_Buf, UWORD X, UWORD Y, UWORD W, UWORD H
     // double duration;
 
     // start = clock();
+    Debug("host area");
 
     EPD_IT8951_HostAreaPackedPixelWrite_1bp(&Load_Img_Info, &Area_Img_Info, Packed_Write);
 
@@ -698,6 +704,7 @@ void EPD_IT8951_1bp_Refresh(UBYTE *Frame_Buf, UWORD X, UWORD Y, UWORD W, UWORD H
     // Debug( "Write occupy %f second\n", duration );
 
     // start = clock();
+    Debug("display 1bp");
 
     EPD_IT8951_Display_1bp(X, Y, W, H, Mode, Target_Memory_Addr, 0xF0, 0x00);
 

@@ -53,13 +53,15 @@ export class RpiIT8951 implements DisplayDevice {
     public async displayPng(img: Buffer, options?: ImageOptions) {
         console.log("displayPng");
         if (this.colorMode === ColorMode.Gray4) {
+            console.log("+displayPng gray");
             await this.displayPngGray4(img, options);
         } else {
+            console.log("+displayPng bw");
             await this.displayPngBW(img, options);
         }
     }
 
-    private async displayPngBW(img: Buffer, options?: ImageOptions) {
+    public async displayPngBW(img: Buffer, options?: ImageOptions) {
         console.log("displayPng bw");
         const converter = new Monochrome(img);
         const blackBuffer = await converter.toBlack({
@@ -69,7 +71,7 @@ export class RpiIT8951 implements DisplayDevice {
         this.driver.display(blackBuffer);
     }
 
-    private async displayPngGray4(img: Buffer, options?: ImageOptions) {
+    public async displayPngGray4(img: Buffer, options?: ImageOptions) {
         console.log("displayPng gray 4");
         const converter = new GrayLR(img);
         const grayBuffer = await converter.to4Gray({
