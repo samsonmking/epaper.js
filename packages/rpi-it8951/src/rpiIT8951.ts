@@ -32,6 +32,7 @@ export class RpiIT8951 implements DisplayDevice {
     }
 
     public wake() {
+        console.log("wake");
         if (this.colorMode === ColorMode.Gray4) {
             this.driver.init_4Gray();
         } else {
@@ -40,14 +41,17 @@ export class RpiIT8951 implements DisplayDevice {
     }
 
     public clear() {
+        console.log("clear");
         this.driver.clear();
     }
 
     public sleep() {
+        console.log("sleep");
         this.driver.sleep();
     }
 
     public async displayPng(img: Buffer, options?: ImageOptions) {
+        console.log("displayPng");
         if (this.colorMode === ColorMode.Gray4) {
             await this.displayPngGray4(img, options);
         } else {

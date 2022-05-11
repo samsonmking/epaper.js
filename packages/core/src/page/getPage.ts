@@ -5,8 +5,7 @@ import { BrowserPage } from './page';
 export async function getPageRpi(width: number, height: number, logger?: Logger) {
     const browser = await puppeteer.launch({
         executablePath: 'chromium-browser',
-        headless: true,
-        args: ['--font-render-hinting=slight', '--headless', '--no-sandbox', '--disable-setuid-sandbox'],
+        args: ['--font-render-hinting=slight', '--no-sandbox', '--disable-setuid-sandbox'],
     });
     const context = await browser.createIncognitoBrowserContext();
     const browserPage = await context.newPage();
