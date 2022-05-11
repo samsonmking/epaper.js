@@ -60,6 +60,7 @@ export class RpiIT8951 implements DisplayDevice {
     }
 
     private async displayPngBW(img: Buffer, options?: ImageOptions) {
+        console.log("displayPng bw");
         const converter = new Monochrome(img);
         const blackBuffer = await converter.toBlack({
             ...options,
@@ -69,6 +70,7 @@ export class RpiIT8951 implements DisplayDevice {
     }
 
     private async displayPngGray4(img: Buffer, options?: ImageOptions) {
+        console.log("displayPng gray 4");
         const converter = new GrayLR(img);
         const grayBuffer = await converter.to4Gray({
             ...options,
