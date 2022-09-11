@@ -1,6 +1,6 @@
 {
     "name": "@epaperjs/rpi-2in13-bc",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "private": false,
     "description": "ePaper.js support for Waveshare 2.13\" BC display",
     "author": "samsonmking <samson@samsonmking.com>",

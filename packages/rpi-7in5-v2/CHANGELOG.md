@@ -1,5 +1,15 @@
 # @epaperjs/rpi-7in5-v2
 
+## 2.0.4
+
+### Patch Changes
+
+-   1a8ae0d: Bump Version after main migration
+-   9df3d66: Update for Raspberry Pi OS Bullseye 64bit and Chromium 104.0.5112.105
+-   Updated dependencies [1a8ae0d]
+-   Updated dependencies [9df3d66]
+    -   @epaperjs/core@2.2.1
+
 ## 2.0.3
 
 ### Patch Changes
