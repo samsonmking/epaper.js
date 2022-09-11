@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "pngjs": "^6.0.0",
-        "puppeteer-core": "11.0.0",
+        "puppeteer-core": "15.1.0",
         "tinycolor2": "^1.4.2"
     }
 }
