@@ -12,7 +12,7 @@ Napi::Number DEV_Init(const Napi::CallbackInfo& info) {
 
 Napi::Value Init(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
-    EPD_4IN2_Init();
+    EPD_4IN2_Init_Fast();
     return env.Undefined();
 }
 

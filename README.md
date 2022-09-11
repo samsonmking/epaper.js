@@ -110,6 +110,14 @@ See the examples directory
 -   4gray: A demonstration of the 4gray capabilities
 -   dithering: A demonstration of the dithering feature
 
+## Supported Software Versions
+
+The following versions are the recommended versions that using during development and testing. Other versions _may work_, but are not officially supported.
+
+-   Node.js: `16 LTS`
+-   Raspberry Pi OS: `Bullseye 32 / 64bit`
+-   Chromium: `104.0.5112.105`
+
 ## Installation
 
 ### Raspberry PI
