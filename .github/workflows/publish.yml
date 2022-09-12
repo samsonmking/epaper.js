@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: pnpm -r build:clean
       - name: create and publish versions
-        uses: changesets/action@master
+        uses: changesets/action@v1
         with:
           version: pnpm ci:version
           commit: 'chore: update versions'
