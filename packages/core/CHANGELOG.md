@@ -1,5 +1,12 @@
 # @epaperjs/core
 
+## 2.2.1
+
+### Patch Changes
+
+-   1a8ae0d: Bump Version after main migration
+-   9df3d66: Update for Raspberry Pi OS Bullseye 64bit and Chromium 104.0.5112.105
+
 ## 2.2.0
 
 ### Minor Changes

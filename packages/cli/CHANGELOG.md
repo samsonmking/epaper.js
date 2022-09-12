@@ -1,5 +1,20 @@
 # @epaperjs/cli
 
+## 2.1.2
+
+### Patch Changes
+
+-   1a8ae0d: Bump Version after main migration
+-   Updated dependencies [1a8ae0d]
+-   Updated dependencies [9df3d66]
+    -   @epaperjs/core@2.2.1
+    -   @epaperjs/rpi-2in13-bc@2.0.4
+    -   @epaperjs/rpi-2in13-v2@2.0.4
+    -   @epaperjs/rpi-2in7@2.0.4
+    -   @epaperjs/rpi-3in7@2.0.4
+    -   @epaperjs/rpi-4in2@2.0.4
+    -   @epaperjs/rpi-7in5-v2@2.0.4
+
 ## 2.1.1
 
 ### Patch Changes
