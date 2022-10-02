@@ -1,5 +1,11 @@
 # @epaperjs/core
 
+## 2.2.2
+
+### Patch Changes
+
+-   a142300: Fix: typescript build
+
 ## 2.2.1
 
 ### Patch Changes

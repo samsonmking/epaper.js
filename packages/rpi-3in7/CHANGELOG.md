@@ -1,5 +1,13 @@
 # @epaperjs/rpi-3in7
 
+## 2.0.5
+
+### Patch Changes
+
+-   a142300: Fix: typescript build
+-   Updated dependencies [a142300]
+    -   @epaperjs/core@2.2.2
+
 ## 2.0.4
 
 ### Patch Changes
