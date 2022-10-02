@@ -1,6 +1,6 @@
 {
     "name": "@epaperjs/rpi-4in2",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "private": false,
     "description": "ePaper.js support for Waveshare 4.2\" display",
     "author": "samsonmking <samson@samsonmking.com>",
