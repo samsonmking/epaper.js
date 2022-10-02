@@ -30,8 +30,10 @@ jobs:
         run: pnpm install
       - name: Check Formatting
         run: pnpm format:check
-      - name: Build
+      - name: Build Packages
         run: pnpm -r build:clean
+      - name: Build Typescript
+        run: pnpm build:clean
       - name: create and publish versions
         uses: changesets/action@v1
         with:
