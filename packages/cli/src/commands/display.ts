@@ -16,7 +16,7 @@ export class DisplayCommand implements Command<DisplayArgs> {
     private displayDevice?: DisplayDevice;
     private browserPage?: BrowserPage;
 
-    constructor(private readonly logger: Logger) {}
+    constructor(private readonly logger: Logger) { }
 
     public async execute(displayArgs: DisplayArgs) {
         const { deviceType, orientation, colorMode, url, dither } = displayArgs;
@@ -31,8 +31,9 @@ export class DisplayCommand implements Command<DisplayArgs> {
         const imgOfUrl = await this.browserPage.screenshot(url, {
             delay: displayArgs.screenshotDelay,
             username: displayArgs.username,
-            password: displayArgs.password,
+            password: displayArgs.password
         });
+        this.logger.log(`display png`);
         await this.displayDevice.displayPng(imgOfUrl, { dither });
     }
 

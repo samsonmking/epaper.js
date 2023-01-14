@@ -21,6 +21,7 @@ export class BrowserPage {
     }
 
     async screenshot(url: string, options: ScreenshotOptions = {}): Promise<Buffer> {
+
         if (options.username && options.password) {
             await this.browserPage.authenticate({ username: options.username, password: options.password });
         }
@@ -28,6 +29,7 @@ export class BrowserPage {
             waitUntil: 'networkidle0',
         });
         if (!response?.ok() && response?.status() !== this.HTTP_NOT_MODIFIED) {
+            this.logger?.debug("error while navigating")
             throw new Error(`Error occurred navigating to ${url}: ${response?.statusText()}`);
         }
         if (options.delay) {
@@ -35,6 +37,7 @@ export class BrowserPage {
             await this.browserPage.waitForTimeout(options.delay);
             this.logger?.debug('Screenshot delay complete');
         }
+        this.logger?.debug('Screenshot ...');
 
         return (await this.browserPage.screenshot({
             type: 'png',

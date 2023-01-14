@@ -25,6 +25,9 @@
         },
         {
             "path": "packages/rpi-3in7"
+        },
+        {
+            "path": "packages/rpi-it8951"
         }
     ]
 }
