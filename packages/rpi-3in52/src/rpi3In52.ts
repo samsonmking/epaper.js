@@ -13,7 +13,7 @@ export class Rpi3In52 implements DisplayDevice {
             throw new Error('Only black color mode is supported');
         }
 
-        this.driver = bindings('waveshare3in52.node');
+        this.driver = bindings('waveshare3in52');
         this.height = this.orientation === Orientation.Horizontal ? 240 : 360;
         this.width = this.orientation === Orientation.Horizontal ? 360 : 240;
     }
