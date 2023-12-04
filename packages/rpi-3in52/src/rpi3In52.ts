@@ -8,7 +8,7 @@ export class Rpi3In52 implements DisplayDevice {
     public readonly width: number;
     private readonly driver: Driver;
 
-    constructor(public readonly orientation = Orientation.Horizontal, public readonly colorMode = ColorMode.Gray4) {
+    constructor(public readonly orientation = Orientation.Horizontal, public readonly colorMode = ColorMode.Black) {
         if (colorMode !== ColorMode.Black) {
             throw new Error('Only black color mode is supported');
         }
