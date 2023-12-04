@@ -60,10 +60,10 @@ void EPD_3IN52_refresh(void);
 void EPD_3IN52_lut_GC(void);
 void EPD_3IN52_lut_DU(void);
 void EPD_3IN52_Init(void);
-void EPD_3IN52_Display(UBYTE* picData);
-void EPD_3IN52_Display_NUM(UBYTE NUM);
+void EPD_3IN52_display(UBYTE* picData);
+void EPD_3IN52_display_NUM(UBYTE NUM);
 void EPD_3IN52_Clear(void);
-void EPD_3IN52_Sleep(void);
+void EPD_3IN52_sleep(void);
 
 
 

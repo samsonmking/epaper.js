@@ -19,7 +19,7 @@ Napi::Value Init(const Napi::CallbackInfo& info) {
 Napi::Value Display(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
     Napi::Buffer<uint8_t> jsBuffer = info[0].As<Napi::Buffer<uint8_t>>();
-    EPD_3IN52_Display(reinterpret_cast<uint8_t *>(jsBuffer.Data()));
+    EPD_3IN52_display(reinterpret_cast<uint8_t *>(jsBuffer.Data()));
     return env.Undefined();
 }
 
@@ -31,7 +31,7 @@ Napi::Value Clear(const Napi::CallbackInfo& info) {
 
 Napi::Value Sleep(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
-    EPD_3IN52_Sleep();
+    EPD_3IN52_sleep();
     return env.Undefined();
 }
 
