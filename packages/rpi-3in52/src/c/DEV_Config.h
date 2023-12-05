@@ -63,7 +63,7 @@
         #include <wiringPi.h>
         #include <wiringPiSPI.h>
     #elif USE_DEV_LIB
-        #include "RPI_sysfs_gpio.h"
+        #include "RPI_gpiod.h"
         #include "dev_hardware_SPI.h"
     #endif
 #endif
@@ -92,6 +92,7 @@ extern int EPD_RST_PIN;
 extern int EPD_DC_PIN;
 extern int EPD_CS_PIN;
 extern int EPD_BUSY_PIN;
+extern int EPD_PWR_PIN;
 
 /*------------------------------------------------------------------------------------------------------*/
 void DEV_Digital_Write(UWORD Pin, UBYTE Value);
