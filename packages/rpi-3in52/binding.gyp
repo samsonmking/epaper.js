@@ -13,7 +13,6 @@
                 "./src/c/EPD_3in52.c",
                 "./src/c/dev_hardware_SPI.c",
                 "./src/c/RPI_gpiod.c",
-                "./src/c/RPI_sysfs_gpio.c"
             ],
             "defines": [
                 "RPI",
@@ -23,7 +22,8 @@
                 "<!@(node -p \"require('node-addon-api').include\")"
             ],
             "libraries": [
-                "-lm"
+                "-lm",
+                "-lgpiod"
             ]
         }
     ]
