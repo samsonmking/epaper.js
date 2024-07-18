@@ -5,6 +5,7 @@ import { BrowserPage } from './page';
 export async function getPageRpi(width: number, height: number, logger?: Logger) {
     const browser = await puppeteer.launch({
         executablePath: 'chromium-browser',
+        headless: true,
         args: ['--font-render-hinting=slight'],
     });
     const context = await browser.createIncognitoBrowserContext();
